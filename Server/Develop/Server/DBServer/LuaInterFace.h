@@ -1,9 +1,16 @@
 #include "LuaManage.h"
 #include "RegisterLuaDefine.h"
 #include "Test2Lua.h"
-STRUCTBEGIN(Test2Lua)
-	STRUCTVALUE(int,al)
-	STRUCTVALUE(double, cl)
-	STRUCTVALUE(float, fl)
-	STRUCTFUNCTION(void,show,int,char)
-STRUCTEND()
+namespace LUANOUSER{
+	struct A
+	{
+	};
+	class Test2Lua:public A{
+		int al;
+		double cl;
+		float fl;
+		void show(int, char);
+		void show(int, double);
+		void show(int,int,char);
+	};
+}

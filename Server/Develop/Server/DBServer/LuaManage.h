@@ -41,6 +41,7 @@ namespace SJH{
 		putfunc(char,char*,  string);
 		putfunc(string,char*,  string);
 		putfunc(function,lua_CFunction,  cfunction);
+		inline void pushvoid(void){}
 #undef putfunc
 		//.....
 	};
