@@ -135,6 +135,12 @@
     <ClInclude Include="RegisterLuaDefine.h">
       <Filter>DBServerLib</Filter>
     </ClInclude>
+    <ClInclude Include="LuaInterFace.h">
+      <Filter>DBServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Test2Lua.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -262,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="..\Lua\ldo.c">
       <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Test2Lua.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

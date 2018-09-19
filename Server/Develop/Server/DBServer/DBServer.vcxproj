@@ -110,6 +110,7 @@
     <ClInclude Include="DBTaskEvent.h" />
     <ClInclude Include="JHConfigManage.h" />
     <ClInclude Include="JHTimerSystem.h" />
+    <ClInclude Include="LuaInterFace.h" />
     <ClInclude Include="LuaManage.h" />
     <ClInclude Include="NetSocket.h" />
     <ClInclude Include="Ref.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="SocketManage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Test2Lua.h" />
     <ClInclude Include="ThreadPoolManage.h" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +164,7 @@
     <ClCompile Include="Ref.cpp" />
     <ClCompile Include="SocketManage.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Test2Lua.cpp" />
     <ClCompile Include="ThreadPoolManage.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
