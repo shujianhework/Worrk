@@ -114,10 +114,12 @@ void TestConfig(int argc, _TCHAR* argv[]){
 	config->get("ConfigFile", fs);
 	config->init(fs);
 }
+void pushTable(){
+	
+}
 void TestLua(){
 	auto *lua = SJH::LuaManage::getInstance();
 	lua->start("test.lua");
-	lua->getstring(1);
 	SJH::LuaManage::Destroy();
 }
 #if 1==0
@@ -167,6 +169,7 @@ public:\
 int _tmain(int argc, _TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
+	TestLua();
 	system("pause");
 	return 0;
 }

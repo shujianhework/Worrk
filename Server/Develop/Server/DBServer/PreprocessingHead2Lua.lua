@@ -145,11 +145,17 @@ end
 function Server:RegisterLua(Name,tab)
 	self.ClassFunctions = self.ClassFunctions or {}
 	self.WriteList[#self.WriteList + 1] = "int AutoRegister_"..Name.."_Function(lua_State *L);"
+	local RegisterClassFunc = {"int AutoRegister_"..Name.."_Function(lua_State *L){"}
 	for k,v in pairs(tab) do
 		if type(v) ~= "table" then
-			--self.WriteList[#self.WriteList + 1] = ""
+			
+			self.WriteList[#self.WriteList + 1] = "int AutoRegister_"..Name.."_Val_get"..k.."_Function(lua_State *L);";
+			self.WriteList[#self.WriteList + 1] = "int AutoRegister_"..Name.."_Val_set"..k.."_Function(lua_State *L);";
+		else
+			self.WriteList[#self.WriteList + 1] = "int AutoRegister_"..Name.."_Func_"..k.."_Function(lua_State *L);";
 		end
 	end
+	RegisterClassFunc[#RegisterClassFunc + 1] = "}"
 	--self.ClassFunctions[#self.ClassFunctions + 1] = 
 end
 function Server:LoadSrcCode()
@@ -260,7 +266,7 @@ function Server:LoadSrcCode()
 			self:RegisterLua(k,v)
 		end
 	end
-	--print(GetTableString(self.temptab))
+	print(GetTableString(self.WriteList))
 end
 Server:LoadSrcCode()
 --print(string.find("[((","%("))
