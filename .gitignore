@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+/Server/Develop/Server/DBServer/*.log
+/Server/Develop/Server/DBServer/*.idc
+/Server/Develop/Server/DBServer/Debug/*.log
+/Server/Develop/Server/DBServer/Debug/DBServer.tlog/*.tlog
+/Server/Develop/Server/DBServer/Debug/*.i
+/Server/Develop/Server/DBServer/Debug/*.tli
+/Server/Develop/Server/DBServer/Debug/*.tlh
+/Server/Develop/Server/DBServer/Debug/*.idb
+/Server/Develop/Server/DBServer/Debug/*.pdb
+/Server/Develop/Server/Debug/*.ilk
+/Server/Develop/Server/Debug/*.pdb
+/Server/Develop/Server/Debug
+/Server/Develop/Server/DBServer/Debug
+/Server/Develop/Server/Server/Debug
