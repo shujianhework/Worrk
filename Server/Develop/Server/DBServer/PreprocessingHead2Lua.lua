@@ -148,9 +148,9 @@ function Server:RegisterStructGetVal(StructName,Type,Name,FuncName)
 	self.WriteList[#self.WriteList + 1] = "static int "..FuncName.."(lua_State* L);"
 	local tab = {
 		"static int "..FuncName.."(lua_State* L){",
-		StructName.."** P = ("..StructName.."**)luaL_checkudata(L, 1, "..StructName..");",
-		"luaL_argcheck(L, P != NULL, 1, \"invalid user data\");",
-		PutDataPrve..Type.."((*P)->"..Name..")",
+		"\t"..StructName.."** P = ("..StructName.."**)luaL_checkudata(L, 1, \""..StructName.."\");",
+		"\tluaL_argcheck(L, P != NULL, 1, \"invalid user data\");",
+		"\t"..PutDataPrve..Type.."((*P)->"..Name..");",
 		"}"
 	}
 	return tab
@@ -160,8 +160,8 @@ function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
 	local s = "static struct "..FuncName.."FuncList {"
 	local tab = {
 		"static int "..FuncName.."(lua_State* L){",
-		StructName.."** P = ("..StructName.."**)luaL_checkudata(L, 1, "..StructName..");",
-		"luaL_argcheck(L, P != NULL, 1, \"invalid user data\");",
+		"\t"..StructName.."** P = ("..StructName.."**)luaL_checkudata(L, 1, \""..StructName.."\");",
+		"\tluaL_argcheck(L, P != NULL, 1, \"invalid user data\");",
 	}
 	local ParamLists = {}
 	local index,endindex = nil,nil
@@ -191,8 +191,8 @@ function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
 	for i,v in ipairs(List) do
 		ParamLists[i] = {}
 		local tab = string.split(v,',')
-		if #tab[i] == 1 and tab[i] == "" then
-			tab[i] = {}
+		if #tab == 1 and tab == "" then
+			tab = {}
 		end
 		for k,vv in pairs(tab) do
 			local ps = self:DelFirstEndNILChar(vv) --string.split(vv)
@@ -201,13 +201,17 @@ function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
 			end
 		end
 	end
+	if ParamLists == nil then
+		return 
+	end
+	local Getdataprve = string.sub(GetDataPrve,string.len(GetLuaManage)+1,-1)
 	if #ParamLists == 1 then--直接调用
 		local s = ""
 		if #ParamLists[1] == 0 then
-			s = "(*P)->"..Name.."();"
+			s = "\t(*P)->"..Name.."();"
 		else
-			s = "auto LM = "..GetLuaManage..";(*P)->"..Name.."("
-			local Getdataprve = string.sub(GetDataPrve,string.len(GetLuaManage)+1,-1)
+			s = "\tauto LM = "..GetLuaManage..";\n\t(*P)->"..Name.."("
+			
 			for k,v in pairs(ParamLists[1]) do
 				s = s.."LM"..Getdataprve..v.."(),"
 			end
@@ -216,44 +220,109 @@ function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
 		end
 		tab[#tab + 1] = s
 	else
-		local s = "int len = lua_gettop("..GetLuaManage.."->L);\nswitch(len){"
-		local max,min = 0,0
-		for k,v in pairs(ParamLists) do
-			max = math.max(max,#v)
-			min = math.min(min,#v)
-		end
+		local s = "\tint len = lua_gettop("..GetLuaManage.."->L);\n\tswitch(len){"
+		
+		table.sort(ParamLists,function (a,b)
+			if #a ~= #b then
+				return #a < #b
+			end
+			return false
+		end)
+		local min,max = #ParamLists[1],#ParamLists[#ParamLists]
+		local StructFuncAddr = StructName.."::"..Name
+		print(GetTableString(ParamLists))
+		print(Name,min,max)
 		for i=min,max do
-			s = s.."\ncase "..i..":{\n"
-			
-			s = s.."\n};break;"
+			s = s.."\n\tcase "..i..":{\n"
+			if i == 0 then
+				s = s.."\t\tauto LM = "..GetLuaManage..";\n\t\t(*P)->"..Name.."();\n"
+				table.remove(ParamLists,1)
+			else
+				local len = #ParamLists
+				local tabvarnames = {}
+				for j = 1,len do
+					if #ParamLists[j] ~= i then
+						break
+					end
+					s = s.."\t\tstd::tuple<"
+					local varname = "t"
+					for kk,vv in pairs(ParamLists[j]) do
+						s = s..vv..","
+						varname = varname..vv
+					end
+					tabvarnames[#tabvarnames + 1] = varname
+					s = string.sub(s,1,-2)
+					s=s.."> "..varname..";\n"
+				end
+				print("--------------")
+				print(s)
+				local flg = false
+				local format = "\t\t"
+				for i,v in ipairs(tabvarnames) do
+					local ps = GetLuaManage.."->getFunAllParam<decltype("..v..")>("..v..",[&](){"
+					ps = ps.."auto ret = public2ThisFunc"..i.."<decltype(*P),decltype(&"..StructFuncAddr.."),decltype("..v..")>(*P,&"..StructFuncAddr..","..v..");"
+					ps = ps.."})"
+					s = s..format.."if ("..ps.." == false)\n"
+					table.remove(ParamLists,1)
+					format =format.."\t"
+				end
+				s = s ..format.. "assert(false);//传入的参数和所有重载函数都不匹配\n"
+			end
+			s = s.."\t};break;"
 		end
-		s = s.."\n default:printf(\"参数数量错误没有该重载函数\");return 0;"
+		s = s.."\n\tdefault:printf(\"参数数量错误没有该重载函数\");return 0;"
 		s = s.."}"
+		tab[#tab + 1] = s
 	end
 	tab[#tab+1] = wrret
 	tab[#tab + 1] = "}"
-	--需要搜集参数s
-	--首先判断传入的参数列表的类型s
-	--return tab
-	--print(StructName,Name,Ret,FuncName)
+	return tab
 end
 function Server:RegisterLua(Name,tab,varname,funcname)
 	local vartab = {"static const struct luaL_Reg "..varname.."[] = {"}
+	local Funtab = {"static const struct luaL_Reg "..funcname.."[] = {"}
 	local FuncName = nil
 	local Members = {}
 	for k,v in pairs(tab) do
 		if type(v) == "string" then
 			FuncName = "AutoRegister_"..Name.."_Val_"..k
-			vartab[#vartab+1] = "{"..k..","..FuncName.."}"
+			vartab[#vartab+1] = "\t{\""..k.."\","..FuncName.."},"
 			Members[#Members+1] = self:RegisterStructGetVal(Name,v,k,FuncName)
 		else
 			FuncName = "AutoRegister_"..Name.."_Func_"..k
-			self:RegisterStructGetFunc(Name,k,v,FuncName)
+			Funtab[#Funtab+1] = "\t{\""..k.."\","..FuncName.."},"
+			Members[#Members+1] = self:RegisterStructGetFunc(Name,k,v,FuncName)
 		end
 	end
-	vartab[#vartab+1] = "{NULL,NULL},"
-	vartab[#vartab+1] = "}"
-	print(GetTableString(Members))
+	vartab[#vartab+1] = "\t{NULL,NULL},"
+	vartab[#vartab+1] = "};"	
+	Funtab[#Funtab+1] = "\t{NULL,NULL},"
+	Funtab[#Funtab+1] = "};"
+	return {vartab,Funtab,Members}
+end
+function Server:Write()
+	if self.WriteBuffer then
+		local temp = nil
+		temp = function (tab,back)
+			if type(tab) == "string" then
+				back(tab)
+			else
+				for k,v in pairs(tab) do
+					temp(v,back)
+				end
+			end
+		end
+		local f = io.open(Write2File,"w")
+		if f == nil then
+			return false
+		end
+		temp(self.WriteBuffer,function (s)
+			--print(s)
+			f:write(s.."\n")
+		end)
+		f:close()
+		return true
+	end
 end
 function Server:LoadSrcCode()
 	local temptab = {}
@@ -367,6 +436,7 @@ function Server:LoadSrcCode()
 	local count = 0
 	local ValUserStructName = ""
 	local FucUserStructName = ""
+	local AllRegistDatas = {}
 	for k,v in pairs(self.temptab) do
 		if next(v) then
 			ValUserStructName = "AutoRegister_"..k.."_Struct"
@@ -379,13 +449,17 @@ function Server:LoadSrcCode()
 			switch[#switch+1] = "top=lua_gettop(L);"
 			count = count +1
 			testModelOpen[#testModelOpen + 1] = "\tluaL_newlib(L, "..FucUserStructName..");"
-			self:RegisterLua(k,v,ValUserStructName,FucUserStructName)
+			local ft = self:RegisterLua(k,v,ValUserStructName,FucUserStructName)
+			AllRegistDatas[k] = ft
 		end
 	end
 	switch[#switch+1] = "}"
 	testModelOpen[#testModelOpen+1] = "\treturn "..count..";"
 	testModelOpen[#testModelOpen+1] = "}"
-	--print(GetTableString(testModelOpen))
+	self.temptab = nil
+	self.WriteBuffer = {self.WriteList,AllRegistDatas,testModelOpen}
+	self.WriteList = nil
+	self:Write()
 end
 Server:LoadSrcCode()
 --print(string.find("[((","%("))
