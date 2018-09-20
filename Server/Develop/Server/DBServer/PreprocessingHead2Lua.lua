@@ -1,8 +1,10 @@
 local HeadFile = "LuaInterFace.h"
 local Write2File = "LuaInterFace.cpp"
-local GetDataPrve = "SJH::LuaManage::getInstance()->get"
-local PutDataPrve = "SJH::LuaManage::getInstance()->push"
+local GetLuaManage = "SJH::LuaManage::getInstance()"
+local GetDataPrve = GetLuaManage.."->get"
+local PutDataPrve = GetLuaManage.."->push"
 local BeginStructFlg = "namespace LUANOUSER"
+local ModelName = "testModel"
 local Server = {WriteList = {}}
 if string.split == nil then
 	function string.split(str, delimiter)  
@@ -142,21 +144,116 @@ function Server:MemHandler(tab)
 	end
 	return ret
 end
-function Server:RegisterLua(Name,tab)
-	self.ClassFunctions = self.ClassFunctions or {}
-	self.WriteList[#self.WriteList + 1] = "int AutoRegister_"..Name.."_Function(lua_State *L);"
-	local RegisterClassFunc = {"int AutoRegister_"..Name.."_Function(lua_State *L){"}
-	for k,v in pairs(tab) do
-		if type(v) ~= "table" then
-			
-			self.WriteList[#self.WriteList + 1] = "int AutoRegister_"..Name.."_Val_get"..k.."_Function(lua_State *L);";
-			self.WriteList[#self.WriteList + 1] = "int AutoRegister_"..Name.."_Val_set"..k.."_Function(lua_State *L);";
-		else
-			self.WriteList[#self.WriteList + 1] = "int AutoRegister_"..Name.."_Func_"..k.."_Function(lua_State *L);";
+function Server:RegisterStructGetVal(StructName,Type,Name,FuncName)
+	self.WriteList[#self.WriteList + 1] = "static int "..FuncName.."(lua_State* L);"
+	local tab = {
+		"static int "..FuncName.."(lua_State* L){",
+		StructName.."** P = ("..StructName.."**)luaL_checkudata(L, 1, "..StructName..");",
+		"luaL_argcheck(L, P != NULL, 1, \"invalid user data\");",
+		PutDataPrve..Type.."((*P)->"..Name..")",
+		"}"
+	}
+	return tab
+end
+function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
+	self.WriteList[#self.WriteList + 1] = "static int "..FuncName.."(lua_State* L);"
+	local s = "static struct "..FuncName.."FuncList {"
+	local tab = {
+		"static int "..FuncName.."(lua_State* L){",
+		StructName.."** P = ("..StructName.."**)luaL_checkudata(L, 1, "..StructName..");",
+		"luaL_argcheck(L, P != NULL, 1, \"invalid user data\");",
+	}
+	local ParamLists = {}
+	local index,endindex = nil,nil
+	--去重  函数名 参数列表相同
+	for k,v in ipairs(List) do
+		index,endindex = string.find(v,"%(")
+		if index then
+			v = string.sub(v,index+1,-1)
+		end
+		index,endindex = string.find(v,"%)")
+		if index then
+			v = string.sub(v,1,index-1)
+		end
+		ParamLists[v] = 1
+	end
+	local wrret = "return "
+	if List.Ret == nil or List.Ret == "" or List.Ret == "void" then
+		wrret = wrret.."0;"
+	else
+		wrret = wrret.."1;"
+	end
+	List = {}
+	for k,v in pairs(ParamLists) do
+		List[#List+1] = k
+	end
+	ParamLists = {}
+	for i,v in ipairs(List) do
+		ParamLists[i] = {}
+		local tab = string.split(v,',')
+		if #tab[i] == 1 and tab[i] == "" then
+			tab[i] = {}
+		end
+		for k,vv in pairs(tab) do
+			local ps = self:DelFirstEndNILChar(vv) --string.split(vv)
+			if ps ~= "" then
+				ParamLists[i][#ParamLists[i] + 1] = ps
+			end
 		end
 	end
-	RegisterClassFunc[#RegisterClassFunc + 1] = "}"
-	--self.ClassFunctions[#self.ClassFunctions + 1] = 
+	if #ParamLists == 1 then--直接调用
+		local s = ""
+		if #ParamLists[1] == 0 then
+			s = "(*P)->"..Name.."();"
+		else
+			s = "auto LM = "..GetLuaManage..";(*P)->"..Name.."("
+			local Getdataprve = string.sub(GetDataPrve,string.len(GetLuaManage)+1,-1)
+			for k,v in pairs(ParamLists[1]) do
+				s = s.."LM"..Getdataprve..v.."(),"
+			end
+			s = string.sub(s,1,-2)
+			s = s..");"
+		end
+		tab[#tab + 1] = s
+	else
+		local s = "int len = lua_gettop("..GetLuaManage.."->L);\nswitch(len){"
+		local max,min = 0,0
+		for k,v in pairs(ParamLists) do
+			max = math.max(max,#v)
+			min = math.min(min,#v)
+		end
+		for i=min,max do
+			s = s.."\ncase "..i..":{\n"
+			
+			s = s.."\n};break;"
+		end
+		s = s.."\n default:printf(\"参数数量错误没有该重载函数\");return 0;"
+		s = s.."}"
+	end
+	tab[#tab+1] = wrret
+	tab[#tab + 1] = "}"
+	--需要搜集参数s
+	--首先判断传入的参数列表的类型s
+	--return tab
+	--print(StructName,Name,Ret,FuncName)
+end
+function Server:RegisterLua(Name,tab,varname,funcname)
+	local vartab = {"static const struct luaL_Reg "..varname.."[] = {"}
+	local FuncName = nil
+	local Members = {}
+	for k,v in pairs(tab) do
+		if type(v) == "string" then
+			FuncName = "AutoRegister_"..Name.."_Val_"..k
+			vartab[#vartab+1] = "{"..k..","..FuncName.."}"
+			Members[#Members+1] = self:RegisterStructGetVal(Name,v,k,FuncName)
+		else
+			FuncName = "AutoRegister_"..Name.."_Func_"..k
+			self:RegisterStructGetFunc(Name,k,v,FuncName)
+		end
+	end
+	vartab[#vartab+1] = "{NULL,NULL},"
+	vartab[#vartab+1] = "}"
+	print(GetTableString(Members))
 end
 function Server:LoadSrcCode()
 	local temptab = {}
@@ -261,12 +358,34 @@ function Server:LoadSrcCode()
 			break
 		end
 	end
+	self.WriteList[#self.WriteList + 1] = "int AutoRegister_Model(lua_State *L);"
+	self.WriteList[#self.WriteList + 1] = "static int testModelOpen(lua_State *L);"
+	self.ClassFunctions = {}
+	local testModelOpen = {"static int testModelOpen(lua_State *L){"}
+	local switch = {"int AutoRegister_Model(lua_State *L){","int top = lua_gettop(L);",
+	"luaL_requiref(L, "..ModelName..", testModelOpen, 0);","top=lua_gettop(L);"}
+	local count = 0
+	local ValUserStructName = ""
+	local FucUserStructName = ""
 	for k,v in pairs(self.temptab) do
 		if next(v) then
-			self:RegisterLua(k,v)
+			ValUserStructName = "AutoRegister_"..k.."_Struct"
+			FucUserStructName = "AutoRegister_"..k.."_Funcs"
+			switch[#switch+1] = "luaL_newmetatable(L, "..k..");"
+			switch[#switch+1] = "lua_pushvalue(L, -1);"
+			switch[#switch+1] = "lua_setfield(L, -2, \"__index\");"
+			switch[#switch+1] = "luaL_setfuncs(L, "..ValUserStructName..", 0);"
+			switch[#switch+1] = "lua_pop(L,1);"
+			switch[#switch+1] = "top=lua_gettop(L);"
+			count = count +1
+			testModelOpen[#testModelOpen + 1] = "\tluaL_newlib(L, "..FucUserStructName..");"
+			self:RegisterLua(k,v,ValUserStructName,FucUserStructName)
 		end
 	end
-	print(GetTableString(self.WriteList))
+	switch[#switch+1] = "}"
+	testModelOpen[#testModelOpen+1] = "\treturn "..count..";"
+	testModelOpen[#testModelOpen+1] = "}"
+	--print(GetTableString(testModelOpen))
 end
 Server:LoadSrcCode()
 --print(string.find("[((","%("))

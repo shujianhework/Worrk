@@ -242,12 +242,6 @@
     <ClCompile Include="..\Lua\lzio.c">
       <Filter>Lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Lua\print.c">
-      <Filter>Lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Lua\wmain.c">
-      <Filter>Lua</Filter>
-    </ClCompile>
     <ClCompile Include="..\Lua\lapi.c">
       <Filter>Lua</Filter>
     </ClCompile>

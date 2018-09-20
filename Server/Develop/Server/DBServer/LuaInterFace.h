@@ -2,15 +2,14 @@
 #include "RegisterLuaDefine.h"
 #include "Test2Lua.h"
 namespace LUANOUSER{
-	struct A
-	{
+	struct A{
+		double d;
 	};
-	class Test2Lua:public A{
+	struct Test2Lua:public A{
 		int al;
 		double cl;
 		float fl;
-		void show(int, char);
-		void show(int, double);
-		void show(int,int,char);
+		void show();
+		void vshow(int, char);
 	};
 }

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#if 1 == 0 
 #include "../DBServer/DBOper.h"
 #include "../DBServer/DBTaskEvent.h"
 #include "../DBServer/ThreadPoolManage.h"
@@ -93,3 +94,111 @@ int main(){
 	return -1;*/
 	return 0;
 }
+#else
+#include "../Lua/lua.hpp"
+class CTest{
+public:
+	CTest(){}
+	~CTest(){}
+
+	int getA(){ return m_a; }
+	void setA(int a){ m_a = a; }
+
+private:
+	int m_a;
+
+};
+static int CreateTest(lua_State* L)
+{
+	CTest** ppTest = (CTest**)lua_newuserdata(L, sizeof(CTest*));
+	*ppTest = new CTest;
+	luaL_getmetatable(L, "test");
+	lua_setmetatable(L, -2);
+	return 1;
+}
+
+static int TestGetA(lua_State* L)
+{
+	CTest** ppTest = (CTest**)luaL_checkudata(L, 1, "test");
+	luaL_argcheck(L, ppTest != NULL, 1, "invalid user data");
+	lua_pushnumber(L, (int)(*ppTest)->getA());
+	return 1;
+}
+
+static int TestSetA(lua_State* L)
+{
+	CTest** ppTest = (CTest**)luaL_checkudata(L, 1, "test");
+	luaL_argcheck(L, ppTest != NULL, 1, "invalid user data");
+	int a = (int)lua_tointeger(L, 2);
+	(*ppTest)->setA(a);
+	return 0;
+}
+
+static int DeleteTest(lua_State* L)
+{
+	CTest** ppTest = (CTest**)luaL_checkudata(L, 1, "test");
+	delete *ppTest;
+	printf("test is deleted");
+	return 0;
+}
+
+static const struct luaL_Reg test_reg_f[] =
+{
+	{ "test", CreateTest },
+	{ NULL, NULL },
+};
+
+static const struct luaL_Reg test_reg_mf[] =
+{
+	{ "TestGetA", TestGetA },
+	{ "TestSetA", TestSetA },
+	{ "__gc", DeleteTest },
+	{ NULL, NULL },
+};
+
+static int testModelOpen(lua_State* L)
+{
+	//luaL_register(L, "testModel", test_reg_f);
+	luaL_newlib(L, test_reg_f);
+	return 1;
+}
+template <typename T>
+void backcall(T t){
+	t(1,2,3);
+}
+int main()
+{
+	//int top = 0;
+	//lua_State* L = luaL_newstate();
+	//top = lua_gettop(L);
+	////luaopen_base(L);
+	//luaL_openlibs(L);
+	//top = lua_gettop(L);
+
+	////加载模块
+	//luaL_requiref(L, "testModel", testModelOpen, 0);
+	//top = lua_gettop(L);
+
+	////创建metatable
+	//luaL_newmetatable(L, "test");
+	//lua_pushvalue(L, -1);
+	//lua_setfield(L, -2, "__index");
+	//luaL_setfuncs(L, test_reg_mf, 0);
+	//lua_pop(L, 1);
+	//top = lua_gettop(L);
+
+	//int ret = luaL_dofile(L, "test.lua");
+	//if (ret != 0)
+	//{
+	//	printf("%s", lua_tostring(L, -1));
+	//}
+	//lua_close(L);
+//	auto r = plf();
+	auto call = [&](int a,int b,int c,int d){
+		printf("%d,%d,%d", a, b, c);
+	};
+	backcall<decltype(call)>(call);
+	getchar();
+	return 1;
+}
+#endif

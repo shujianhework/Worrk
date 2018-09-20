@@ -32,7 +32,7 @@ namespace SJH{
 		GetFunc(char*,char, string);
 		GetFunc(char*, string, string);
 #undef GetFunc
-#define putfunc(FunType,Type,LuaType) inline void push##FunType(Type v){lua_push##LuaType(L,v);}
+#define putfunc(FunType,Type,LuaType) inline int push##FunType(Type v){lua_push##LuaType(L,v);return 1;}
 		putfunc(int, int, number);
 		putfunc(double, double, number);
 		putfunc(float, float, number);
@@ -41,7 +41,7 @@ namespace SJH{
 		putfunc(char,char*,  string);
 		putfunc(string,char*,  string);
 		putfunc(function,lua_CFunction,  cfunction);
-		inline void pushvoid(void){}
+		inline int pushvoid(void){ return 0; }
 #undef putfunc
 		//.....
 	};

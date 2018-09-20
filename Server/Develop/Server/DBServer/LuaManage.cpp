@@ -34,15 +34,15 @@ void SELF::Destroy(){
 }
 //注册？
 int SELF::start(std::string file){
-	std::string str = "_MyG = {}setmetatable(_G, {__newindex=function(t, k, v)\nerror(\"禁止添加全局变量\")end })\n local f = loadfile(\""+file+"\")\n f()";
-	//luaL_loadfile(L, file.c_str());
-	luaL_loadstring(L, str.c_str());
-	if (lua_pcall(L,0,0,0))
-	{
-		LogInfo("%s\n", lua_tostring(L, -1));
-		return -1;
-	}
-	lua_close(L);
+	//std::string str = "_MyG = {}setmetatable(_G, {__newindex=function(t, k, v)\nerror(\"禁止添加全局变量\")end })\n local f = loadfile(\""+file+"\")\n f()";
+	////luaL_loadfile(L, file.c_str());
+	//luaL_loadstring(L, str.c_str());
+	//if (lua_pcall(L,0,0,0))
+	//{
+	//	LogInfo("%s\n", lua_tostring(L, -1));
+	//	return -1;
+	//}
+	//lua_close(L);
 	return 0;
 }
 #undef SELF

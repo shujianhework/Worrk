@@ -152,8 +152,6 @@
     <ClCompile Include="..\Lua\lundump.c" />
     <ClCompile Include="..\Lua\lvm.c" />
     <ClCompile Include="..\Lua\lzio.c" />
-    <ClCompile Include="..\Lua\print.c" />
-    <ClCompile Include="..\Lua\wmain.c" />
     <ClCompile Include="DBOper.cpp" />
     <ClCompile Include="DBServer.cpp" />
     <ClCompile Include="DBTaskEvent.cpp" />

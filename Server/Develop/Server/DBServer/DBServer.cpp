@@ -9,6 +9,7 @@
 #include "JHTimerSystem.h"
 #include "JHConfigManage.h"
 #include "LuaManage.h"
+#include "RegisterLuaDefine.h"
 using namespace std;
 #include <vector>
 #include <algorithm>
@@ -115,7 +116,10 @@ void TestConfig(int argc, _TCHAR* argv[]){
 	config->init(fs);
 }
 void pushTable(){
-	
+	/*auto L = SJH::LuaManage::getInstance()->L;
+	lua_getglobal(L, "_G");
+	lua_newtable(L);
+	lua_pushstring(L, "TESTTABLE");*/
 }
 void TestLua(){
 	auto *lua = SJH::LuaManage::getInstance();
@@ -166,10 +170,22 @@ public:\
 #define C2LFun(Ref,SType,Name,...)
 #define C2LEnd() }
 #endif
+class MyClass
+{
+public:
+	void show(int, int, double, char){
+	}
+	void vshow(){}
+};
 int _tmain(int argc, _TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
-	TestLua();
+	MyClass mc;
+	std::tuple<int, int, double, bool> pl(0, 0, 20, true);
+	//iidc<std::tuple<int, int, double, char>,void>(pl);
+	//iidc<void, MyClass*, decltype(&MyClass::show), std::tuple<int, int, double, char>>(&mc, &MyClass::show, pl);
+	public2ThisFunc4<MyClass*, decltype(&MyClass::show), decltype(pl)>(&mc, &MyClass::show, pl);
+	//void(__thiscall MyClass::*)(void) pil = &MyClass::vshow;
 	system("pause");
 	return 0;
 }
