@@ -60,6 +60,21 @@
     <ClInclude Include="LuaManage.h">
       <Filter>DBServerLib</Filter>
     </ClInclude>
+    <ClInclude Include="RegisterLuaDefine.h">
+      <Filter>DBServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaInterFace.h">
+      <Filter>DBServerLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Test2Lua.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lctype.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\ldebug.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
     <ClInclude Include="..\Lua\ldo.h">
       <Filter>Lua</Filter>
     </ClInclude>
@@ -85,6 +100,9 @@
       <Filter>Lua</Filter>
     </ClInclude>
     <ClInclude Include="..\Lua\lparser.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lua\lprefix.h">
       <Filter>Lua</Filter>
     </ClInclude>
     <ClInclude Include="..\Lua\lstate.h">
@@ -129,18 +147,6 @@
     <ClInclude Include="..\Lua\lcode.h">
       <Filter>Lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\Lua\ldebug.h">
-      <Filter>Lua</Filter>
-    </ClInclude>
-    <ClInclude Include="RegisterLuaDefine.h">
-      <Filter>DBServerLib</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaInterFace.h">
-      <Filter>DBServerLib</Filter>
-    </ClInclude>
-    <ClInclude Include="Test2Lua.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -175,6 +181,21 @@
     </ClCompile>
     <ClCompile Include="LuaManage.cpp">
       <Filter>DBServerLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Test2Lua.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lctype.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\ldblib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\ldebug.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\ldo.c">
+      <Filter>Lua</Filter>
     </ClCompile>
     <ClCompile Include="..\Lua\ldump.c">
       <Filter>Lua</Filter>
@@ -233,7 +254,16 @@
     <ClCompile Include="..\Lua\ltm.c">
       <Filter>Lua</Filter>
     </ClCompile>
+    <ClCompile Include="..\Lua\lua.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\luac.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
     <ClCompile Include="..\Lua\lundump.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lua\lutf8lib.c">
       <Filter>Lua</Filter>
     </ClCompile>
     <ClCompile Include="..\Lua\lvm.c">
@@ -251,23 +281,22 @@
     <ClCompile Include="..\Lua\lbaselib.c">
       <Filter>Lua</Filter>
     </ClCompile>
+    <ClCompile Include="..\Lua\lbitlib.c">
+      <Filter>Lua</Filter>
+    </ClCompile>
     <ClCompile Include="..\Lua\lcode.c">
       <Filter>Lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\Lua\ldblib.c">
+    <ClCompile Include="..\Lua\lcorolib.c">
       <Filter>Lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Lua\ldebug.c">
-      <Filter>Lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Lua\ldo.c">
-      <Filter>Lua</Filter>
-    </ClCompile>
-    <ClCompile Include="Test2Lua.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LuaInterFace.cpp">
-      <Filter>DBServerLib</Filter>
+      <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Lua\Makefile">
+      <Filter>Lua</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -157,6 +157,7 @@ function Server:RegisterStructGetVal(StructName,Type,Name,FuncName)
 end
 function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
 	self.WriteList[#self.WriteList + 1] = "static int "..FuncName.."(lua_State* L);"
+	local Ret = List.Ret
 	local s = "static struct "..FuncName.."FuncList {"
 	local tab = {
 		"static int "..FuncName.."(lua_State* L){",
@@ -220,8 +221,12 @@ function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
 		end
 		tab[#tab + 1] = s
 	else
-		local s = "\tint len = lua_gettop("..GetLuaManage.."->L);\n\tswitch(len){"
-		
+		local s = "\tauto LM = "..GetLuaManage..";\n"
+		s = s.."\tint len = lua_gettop("..GetLuaManage.."->L);\n\tswitch(len){"
+		local strlastRet = ""
+		if Ret ~= "void" then
+			strlastRet = "auto ret = "
+		end
 		table.sort(ParamLists,function (a,b)
 			if #a ~= #b then
 				return #a < #b
@@ -230,12 +235,10 @@ function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
 		end)
 		local min,max = #ParamLists[1],#ParamLists[#ParamLists]
 		local StructFuncAddr = StructName.."::"..Name
-		print(GetTableString(ParamLists))
-		print(Name,min,max)
 		for i=min,max do
 			s = s.."\n\tcase "..i..":{\n"
 			if i == 0 then
-				s = s.."\t\tauto LM = "..GetLuaManage..";\n\t\t(*P)->"..Name.."();\n"
+				s = s.."\t\t(*P)->"..Name.."();\n"
 				table.remove(ParamLists,1)
 			else
 				local len = #ParamLists
@@ -246,21 +249,26 @@ function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
 					end
 					s = s.."\t\tstd::tuple<"
 					local varname = "t"
+					local funtype = Ret.."("..StructName.."::*)("
 					for kk,vv in pairs(ParamLists[j]) do
 						s = s..vv..","
 						varname = varname..vv
+						funtype = funtype..vv..","
 					end
-					tabvarnames[#tabvarnames + 1] = varname
+					funtype = string.sub(funtype,1,-2)
+					tabvarnames[funtype] = varname
 					s = string.sub(s,1,-2)
 					s=s.."> "..varname..";\n"
 				end
-				print("--------------")
-				print(s)
 				local flg = false
 				local format = "\t\t"
-				for i,v in ipairs(tabvarnames) do
-					local ps = GetLuaManage.."->getFunAllParam<decltype("..v..")>("..v..",[&](){"
-					ps = ps.."auto ret = public2ThisFunc"..i.."<decltype(*P),decltype(&"..StructFuncAddr.."),decltype("..v..")>(*P,&"..StructFuncAddr..","..v..");"
+				for k,v in pairs(tabvarnames) do
+					local ps = "LM->getFunAllParam(\n\t"..format.."[&](int len){\n\t\t"..format.."if ("..len.." < len) return false;\n\t\t"..format
+					for endi = 1,len-1 do
+						ps = ps.."std::get<"..(endi-1)..">("..v..") = LM->getParam<decltype(std::get<"..(endi-1)..">("..v.."))>(std::get<"..(endi-1)..">("..v.."),"..endi..");\n\t\t"..format
+					end
+					ps = ps.."return true;\n\t"..format.."},\n\t"..format.."[&](){\n\t\t"..format..""
+					ps = ps..strlastRet.."public2ThisFunc"..i.."<decltype(*P),"..k.."),decltype("..v..")>(*P,&"..StructFuncAddr..","..v..");\n\t"..format..""
 					ps = ps.."})"
 					s = s..format.."if ("..ps.." == false)\n"
 					table.remove(ParamLists,1)
@@ -270,7 +278,8 @@ function Server:RegisterStructGetFunc(StructName,Name,List,FuncName)
 			end
 			s = s.."\t};break;"
 		end
-		s = s.."\n\tdefault:printf(\"参数数量错误没有该重载函数\");return 0;"
+		--参数数量错误没有该重载函数
+		s = s.."\n\tdefault:{\n\t\tprintf(\"\");\n\t\treturn 0;\n\t}\n"
 		s = s.."}"
 		tab[#tab + 1] = s
 	end

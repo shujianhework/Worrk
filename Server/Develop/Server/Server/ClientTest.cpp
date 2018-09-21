@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <functional>
 #if 1 == 0 
 #include "../DBServer/DBOper.h"
 #include "../DBServer/DBTaskEvent.h"
@@ -97,7 +96,6 @@ int main(){
 }
 #else
 #include "../Lua/lua.hpp"
-#include <tuple>
 class CTest{
 public:
 	CTest(){}
@@ -164,10 +162,6 @@ static int testModelOpen(lua_State* L)
 	luaL_newlib(L, test_reg_f);
 	return 1;
 }
-template <typename T>
-void backcall(T t){
-	t(1,2,3);
-}
 int main()
 {
 	//int top = 0;
@@ -195,14 +189,6 @@ int main()
 	//	printf("%s", lua_tostring(L, -1));
 	//}
 	//lua_close(L);
-//	auto r = plf();
-	auto call = [&](int a,int b,int c){
-		printf("%d,%d,%d", a, b, c);
-	};
-	//std::function<void(void)> 
-	backcall<decltype(call)>(call);
-	std::tuple<> tp;
-	//Éú³É×Ö·û´® "int double char ..." 
 	getchar();
 	return 1;
 }

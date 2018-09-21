@@ -170,22 +170,23 @@ public:\
 #define C2LFun(Ref,SType,Name,...)
 #define C2LEnd() }
 #endif
-class MyClass
-{
-public:
-	void show(int, int, double, char){
+void TestNewLua(){
+	int top = 0;
+	lua_State* L = luaL_newstate();
+	top = lua_gettop(L);
+	luaL_openlibs(L);
+	top = lua_gettop(L);
+	int ret = luaL_dofile(L, "test.lua");
+	if (ret != 0)
+	{
+		printf("%s", lua_tostring(L, -1));
 	}
-	void vshow(){}
-};
+	lua_close(L);
+}
 int _tmain(int argc, _TCHAR* argv[])
 {
+	
 	setlocale(LC_ALL, "");
-	MyClass mc;
-	std::tuple<int, int, double, bool> pl(0, 0, 20, true);
-	//iidc<std::tuple<int, int, double, char>,void>(pl);
-	//iidc<void, MyClass*, decltype(&MyClass::show), std::tuple<int, int, double, char>>(&mc, &MyClass::show, pl);
-	public2ThisFunc4<MyClass*, decltype(&MyClass::show), decltype(pl)>(&mc, &MyClass::show, pl);
-	//void(__thiscall MyClass::*)(void) pil = &MyClass::vshow;
 	system("pause");
 	return 0;
 }
