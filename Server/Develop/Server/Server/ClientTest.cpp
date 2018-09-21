@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <functional>
 #if 1 == 0 
 #include "../DBServer/DBOper.h"
 #include "../DBServer/DBTaskEvent.h"
@@ -96,6 +97,7 @@ int main(){
 }
 #else
 #include "../Lua/lua.hpp"
+#include <tuple>
 class CTest{
 public:
 	CTest(){}
@@ -194,10 +196,13 @@ int main()
 	//}
 	//lua_close(L);
 //	auto r = plf();
-	auto call = [&](int a,int b,int c,int d){
+	auto call = [&](int a,int b,int c){
 		printf("%d,%d,%d", a, b, c);
 	};
+	//std::function<void(void)> 
 	backcall<decltype(call)>(call);
+	std::tuple<> tp;
+	//Éú³É×Ö·û´® "int double char ..." 
 	getchar();
 	return 1;
 }

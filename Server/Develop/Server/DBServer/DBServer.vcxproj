@@ -157,6 +157,7 @@
     <ClCompile Include="DBTaskEvent.cpp" />
     <ClCompile Include="JHConfigManage.cpp" />
     <ClCompile Include="JHTimerSystem.cpp" />
+    <ClCompile Include="LuaInterFace.cpp" />
     <ClCompile Include="LuaManage.cpp" />
     <ClCompile Include="NetSocket.cpp" />
     <ClCompile Include="Ref.cpp" />

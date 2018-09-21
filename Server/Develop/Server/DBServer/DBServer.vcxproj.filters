@@ -266,5 +266,8 @@
     <ClCompile Include="Test2Lua.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="LuaInterFace.cpp">
+      <Filter>DBServerLib</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -21,6 +21,49 @@ namespace SJH{
 		static void Destroy();
 		void release();
 		int start(std::string file);
+		template<typename T>
+		bool getFunAllParam(T std,std::function<void(void)> back)
+		{
+			int len = lua_gettop(L);
+			std::tuple<> tp;
+			if (len <= 1)
+			{
+				call();
+				return true;
+			}
+			int type = 0;
+			for (int i = 1; i < len; i++)
+			{
+				type = lua_type(L, i);
+				switch (type)
+				{
+				case LUA_TBOOLEAN:
+					tp = std::tuple_cat(tp, lua_toboolean(L,i));
+					break;
+				case LUA_TNUMBER:
+					tp = std::tuple_cat(tp, lua_tonumber(L, i));
+					break;
+				case LUA_TSTRING:
+					tp = std::tuple_cat(tp, lua_tostring(L, i));
+					break;
+				case LUA_TFUNCTION:
+					tp = std::tuple_cat(tp, lua_tocfunction(L, i));
+					break;
+				case LUA_TNIL:
+					tp = std::tuple_cat(tp, NULL);
+					break;
+				default:
+					//暂时不支持
+					assert(false);
+					break;
+				}
+			}
+			if (len > -1){
+				call();
+				return true;
+			}
+			return false;
+		}
 #define GetFunc(RetType,Type,LuaType) inline RetType get##Type(int i){return (RetType)lua_to##LuaType(L,i);}
 		GetFunc(int, int, number);
 		GetFunc(double, double, number);
