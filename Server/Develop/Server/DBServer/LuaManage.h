@@ -11,6 +11,7 @@ namespace SJH{
 	{
 	private:
 		static LuaManage* instance;
+		std::function<void(void*, int)> tempback;
 	public:
 		lua_State *L;
 		bool TempFuncRet;
@@ -18,94 +19,12 @@ namespace SJH{
 	private:
 		LuaManage();
 		~LuaManage();
-#define TYPECOM(X) ((typeid(T) == typeid(X)) && (typeid(T) == typeid(unsigned X)))
-#define TYPETRUEHANDLE(x) {t = (T)lua_to##x(L,i);return;}
-		template<typename T>
-		bool luaTNUMBER(T &t, int i){
-			if (TYPECOM(int) && TYPECOM(short) && TYPECOM(long) && TYPECOM(long long))//int 
-				TYPETRUEHANDLE(number);
-			if (typeid(double) == typeid(T) && typeid(float) == typeid(T))
-				TYPETRUEHANDLE(number);
-			TempFuncRet = false;
-			return false;
-		}
-#undef TYPECOM
-#define TYPECOM(X) (typeid(T) == typeid(X))
-		template<typename T>
-		bool luaTBOOLEAN(T &t, int i){
-			if (TYPECOM(bool))
-				TYPETRUEHANDLE(boolean);
-			TempFuncRet = false;
-			return false;
-		}
-		template<typename T>
-		bool luaTSTRING(T &t, int i){
-			if (TYPECOM(char*) && TYPECOM(std::string) && TYPECOM(const char*))
-				TYPETRUEHANDLE(string);
-			if (TYPECOM(char))
-			{
-				char *p = lua_tostring(L, i);
-				t = p[0];
-				return;
-			}
-			TempFuncRet = false;
-			return false;
-		}
-		template<typename T>
-		bool luaTFUNCTION(T &t, int i){
-			//不知道怎么写？
-			TempFuncRet = false;
-			return false;
-		}
-		template<typename T>
-		bool luaTNIL(T &t, int i){
-			TempFuncRet = false;
-			return false;
-		}
-		template<typename T>
-		bool luaTTABLE(T &t, int i){
-			TempFuncRet = false;
-			return false;
-		}
-		template<typename T>
-		bool luaTUSERDATA(T &t, int i){
-			TempFuncRet = false;
-			return false;
-		}
-#undef TYPECOM
-#undef TYPETRUEHANDLE
 	public:
 		static LuaManage* getInstance();
 		static void Destroy();
 		void release();
 		int start(std::string file);
 		//lua##X<T>(t,i)
-#define LUATYPEGET(X) case LUA_##X:{\
-		}; break;
-		template<typename T>
-		T getParam(T& t,int i){
-			if (TempFuncRet){
-				if (tempFuncParamLen < i)
-				{
-					TempFuncRet = false;
-					return t;
-				}
-				int type = lua_type(L, i);
-				switch (type){
-					LUATYPEGET(TBOOLEAN);
-					LUATYPEGET(TNUMBER);
-					LUATYPEGET(TFUNCTION);
-					LUATYPEGET(TSTRING);
-					LUATYPEGET(TNIL);
-					LUATYPEGET(TUSERDATA);
-					LUATYPEGET(TTABLE);
-				default:
-					assert(false);
-					break;
-				}
-			}
-			return t;
-		}
 		bool getFunAllParam(std::function<bool(int)> firstback,std::function<void(void)> endcall)
 		{
 			TempFuncRet = true;
@@ -120,17 +39,22 @@ namespace SJH{
 			}
 			return false;
 		}
-#undef LUATYPEGET
-#define GetFunc(RetType,Type,LuaType) inline RetType get##Type(int i){return (RetType)lua_to##LuaType(L,i);}
-		GetFunc(int, int, number);
-		GetFunc(double, double, number);
-		GetFunc(float, float, number);
-		GetFunc(bool, bool, number);
-		//GetFunc(void*, class, userdata);
-		GetFunc(lua_CFunction, function, cfunction);
-		GetFunc(const char*, constchar, string);
-		GetFunc(char*,char, string);
-		GetFunc(char*, string, string);
+#define GetFunc(RetType,Type,LuaType,DefValue,TABTYPE) inline RetType get##Type(int i){\
+	RetType rt = ##DefValue;\
+	if(lua_type(L,i) == ##TABTYPE)\
+		rt = (RetType)lua_to##LuaType(L,i);\
+		else\
+		TempFuncRet = false;\
+	return rt;\
+		}
+		GetFunc(int, int, number,0,LUA_TNUMBER);
+		GetFunc(double, double, number,0.0f,LUA_TNUMBER);
+		GetFunc(float, float, number,0.0f,LUA_TNUMBER);
+		GetFunc(bool, bool, boolean, false, LUA_TBOOLEAN);
+		GetFunc(lua_CFunction, function, cfunction,NULL,LUA_TFUNCTION);
+		GetFunc(const char*, constchar, string,"",LUA_TSTRING);
+		GetFunc(char*, char, string, "", LUA_TSTRING);
+		GetFunc(char*, string, string, "", LUA_TSTRING);
 #undef GetFunc
 #define putfunc(FunType,Type,LuaType) inline int push##FunType(Type v){lua_push##LuaType(L,v);return 1;}
 		putfunc(int, int, number);
@@ -148,6 +72,16 @@ namespace SJH{
 		putfunc(function,lua_CFunction,  cfunction);
 		inline int pushvoid(void){ return 0; }
 #undef putfunc
-		//.....
+#define CheckFunc(CType,LISTypeFunc,LGetValueFunc) inline bool Peek##CType(CType& value,int i){\
+			if (lua_type(L,i) == LUA_##LISTypeFunc)\
+				value = lua_to##LGetValueFunc(L,i);\
+			else\
+				return false;\
+			return true;\
+		}
+		CheckFunc(int, TNUMBER, number);
+		CheckFunc(double, TNUMBER, number);
+		CheckFunc(float, TNUMBER, number);
+		//CheckFunc(string, TSTRING, string);
 	};
 };

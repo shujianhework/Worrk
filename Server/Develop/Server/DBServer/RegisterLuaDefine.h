@@ -47,3 +47,4 @@ decltype((ct->*ft)(std::get<0>(t), std::get<1>(t), std::get<2>(t), std::get<3>(t
 	return (ct->*ft)(std::get<0>(t), std::get<1>(t), std::get<2>(t), std::get<3>(t), std::get<4>(t), std::get<5>(t));
 }
 #endif
+//#define CHECKSET(LTYPE,VALUE,LTYPE) if(lua_type()
