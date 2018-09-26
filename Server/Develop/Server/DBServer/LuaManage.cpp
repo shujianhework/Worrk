@@ -45,5 +45,9 @@ int SELF::start(std::string file){
 	//lua_close(L);
 	return 0;
 }
+bool SELF::CheckParams(std::string Types){
+	return false;
+}
+void SELF::GetParamTypes(){}
 #undef SELF
 #undef self

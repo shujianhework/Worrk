@@ -14,8 +14,6 @@ namespace SJH{
 		std::function<void(void*, int)> tempback;
 	public:
 		lua_State *L;
-		bool TempFuncRet;
-		int tempFuncParamLen;
 	private:
 		LuaManage();
 		~LuaManage();
@@ -24,53 +22,28 @@ namespace SJH{
 		static void Destroy();
 		void release();
 		int start(std::string file);
-		//lua##X<T>(t,i)
-		bool getFunAllParam(std::function<bool(int)> firstback,std::function<void(void)> endcall)
-		{
-			TempFuncRet = true;
-			int len = lua_gettop(L);
-			tempFuncParamLen = len;
-			if (true == firstback(len))
-			{
-				if (TempFuncRet){
-					endcall();
-					return true;
-				}
-			}
-			return false;
+		bool CheckParams(std::string Types);
+		void GetParamTypes();
+#define ToFunc(RetType,LGetNextName,DefValue) inline RetType To##LGetNextName(int i){\
+			return (RetType)lua_to##LGetNextName(L, i); \
 		}
-#define GetFunc(RetType,Type,LuaType,DefValue,TABTYPE) inline RetType get##Type(int i){\
-	RetType rt = ##DefValue;\
-	if(lua_type(L,i) == ##TABTYPE)\
-		rt = (RetType)lua_to##LuaType(L,i);\
-		else\
-		TempFuncRet = false;\
-	return rt;\
+		ToFunc(double, number);
+		ToFunc(char*, string);
+		ToFunc(bool, boolean);
+#undef ToFunc
+#define putfunc(Type,FuncName) inline int Push##FuncName(Type v){lua_push##FuncName(L,v);return 1;}
+		putfunc(double, number);
+		putfunc(int, number);
+		putfunc(long, number);
+		putfunc(bool, boolean);
+		putfunc(const char*, string);
+		inline int Pushstring(char c){
+			std::string s = &c;
+			return Pushstring(s.c_str());
 		}
-		GetFunc(int, int, number,0,LUA_TNUMBER);
-		GetFunc(double, double, number,0.0f,LUA_TNUMBER);
-		GetFunc(float, float, number,0.0f,LUA_TNUMBER);
-		GetFunc(bool, bool, boolean, false, LUA_TBOOLEAN);
-		GetFunc(lua_CFunction, function, cfunction,NULL,LUA_TFUNCTION);
-		GetFunc(const char*, constchar, string,"",LUA_TSTRING);
-		GetFunc(char*, char, string, "", LUA_TSTRING);
-		GetFunc(char*, string, string, "", LUA_TSTRING);
-#undef GetFunc
-#define putfunc(FunType,Type,LuaType) inline int push##FunType(Type v){lua_push##LuaType(L,v);return 1;}
-		putfunc(int, int, number);
-		putfunc(double, double, number);
-		putfunc(float, float, number);
-		putfunc(bool, bool, number);
-		putfunc(constchar,const char*,  string);
-		putfunc(char,char*,  string);
-		inline int pushchar(char v){
-			lua_pushstring(L, &v);
-			return 1;
+		inline int Pushnil(){
+			return 0;
 		}
-		//putfunc(char, char, string);
-		putfunc(string,char*,  string);
-		putfunc(function,lua_CFunction,  cfunction);
-		inline int pushvoid(void){ return 0; }
 #undef putfunc
 #define CheckFunc(CType,LISTypeFunc,LGetValueFunc) inline bool Peek##CType(CType& value,int i){\
 			if (lua_type(L,i) == LUA_##LISTypeFunc)\

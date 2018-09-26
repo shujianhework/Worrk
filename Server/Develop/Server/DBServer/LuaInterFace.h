@@ -18,7 +18,7 @@ namespace LUANOUSER{
 		bool bb;
 		void show();
 		void show(int);
-		void show(int, int, bool);
+		void show(int , int, bool);
 		void print();
 	};
 	class BLI{
