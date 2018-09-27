@@ -53,7 +53,7 @@ function initLoadPy()
 		end})
 	end
 end
-initLoadPy()
+--initLoadPy()
 function print(...)
 	local str = ""
 	local tab = {...}

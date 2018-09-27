@@ -51,8 +51,13 @@ struct Func{
 private:
 	std::string strBackFunc;
 public:
+	~Func(){
+		remvoeBack();
+	}
 	std::string setBack(std::string strback){
 		strBackFunc = strback;
 		return strback;
 	}
+	bool remvoeBack();
+	int call();
 };

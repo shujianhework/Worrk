@@ -95,9 +95,11 @@ std::string SELF::RegisterLuaFunction(int idx){
 		return "";
 	}
 	//生成一个key
-	std::string key = "12365";//Tool::getHaskKeys(50);
+	std::string key = Tool::getHaskKeys(10);
+	while (C2LuaCallKeyManage.find(key) != C2LuaCallKeyManage.end()){
+		key = Tool::getHaskKeys(35);
+	}
 	lua_getglobal(L, C2LuaBackS);
-	//printf("-1 type = %d\n",lua_type(L, -1));
 	lua_pushvalue(L, idx);
 	lua_setfield(L, -2, key.c_str());
 	C2LuaCallKeyManage[key] = true;

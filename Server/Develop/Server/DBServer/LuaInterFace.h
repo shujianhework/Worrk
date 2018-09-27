@@ -38,5 +38,7 @@ namespace LUANOUSER{
 	};
 	struct Func{
 		string setBack(LUAFUNC);
+		bool remvoeBack();
+		int call();
 	};
 }
