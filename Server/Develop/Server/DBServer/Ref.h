@@ -48,6 +48,7 @@ namespace SJH{
 		static std::vector<std::string> split(const std::string &s, const std::string &seperator);
 		static std::string replaces(std::string src, std::string replace, std::string byreplace);
 		static std::string Trim(std::string src,char c = ' ');
+		static std::string getHaskKeys(int len);
 	private:
 
 	};

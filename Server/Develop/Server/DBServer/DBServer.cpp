@@ -79,7 +79,7 @@ void TestConfig(int argc, _TCHAR* argv[]){
 }*/
 
 void TestNewLua(){
-	int top = 0;
+	/*int top = 0;
 	lua_State* L = luaL_newstate();
 	top = lua_gettop(L);
 	luaL_openlibs(L);
@@ -91,12 +91,16 @@ void TestNewLua(){
 	{
 		printf("%s", lua_tostring(L, -1));
 	}
-	lua_close(L);
+	lua_close(L);*/
+	SJH::LuaManage::getInstance()->start("test.lua", [&](lua_State* L){
+		AutoRegister_Model(L);
+	});
 }
 int _tmain(int argc, _TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
-	//TestNewLua();
+	//TestAL("8TBOOLEAN7TSTRING");
+	TestNewLua();
 	system("pause");
 	return 0;
 }

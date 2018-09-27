@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Ref.h"
-
+#include <time.h>
 using namespace SJH;
 Ref::Ref() :_retaincount(0)
 {
@@ -178,4 +178,17 @@ std::string Tool::Trim(std::string src, char c){
 		res = &p[i];
 		return res;
 	}
+}
+std::string Tool::getHaskKeys(int len){
+	std::string s = "";
+	srand(time(NULL));
+	assert(len < 4096);
+	char arr[4096] = "";
+	for (int i = 0; i < len; i++)
+	{
+		arr[i] = rand() % 200 + 10;
+	}
+	arr[len] = '\0';
+	s = arr;
+	return s;
 }

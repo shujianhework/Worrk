@@ -15,19 +15,22 @@ local CType2LuaType = {
 	["string"] = "TSTRING",
 	["char"] = "TSTRING",
 	["bool"] = "TBOOLEAN",
-	["void"] = "TNIL"
+	["void"] = "TNIL",
+	["LUAFUNC"] = "TFUNCTION",
 }
 local Type2GetValue = {
 	["TNUMBER"] = "Tonumber(%d)",
 	["TSTRING"] = "Tostring(%d)",
 	["TBOOLEAN"] = "Toboolean(%d)",
-	["TNIL"] = ""
+	["TNIL"] = "",
+	["TFUNCTION"] = "ToFunction(%d)",
 }
 local Type2SetValue = {
 	["TNUMBER"] = "Pushnumber(%s)",
 	["TSTRING"] = "Pushstring(%s)",
 	["TBOOLEAN"] = "Pushboolean(%s)",
-	["TNIL"] = "Pushnil(%s)"
+	["TNIL"] = "Pushnil(%s)",
+	["TFUNCTION"] = "Pushnil(%s)",
 }
 require "initLua"
 function Server:DelTailNILChar(s)
@@ -64,12 +67,14 @@ end
 function Server:Write()
 	if self.WriteBuffer then
 		local temp = nil
-		temp = function (tab,back)
+		temp = function (k,tab,back)
 			if type(tab) == "string" then
 				back(tab)
+			elseif type(tab) == "function" then
+				back(tab())
 			else
 				for k,v in pairs(tab) do
-					temp(v,back)
+					temp(k,v,back)
 				end
 			end
 		end
@@ -77,7 +82,7 @@ function Server:Write()
 		if f == nil then
 			return false
 		end
-		temp(self.WriteBuffer,function (s)
+		temp(nil,self.WriteBuffer,function (s)
 			f:write(s.."\n")
 		end)
 		f:close()
@@ -143,7 +148,7 @@ function Server:ValHandler(StructName,Name,Type)
 			"\t"..StructName.."** P = ("..StructName.."**)luaL_checkudata(L, 1, \""..StructName.."\");",
 			"\tluaL_argcheck(L, P != NULL, 1, \"invalid user data\");",
 			"\tauto LM = "..GetLuaManage..";",
-			"\t(*P)->"..Name.." = ("..Type..")LM->"..string.format(Type2GetValue[self:CTypeTranceLuaType(Type)],1)..";",
+			"\t(*P)->"..Name.." = ("..Type..")LM->"..string.format(Type2GetValue[self:CTypeTranceLuaType(Type)],2)..";",
 			"\treturn 0;",
 			"}"
 		},{
@@ -159,9 +164,7 @@ function Server:ValHandler(StructName,Name,Type)
 end
 function Server:FuncHandler(StructName,FuncName,pv)
 	local LuaFuncName = FuncName
-	print(FuncName)
 	if FuncName == StructName then
-		--print(StructName)
 		self.NewStructFunLists[#self.NewStructFunLists + 1] = "\t{\""..StructName.."\",AutoRegister_"..StructName.."_Func_new},"
 		LuaFuncName = "new"
 	else
@@ -170,15 +173,8 @@ function Server:FuncHandler(StructName,FuncName,pv)
 	local RegisterFuncName = "static int  AutoRegister_"..StructName.."_Func_"..LuaFuncName.."(lua_State *L)"
 	self.WriteList[#self.WriteList + 1] = RegisterFuncName..";"
 	local tab = {RegisterFuncName.."{"}
-	if LuaFuncName ~= "new" then
-		tab[#tab + 1] = "\t"..StructName.."** P = ("..StructName.."**)luaL_checkudata(L, 1, \""..StructName.."\");"
-		tab[#tab + 1] = "\tluaL_argcheck(L, P != NULL, 1, \"invalid user data\");"
-	else
-		tab[#tab + 1] = "\t"..StructName.."** P = ("..StructName.."**)lua_newuserdata(L,sizeof("..StructName.."*));"
-	end
 	tab[#tab + 1] = "\tconst static std::string ParamTypeLists[] = {"
 	local t = self.FuncLists[StructName][FuncName] or pv
-	--dump({t,pv})
 	local LuaTypes = {}
 	local i = 0
 	local RetStr = ""
@@ -189,7 +185,14 @@ function Server:FuncHandler(StructName,FuncName,pv)
 			local s = ""
 			for kk,vv in pairs(v) do
 				LuaTypes[i][kk] = {vv,self:CTypeTranceLuaType(vv)}
-				s = s..string.len(LuaTypes[i][kk][2])..LuaTypes[i][kk][2]
+				s = s..","..LuaTypes[i][kk][2]
+			end
+			if s ~= "," and s ~= "" then
+				if LuaFuncName ~= "new" then
+					s = "TUSERDATA"..s
+				else
+					--s = "TTABLE"..s
+				end
 			end
 			tab[#tab + 1] = "\t\t\""..s.."\","
 		else
@@ -200,6 +203,12 @@ function Server:FuncHandler(StructName,FuncName,pv)
 	tab[#tab + 1] = "\t};"
 	tab[#tab + 1] = "\tauto LM = "..GetLuaManage..";"
 	tab[#tab + 1] = "\tLM->GetParamTypes();"
+	if LuaFuncName ~= "new" then
+		tab[#tab + 1] = "\t"..StructName.."** P = ("..StructName.."**)luaL_checkudata(L, 1, \""..StructName.."\");"
+		tab[#tab + 1] = "\tluaL_argcheck(L, P != NULL, 1, \"invalid user data\");"
+	else
+		tab[#tab + 1] = "\t"..StructName.."** P = ("..StructName.."**)lua_newuserdata(L,sizeof("..StructName.."*));"
+	end
 	local StrongType = ""
 	for k,v in pairs(LuaTypes) do
 		tab[#tab + 1] = "\tif (true == LM->CheckParams(ParamTypeLists["..(k-1).."])){"
@@ -211,7 +220,7 @@ function Server:FuncHandler(StructName,FuncName,pv)
 				else
 					StrongType = "("..vv[1]..")"
 				end
-				RealReferenceS = RealReferenceS..StrongType.."LM->"..string.format(Type2GetValue[vv[2]],kk-1)..","
+				RealReferenceS = RealReferenceS..StrongType.."LM->"..string.format(Type2GetValue[vv[2]],LuaFuncName == "new" and kk or kk + 1)..","
 			end
 		end
 		if RealReferenceS ~= "" then
@@ -374,6 +383,18 @@ function Server:LoadSrcCode()
 		"\tluaL_requiref(L, \""..ModelName.."\",AutoRegister_Func,0);",
 		""
 	}
+	local DelectFunc = function (k)
+		self.WriteList[#self.WriteList + 1] = "static int AutoRegister_Delete_"..k.."(lua_State *L);"
+		local DelFunCode = {
+			"static int AutoRegister_Delete_"..k.."(lua_State *L){",
+			"\t"..k.."** P = ("..k.."**)luaL_checkudata(L, 1, \""..k.."\");",
+			"\tluaL_argcheck(L, P != NULL, 1, \"invalid user data\");",
+			"\tdelete *P;",
+			"\treturn 0;",
+			"}"
+		}
+		return "AutoRegister_Delete_"..k,DelFunCode
+	end
 	for k,v in pairs(newtab) do
 		tab[k] = {}
 		self.StructFunLists[k] = {"static const struct luaL_Reg AutoRegister_Struct_"..k.."[] {"}
@@ -399,8 +420,11 @@ function Server:LoadSrcCode()
 		RootFuncCode[#RootFuncCode + 1] = "\tluaL_setfuncs(L, AutoRegister_Struct_"..k..", 0);"
 		RootFuncCode[#RootFuncCode + 1] = "\tlua_pop(L,1);"
 		RootFuncCode[#RootFuncCode + 1] = ""
-		self.StructFunLists[k][len+1] = "\t{NULL,NULL}"
-		self.StructFunLists[k][len+2] = "};"
+		local Name,Code = DelectFunc(k)
+		tab[k][#tab[k] + 1] = Code
+		self.StructFunLists[k][len+1] = "\t{\"__gc\","..Name.."},"
+		self.StructFunLists[k][len+2] = "\t{NULL,NULL}"		
+		self.StructFunLists[k][len+3] = "};"
 	end
 	self.NewStructFunLists[#self.NewStructFunLists + 1] = "\t{NULL,NULL}"
 	self.NewStructFunLists[#self.NewStructFunLists + 1] = "};"
