@@ -17,6 +17,15 @@ local CType2LuaType = {
 	["bool"] = "TBOOLEAN",
 	["void"] = "TNIL",
 	["LUAFUNC"] = "TFUNCTION",
+	["MAPSS"]	= "TTABLE",
+	["MAPSI"]	= "TTABLE",
+	["MAPIS"]	= "TTABLE",
+	["MAPII"]	= "TTABLE",
+	["MAPSB"]	= "TTABLE",
+	["MAPIB"]	= "TTABLE",
+	["VECS"]	= "TTABLE",
+	["VECI"]	= "TTABLE",
+	["VECB"]	= "TTABLE",
 }
 local Type2GetValue = {
 	["TNUMBER"] = "Tonumber(%d)",
@@ -24,6 +33,7 @@ local Type2GetValue = {
 	["TBOOLEAN"] = "Toboolean(%d)",
 	["TNIL"] = "",
 	["TFUNCTION"] = "ToFunction(%d)",
+	["TTABLE"] 	= "ToTable<%s>(%d)",
 }
 local Type2SetValue = {
 	["TNUMBER"] = "Pushnumber(%s)",
@@ -31,6 +41,7 @@ local Type2SetValue = {
 	["TBOOLEAN"] = "Pushboolean(%s)",
 	["TNIL"] = "Pushnil(%s)",
 	["TFUNCTION"] = "Pushnil(%s)",
+	["TTABLE"] = "PushTable(%s)",
 }
 require "initLua"
 function Server:DelTailNILChar(s)
@@ -89,7 +100,8 @@ function Server:Write()
 		return true
 	end
 end
-function Server:CreateFuncListTable(StructName,FuncName,RetType,ParamString)
+function Server:CreateFuncListTable(StructName,FuncName,RetType,ParamString,new)
+
 	self.FuncLists = self.FuncLists or {}
 	self.FuncLists[StructName] = self.FuncLists[StructName] or {}
 	self.FuncLists[StructName][FuncName] = self.FuncLists[StructName][FuncName] or {}
@@ -162,9 +174,9 @@ function Server:ValHandler(StructName,Name,Type)
 	}
 	return tab
 end
-function Server:FuncHandler(StructName,FuncName,pv)
+function Server:FuncHandler(StructName,FuncName,pv,new,IsNewFunc)
 	local LuaFuncName = FuncName
-	if FuncName == StructName then
+	if IsNewFunc then
 		self.NewStructFunLists[#self.NewStructFunLists + 1] = "\t{\""..StructName.."\",AutoRegister_"..StructName.."_Func_new},"
 		LuaFuncName = "new"
 	else
@@ -174,6 +186,7 @@ function Server:FuncHandler(StructName,FuncName,pv)
 	self.WriteList[#self.WriteList + 1] = RegisterFuncName..";"
 	local tab = {RegisterFuncName.."{"}
 	tab[#tab + 1] = "\tconst static std::string ParamTypeLists[] = {"
+	--print(StructName,FuncName)
 	local t = self.FuncLists[StructName][FuncName] or pv
 	local LuaTypes = {}
 	local i = 0
@@ -183,15 +196,15 @@ function Server:FuncHandler(StructName,FuncName,pv)
 			i = i + 1
 			LuaTypes[i] = {}
 			local s = ""
-			for kk,vv in pairs(v) do
-				LuaTypes[i][kk] = {vv,self:CTypeTranceLuaType(vv)}
-				s = s..","..LuaTypes[i][kk][2]
+			if type(v) == "table" then
+				for kk,vv in pairs(v) do
+					LuaTypes[i][kk] = {vv,self:CTypeTranceLuaType(vv)}
+					s = s..","..LuaTypes[i][kk][2]
+				end
 			end
 			if s ~= "," and s ~= "" then
 				if LuaFuncName ~= "new" then
 					s = "TUSERDATA"..s
-				else
-					--s = "TTABLE"..s
 				end
 			end
 			tab[#tab + 1] = "\t\t\""..s.."\","
@@ -210,6 +223,9 @@ function Server:FuncHandler(StructName,FuncName,pv)
 		tab[#tab + 1] = "\t"..StructName.."** P = ("..StructName.."**)lua_newuserdata(L,sizeof("..StructName.."*));"
 	end
 	local StrongType = ""
+	if new == "new" then
+		new = new.." "..StructName.." "
+	end
 	for k,v in pairs(LuaTypes) do
 		tab[#tab + 1] = "\tif (true == LM->CheckParams(ParamTypeLists["..(k-1).."])){"
 		local RealReferenceS = ""
@@ -220,7 +236,11 @@ function Server:FuncHandler(StructName,FuncName,pv)
 				else
 					StrongType = "("..vv[1]..")"
 				end
-				RealReferenceS = RealReferenceS..StrongType.."LM->"..string.format(Type2GetValue[vv[2]],LuaFuncName == "new" and kk or kk + 1)..","
+				if vv[2] == "TTABLE" then
+					RealReferenceS = RealReferenceS..StrongType.."LM->"..string.format(Type2GetValue[vv[2]],vv[1],LuaFuncName == "new" and kk or kk + 1)..","
+				else
+					RealReferenceS = RealReferenceS..StrongType.."LM->"..string.format(Type2GetValue[vv[2]],LuaFuncName == "new" and kk or kk + 1)..","
+				end
 			end
 		end
 		if RealReferenceS ~= "" then
@@ -228,7 +248,7 @@ function Server:FuncHandler(StructName,FuncName,pv)
 		end
 		local s = ""
 		if LuaFuncName == "new" then
-			s = "\t\t*P = new "..StructName.."("..RealReferenceS..");\n\t\tluaL_getmetatable(L,\""..StructName.."\");\n\t\tlua_setmetatable(L,-2);\n\t\treturn 1;"
+			s = "\t\t*P = "..new.."("..RealReferenceS..");\n\t\tluaL_getmetatable(L,\""..StructName.."\");\n\t\tlua_setmetatable(L,-2);\n\t\treturn 1;"
 		elseif RetStr == "" or RetStr == "TNIL" then
 			s = "\t\t(*P)->"..FuncName.."("..RealReferenceS..");\n\t\treturn 0;"
 		else
@@ -308,10 +328,50 @@ function Server:LoadSrcCode()
 	--AutoRegister_Model
 	local outkeys = {["{"] = true,["}"] = true,["public:"] = true}
 	local ErrorFlg = false
+
 	local switchList = {}
-	if true then
-		--dump(temptab)
-	end
+	local Flg = false
+	local newtab = TabLoopBackNewTab(temptab,function (k,v)
+		local newFuncLists = {}
+		local instans = {}
+		local nnewtab = TabLoopBackNewTab(v,function (kk,vv)
+			if Flg == false then
+				if vv == "private:" or vv == "private" then
+					Flg = true
+					return nil,nil
+				end
+				local i,l = string.find(vv,"static "..k.."%* ")
+				if i and i == 1 then
+					local ss = string.sub(vv,l+1,-1)
+					if string.find(ss,k) == nil then
+						i,l = string.find(ss,"%(");
+						assert(i)
+						ss = string.sub(ss,1,i-1)
+						instans[#instans + 1] = ss
+						vv = string.sub(vv,8,-1)
+						return kk,vv
+					end
+				end
+				return kk,vv
+			else
+				if vv == "public" or vv == "public:" then
+					Flg = false
+				end
+				local i = string.find(vv,k.."%(")
+				if i and i == 1 then
+					newFuncLists[#newFuncLists + 1] = 1
+				end
+				return nil,nil
+			end
+		end)
+		nnewtab.new = "new"
+		if #instans > 0 then
+			assert(#instans == 1,"不能获取到对象或者，获取到的方式太多new不知处理方式")
+			nnewtab.new = k.."::"..instans[1]
+		end
+		return k,nnewtab
+	end)
+	temptab = newtab
 	local newtab = TabLoopBackNewTab(temptab,function (k,v)
 		if ErrorFlg == true then
 			return nil,nil
@@ -320,6 +380,8 @@ function Server:LoadSrcCode()
 			return nil,nil
 		end
 		local i = 1
+		local new = v.new
+		v.new = nil
 		local vv = TabLoopBackNewTab(v,function (kkk,vvv)
 			if ErrorFlg then return nil,nil end
 			if kkk == "switch" then
@@ -352,6 +414,7 @@ function Server:LoadSrcCode()
 				local FuncName,retType = self:DelFirstEndNILChar(string.sub(prve,index,-1) or ""),self:DelFirstEndNILChar(string.sub(prve,1,index-1) or "")
 				if index == 1 and endindex == 1 and retType == "" and FuncName ~= k then--构造函数
 					if FuncName ~= "~"..k then--析构函数
+						--print(vvv)
 						ErrorFlg = true--出现了异常 不是关键字也不是函数还不是变量
 						return
 					else
@@ -369,8 +432,12 @@ function Server:LoadSrcCode()
 				return nil,nil
 			end
 		end)
+		vv.new = new
 		return k,vv
 	end)
+	if ErrorFlg then
+		return
+	end
 	local tab = {}
 	self.StructFunLists = {}
 	self.NewStructFunLists = {"static const struct luaL_Reg AutoRegister_Struct[] {"}
@@ -383,30 +450,39 @@ function Server:LoadSrcCode()
 		"\tluaL_requiref(L, \""..ModelName.."\",AutoRegister_Func,0);",
 		""
 	}
-	local DelectFunc = function (k)
+	local DelectFunc = function (k,new)
 		self.WriteList[#self.WriteList + 1] = "static int AutoRegister_Delete_"..k.."(lua_State *L);"
 		local DelFunCode = {
 			"static int AutoRegister_Delete_"..k.."(lua_State *L){",
 			"\t"..k.."** P = ("..k.."**)luaL_checkudata(L, 1, \""..k.."\");",
 			"\tluaL_argcheck(L, P != NULL, 1, \"invalid user data\");",
-			"\tdelete *P;",
-			"\treturn 0;",
-			"}"
 		}
+		if new == "new" then
+			DelFunCode[#DelFunCode + 1] = "\tdelete *P;"
+		end
+		DelFunCode[#DelFunCode + 1] = "\treturn 0;"
+		DelFunCode[#DelFunCode + 1] = "}"
 		return "AutoRegister_Delete_"..k,DelFunCode
 	end
 	for k,v in pairs(newtab) do
 		tab[k] = {}
 		self.StructFunLists[k] = {"static const struct luaL_Reg AutoRegister_Struct_"..k.."[] {"}
-		if v[k] == nil then
+		if v[k] == nil and new == "new" then
 			v[k] = {{}}
 		end
+		local new = v.new
+		local getObjFunc = k
+		if new ~= "new" then
+			getObjFunc = string.sub(new,string.len(k..":: "),-1)
+		end
+		v.new = nil
 		for kk,vv in pairs(v) do
 			if type(vv) == "table" then
-				if k == kk then
-					tab[k].class = self:FuncHandler(k,k,vv)
+				if getObjFunc == kk then
+					print(kk)
+					tab[k].class = self:FuncHandler(k,k,vv,new,true)
 				else
-					tab[k][#tab[k] + 1] = self:FuncHandler(k,kk,vv)
+					tab[k][#tab[k] + 1] = self:FuncHandler(k,kk,vv,new,false)
 				end
 			else
 				--添加get和set函数
@@ -420,7 +496,7 @@ function Server:LoadSrcCode()
 		RootFuncCode[#RootFuncCode + 1] = "\tluaL_setfuncs(L, AutoRegister_Struct_"..k..", 0);"
 		RootFuncCode[#RootFuncCode + 1] = "\tlua_pop(L,1);"
 		RootFuncCode[#RootFuncCode + 1] = ""
-		local Name,Code = DelectFunc(k)
+		local Name,Code = DelectFunc(k,new)
 		tab[k][#tab[k] + 1] = Code
 		self.StructFunLists[k][len+1] = "\t{\"__gc\","..Name.."},"
 		self.StructFunLists[k][len+2] = "\t{NULL,NULL}"		

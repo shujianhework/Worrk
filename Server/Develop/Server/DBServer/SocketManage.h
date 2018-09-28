@@ -28,7 +28,7 @@ namespace SJH{
 		}
 		static void Destroy(){
 			if (instance)
-				instance->release();
+				delete instance;
 			instance = NULL;
 		}
 		inline void setAcceptHandler(ACCEPT accepthandler){

@@ -1,44 +1,29 @@
 #include "LuaManage.h"
 #include "RegisterLuaDefine.h"
-#include "Test2Lua.h"
+#include "JHTimerSystem.h"
+#include "DBTaskEvent.h"
 int AutoRegister_Model(lua_State* L);
-#define LUAFUNC std::string
+
 using namespace std;
+using namespace SJH;
 namespace LUANOUSER{
-	class Test2Lua
+	struct LSchedulerCell
+	{
+		LSchedulerCell(){}
+		bool setHandlerBack(LUAFUNC){}
+		int setTimer(int,bool){}
+		bool removeTImer(int){}
+		bool testmap(MAPSS){}
+		bool testmap(MAPSI,bool){}
+	};
+	struct SJH_DB_SQL_DBTaskEvent
 	{
 	public:
-		Test2Lua();
-		Test2Lua(int);
-		Test2Lua(bool);
-		Test2Lua(bool,char*);
-		~Test2Lua();
-		int a;
-		double b;
-		float c;
-		char cc;
-		bool bb;
-		void show();
-		void show(int);
-		void show(int , int, bool);
-		void print();
-	};
-	class BLI{
-	public:
-		int a;
-		double d;
-		void show();
-		void show(int);
-		void show(char*);
-	};
-	struct PLFa{
-		void SendData();
-		void SendData(char*);
-		void SendData(char*,int);
-	};
-	struct Func{
-		string setBack(LUAFUNC);
-		bool remvoeBack();
-		int call();
+		static SJH_DB_SQL_DBTaskEvent* getInstance();
+		bool Run();
+		bool push(string,LUAFUNC);
+		bool push(string,MAPSS, string , std::string, LUAFUNC);
+		bool push(string, MAPSS, LUAFUNC);
+		bool push(string,string,LUAFUNC);
 	};
 }

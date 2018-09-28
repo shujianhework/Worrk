@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <ctime>
 #include "JHConfigManage.h"
+#include "LuaManage.h"
 #define SELF JHTimerSystem
 #define CELL SELF::SchedulerCell
 using namespace SJH;
@@ -65,6 +66,7 @@ unsigned int SELF::setTimer(unsigned int interval, TimerBack tb, bool loop, void
 		tid = rand() % (UINT_MAX-0xff);		
 	}
 	SchedulerCell *cell = new SchedulerCell(interval,tb,loop,p);
+	cell->tid = tid;
 	if (userTempPool)
 		tempPool.insert(std::make_pair(tid, cell));
 	else
@@ -152,15 +154,29 @@ CELL::~SchedulerCell(){
 }
 bool CELL::update(unsigned int dt){
 	if (remaintime == 0){
-		tb(dt, p);
+		tb(dt,tid, p);
 		return !loop;
 	}
 	this->remaintime -= dt;
 	if (remaintime <= 0){
-		tb(interval - remaintime,p);
+		tb(interval - remaintime,tid,p);
 		if (loop == false)
 			return true;
 		remaintime = interval + remaintime;
 	}
 	return false;
+}
+int LSchedulerCell::setTimer(int interval,bool loop)
+{
+	return JHTimerSystem::getInstance()->setTimer(interval, [&](int dt, int tid ,void* P){
+		LuaManage::getInstance()->CallLuaFunction(strhandle, [&](lua_State* L){
+			lua_pushnumber(L,dt);
+			lua_pushnumber(L,tid);
+			return 2;
+		});
+	}, loop,NULL);
+}
+LSchedulerCell::~LSchedulerCell(){
+	LuaManage::getInstance()->RemoveLuaFunction(strhandle);
+	strhandle = "";
 }

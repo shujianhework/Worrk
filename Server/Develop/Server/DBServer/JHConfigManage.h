@@ -20,6 +20,11 @@ namespace SJH{
 		void get(std::string key,int &ret, int Default = 0);
 		void get(std::string key,bool &ret, bool Default = false);
 		void get(std::string key,std::string &ret, std::string Default = "");
+		static void Desotry(){
+			if (instan)
+				delete instan;
+			instan = NULL;
+		}
 	};
 #define __config JHConfigManage::getInstance()
 }

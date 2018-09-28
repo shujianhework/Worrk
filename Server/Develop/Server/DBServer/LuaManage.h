@@ -1,6 +1,7 @@
 #pragma once
 #include "Ref.h"
 #include <functional>
+#include <vector>
 extern "C"{
 	#include "../Lua/lua.h"
 	#include "../Lua/lauxlib.h"
@@ -37,6 +38,137 @@ namespace SJH{
 		ToFunc(bool, boolean);
 		inline std::string ToFunction(int i){
 			return this->RegisterLuaFunction(i);
+		}
+		template<typename T>
+		T ToTable(int i){
+			T t;
+			return ToTable(t, i);
+		}
+		std::map<std::string, std::string> ToTable(std::map<std::string, std::string> flg,int i){
+			luaL_checktype(L, i, LUA_TTABLE);
+			std::map<std::string, std::string> mapss;
+			lua_pushnil(L);
+			while (lua_next(L, i)){
+				lua_pushvalue(L, -2);
+				if (lua_isstring(L, -1) && lua_isstring(L, -2))
+				{
+					mapss[lua_tostring(L, -1)] = lua_tostring(L, -2);
+				}
+				lua_pop(L, 2);
+			}
+			return mapss;
+		}
+		std::map<std::string, int> ToTable(std::map<std::string, int> flg,int i){
+			luaL_checktype(L, i, LUA_TTABLE);
+			std::map<std::string,int> mapss;
+			lua_pushnil(L);
+			while (lua_next(L, i)){
+				lua_pushvalue(L, -2);
+				if (lua_isstring(L, -1) && lua_isnumber(L, -2))
+				{
+					mapss[lua_tostring(L, -1)] = lua_tonumber(L, -2);
+				}
+				lua_pop(L, 2);
+			}
+			return mapss;
+		}
+		std::map<int, std::string> ToTable(std::map<int, std::string> flg, int i){
+			luaL_checktype(L, i, LUA_TTABLE);
+			std::map<int, std::string> mapss;
+			lua_pushnil(L);
+			while (lua_next(L, i)){
+				lua_pushvalue(L, -2);
+				if (lua_isstring(L, -2) && lua_isnumber(L, -1))
+				{
+					mapss[lua_tonumber(L, -1)] = lua_tostring(L, -2);
+				}
+				lua_pop(L, 2);
+			}
+			return mapss;
+		}
+		std::map<int, int> ToTable(std::map<int, int> flg, int i){
+			luaL_checktype(L, i, LUA_TTABLE);
+			std::map<int, int> mapss;
+			lua_pushnil(L);
+			while (lua_next(L, i)){
+				lua_pushvalue(L, -2);
+				if (lua_tonumber(L, -2) && lua_isnumber(L, -1))
+				{
+					mapss[lua_tonumber(L, -1)] = lua_tonumber(L, -2);
+				}
+				lua_pop(L, 2);
+			}
+			return mapss;
+		}
+		std::map<std::string, bool> ToTable(std::map<std::string, bool> flg, int i){
+			luaL_checktype(L, i, LUA_TTABLE);
+			std::map<std::string, bool> mapss;
+			lua_pushnil(L);
+			while (lua_next(L, i)){
+				lua_pushvalue(L, -2);
+				if (lua_isstring(L, -1) && lua_isboolean(L, -2))
+				{
+					mapss[lua_tostring(L, -1)] = lua_toboolean(L, -2);
+				}
+				lua_pop(L, 2);
+			}
+			return mapss;
+		}
+		std::map<int, bool> ToTable(std::map<int, bool> flg, int i){
+			luaL_checktype(L, i, LUA_TTABLE);
+			std::map<int, bool> mapss;
+			lua_pushnil(L);
+			while (lua_next(L, i)){
+				lua_pushvalue(L, -2);
+				if (lua_isstring(L, -2) && lua_isboolean(L, -1))
+				{
+					mapss[lua_tonumber(L, -1)] = lua_toboolean(L, -2);
+				}
+				lua_pop(L, 2);
+			}
+			return mapss;
+		}
+		std::vector<std::string> ToTable(std::vector<std::string> flg, int i){
+			luaL_checktype(L, i, LUA_TTABLE);
+			std::vector<std::string> vec;
+			lua_pushnil(L);
+			while (lua_next(L, i)){
+				lua_pushvalue(L, -2);
+				if (lua_isstring(L, -2))
+				{
+					vec.push_back(lua_tostring(L, -2));
+				}
+				lua_pop(L, 2);
+			}
+			return vec;
+		}
+		std::vector<int> ToTable(std::vector<int> flg, int i){
+			luaL_checktype(L, i, LUA_TTABLE);
+			std::vector<int> vec;
+			lua_pushnil(L);
+			while (lua_next(L, i)){
+				lua_pushvalue(L, -2);
+				if (lua_isnumber(L, -2))
+				{
+					vec.push_back(lua_tonumber(L, -2));
+				}
+				lua_pop(L, 2);
+			}
+			return vec;
+		}
+		std::vector<bool> ToTable(std::vector<bool> flg, int i){
+			luaL_checktype(L, i, LUA_TTABLE);
+			std::vector<bool> vec;
+			lua_pushnil(L);
+			while (lua_next(L, i)){
+				lua_pushvalue(L, -2);
+				if (lua_isboolean(L, -2))
+				{
+					vec.push_back(lua_toboolean(L, -2));
+				}
+				lua_pop(L, 2);
+			}
+			return vec;
 		}
 #undef ToFunc
 #define putfunc(Type,FuncName) inline int Push##FuncName(Type v){lua_push##FuncName(L,v);return 1;}

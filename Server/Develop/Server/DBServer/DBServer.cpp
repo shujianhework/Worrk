@@ -2,18 +2,15 @@
 //
 
 #include "stdafx.h"
-//#include "DBOper.h"
+#include "DBOper.h"
 #include "DBTaskEvent.h"
-//#include "ThreadPoolManage.h"
-//#include "SocketManage.h"
-//#include "JHTimerSystem.h"
-//#include "JHConfigManage.h"
+#include "ThreadPoolManage.h"
+#include "SocketManage.h"
+#include "JHTimerSystem.h"
+#include "JHConfigManage.h"
 #include "LuaManage.h"
-//#include "RegisterLuaDefine.h"
+#include "RegisterLuaDefine.h"
 #include "LuaInterFace.h"
-//using namespace std;
-//#include <vector>
-//#include <algorithm>
 int TestDB(){
 	auto dbtasklist = SJH::SJH_DB_SQL_DBTaskEvent::getInstance();
 	std::string tempstr = "";
@@ -52,24 +49,7 @@ int TestNet(){
 	JHSleep(1000*1000);*/
 	return 0;
 }
-
-//#define TES(a) 
-void TestTimer(){
-	//auto ts = SJH::JHTimerSystem::getInstance();
-	//ts->setFPS(20);
-	/*ts->setTimer(0, [&](int dt,void* ){
-	}, false);*/
-	/*int jl = 0;
-	ts->setTimer(2000, [&](int dt, void*){
-		SYSTEMTIME st;
-		SYSTEMTIME *p = &st;
-		GetLocalTime(p);
-		printf("\ndt = %d\t\t,Sec = %d\t\t Millisec = %d\t\t",dt, p->wSecond, p->wMilliseconds);
-		jl++;
-	}, true);
-	while (jl < 100);
-	SJH::JHTimerSystem::Destroy();*/
-}/*
+/*
 void TestConfig(int argc, _TCHAR* argv[]){
 	auto *config = SJH::JHConfigManage::getInstance();
 	config->init(argc, argv);
@@ -79,29 +59,24 @@ void TestConfig(int argc, _TCHAR* argv[]){
 }*/
 
 void TestNewLua(){
-	/*int top = 0;
-	lua_State* L = luaL_newstate();
-	top = lua_gettop(L);
-	luaL_openlibs(L);
-	top = lua_gettop(L);
-	SJH::LuaManage::getInstance()->L = L;
-	AutoRegister_Model(L);
-	int ret = luaL_dofile(L, "test.lua");
-	if (ret != 0)
-	{
-		printf("%s", lua_tostring(L, -1));
-	}
-	lua_close(L);*/
 	SJH::LuaManage::getInstance()->start("test.lua", [&](lua_State* L){
 		AutoRegister_Model(L);
 	});
 }
-int _tmain(int argc, _TCHAR* argv[])
+void OnExit(int state){
+	SJH::ThreadPoolManage::Destroy();
+	SJH::JHTimerSystem::Destroy();
+	SJH::SJH_DB_SQL_DBTaskEvent::Destroy();
+	SJH::SocketManage::Destroy();
+	SJH::LuaManage::Destroy();
+	SJH::JHConfigManage::Desotry();
+}
+int main(int argc, TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
-	//TestAL("8TBOOLEAN7TSTRING");
 	TestNewLua();
 	system("pause");
+	//OnExit(0);
 	return 0;
 }
 

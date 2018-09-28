@@ -116,5 +116,26 @@ namespace SJH{
 		bool push(std::string StoredProcedureName, strArr &Param, std::function<void(strArr Param)> back);
 		//ÇÐ»»Êý¾Ý¿â°æ
 		bool push(std::string dbcmd, std::string name, std::function<void(bool)> back);
+
+		bool push(std::string cmd, std::string luabackkey){
+			return push(cmd, [&](int i, std::string key, _variant_t v){
+
+				return true;
+			});
+		}
+		bool push(std::string TableName, strArr KeyValue, std::string wherekey, std::string wherevalue, std::string luabackkey){
+			return push(TableName, KeyValue, wherekey, wherevalue, [&](bool b){
+			});
+		}
+		//´æ´¢¹ý³Ì
+		bool push(std::string StoredProcedureName, strArr &Param, std::string luabackkey){
+			return push(StoredProcedureName, Param, [&](strArr Param){
+			});
+		}
+		//ÇÐ»»Êý¾Ý¿â°æ
+		bool push(std::string dbcmd, std::string name, std::string luabackkey){
+			return push(dbcmd, name, [&](bool b){
+			});
+		}
 	};
 }

@@ -29,7 +29,7 @@ SELF::SELF(){
 	Heartbeat2[4] = 'A';
 	__config->get("ĞÄÌø¼ä¸ô", heartbeatInterval, 20);
 	heartbeatInterval = heartbeatInterval < 60 && heartbeatInterval > 2 ? heartbeatInterval : 30;
-	JHTimerSystem::getInstance()->setTimer(heartbeatInterval * 1000, [&](int dt,void *p){
+	JHTimerSystem::getInstance()->setTimer(heartbeatInterval * 1000, [&](int dt,int,void *p){
 		this->OnHeartbeatHandler();
 	}, true);
 }

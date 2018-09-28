@@ -4,7 +4,7 @@
 #include <functional>
 #include <map>
 namespace SJH{
-	typedef std::function<void(int, void*)> TimerBack;
+	typedef std::function<void(int,int, void*)> TimerBack;
 	class JHTimerSystem:public Ref
 	{
 	private:
@@ -15,6 +15,7 @@ namespace SJH{
 			bool loop;
 			void *p;
 			int remaintime;
+			int tid;
 			SchedulerCell(unsigned int interval, TimerBack tb, bool loop, void *p);
 			~SchedulerCell();
 			//更新后自动回调，根据bool在外面是否删除
@@ -107,12 +108,37 @@ namespace SJH{
 			return instance;
 		}
 		static void Destroy(){
-			if (instance) instance->release();
+			if (instance)
+				delete instance;
 			instance = NULL;
 		}
 		//
 		unsigned int setTimer(unsigned int interval, TimerBack tb, bool loop = false, void *p = NULL);
 		bool removeTimer(unsigned int tid);
 		bool setFPS(unsigned int fps);
+	};
+	struct LSchedulerCell
+	{
+	private:
+		std::string strhandle;
+	public:
+		LSchedulerCell():strhandle(""){}
+		~LSchedulerCell();
+		bool setHandlerBack(std::string str){
+			strhandle = str;
+			return true;
+		}
+		int setTimer(int interval, bool loop = false);
+		bool removeTImer(int tid){
+			return JHTimerSystem::getInstance()->removeTimer(tid);
+		}
+		bool testmap(std::map<std::string, std::string> para){
+			int size = para.size();
+			return size > 0;
+		}
+		bool testmap(std::map<std::string, int> para,int){
+			int size = para.size();
+			return size > 0;
+		}
 	};
 }

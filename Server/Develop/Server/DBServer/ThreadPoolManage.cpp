@@ -26,7 +26,7 @@ SELF* SELF::getInstance(){
 }
 void SELF::Destroy(){
 	if (__instan){
-		__instan->release();
+		delete __instan;
 	}
 	__instan = NULL;
 }
