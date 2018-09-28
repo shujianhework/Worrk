@@ -19,6 +19,6 @@
 #define LogInfo(fmt, ...)	printf(fmt"\n",##__VA_ARGS__)
 #define LogWarn(fmt, ...)	printf(fmt"\n",##__VA_ARGS__)
 #define LogError(fmt, ...)	\
-	printf(TEXT("[ERROR] [file:%s func:%s line: %d]\n :" fmt"\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+	printf(TEXT("[ERROR] [file:%s func:%s line: %d]\n :" fmt"\n"), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 #endif
 #endif

@@ -4,6 +4,7 @@
 #include <ctime>
 #include "JHConfigManage.h"
 #include "LuaManage.h"
+#include "LuaTaskEvent.h"
 #define SELF JHTimerSystem
 #define CELL SELF::SchedulerCell
 using namespace SJH;
@@ -169,14 +170,20 @@ bool CELL::update(unsigned int dt){
 int LSchedulerCell::setTimer(int interval,bool loop)
 {
 	return JHTimerSystem::getInstance()->setTimer(interval, [&](int dt, int tid ,void* P){
-		LuaManage::getInstance()->CallLuaFunction(strhandle, [&](lua_State* L){
-			lua_pushnumber(L,dt);
-			lua_pushnumber(L,tid);
-			return 2;
+		LuaTask<int, int> *LT = new LuaTask<int, int>(dt, tid);
+		LT->setback([&](LuaTaskEvent* lte){
+			LT = (LuaTask<int, int> *)lte;
+			LuaManage::getInstance()->CallLuaFunction(strhandle, [&](lua_State* L){
+				lua_pushnumber(L, std::get<0>(LT->data));
+				lua_pushnumber(L, std::get<1>(LT->data));
+				return 2;
+			});
 		});
+		LuaQueue::getInstance()->push(LT);
 	}, loop,NULL);
 }
 LSchedulerCell::~LSchedulerCell(){
 	LuaManage::getInstance()->RemoveLuaFunction(strhandle);
+	printf(" Õ∑≈LSchedulerCell = %p", this);
 	strhandle = "";
 }

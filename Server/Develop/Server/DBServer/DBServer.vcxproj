@@ -114,6 +114,7 @@
     <ClInclude Include="JHTimerSystem.h" />
     <ClInclude Include="LuaInterFace.h" />
     <ClInclude Include="LuaManage.h" />
+    <ClInclude Include="LuaTaskEvent.h" />
     <ClInclude Include="NetSocket.h" />
     <ClInclude Include="Ref.h" />
     <ClInclude Include="RegisterLuaDefine.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="JHTimerSystem.cpp" />
     <ClCompile Include="LuaInterFace.cpp" />
     <ClCompile Include="LuaManage.cpp" />
+    <ClCompile Include="LuaTaskEvent.cpp" />
     <ClCompile Include="NetSocket.cpp" />
     <ClCompile Include="Ref.cpp" />
     <ClCompile Include="SocketManage.cpp" />

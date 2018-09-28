@@ -21,9 +21,10 @@ namespace LUANOUSER{
 	public:
 		static SJH_DB_SQL_DBTaskEvent* getInstance();
 		bool Run();
-		bool push(string,LUAFUNC);
-		bool push(string,MAPSS, string , std::string, LUAFUNC);
-		bool push(string, MAPSS, LUAFUNC);
-		bool push(string,string,LUAFUNC);
+		void setLuaBack(LUAFUNC,LUAFUNC,LUAFUNC,LUAFUNC);
+		bool push(string);
+		bool push(string,MAPSS, string , string);
+		bool push(string, MAPSS);
+		bool push(string,string);
 	};
 }

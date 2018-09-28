@@ -1,6 +1,7 @@
 #include "DBTaskEvent.h"
 #include "ThreadPoolManage.h"
 #include "JHConfigManage.h"
+#include "LuaTaskEvent.h"
 #include <mutex>
 #define SELF SJH_DB_SQL_DBTaskEvent
 using namespace SJH;
@@ -19,6 +20,7 @@ SELF::SELF()
 }
 SELF::~SELF()
 {
+	printf(" 释放 SJH_DB_SQL_DBTaskEvent = %p", this);
 	for (int i = 0; i < DB_SQL_THREAD_NUMBER_MAX; i++)
 	{
 		if (RunFlg[i] != Empty && RunFlg[i] != Stop)
@@ -143,6 +145,51 @@ bool SELF::push(std::string dbcmd, std::string name, std::function<void(bool)> b
 		JHSleep(10);
 	}
 	return false;
+}
+bool SELF::push(std::string cmd){
+	return push(cmd, [&](int i, std::string key, _variant_t v){
+		LuaTask<int, std::string, std::string> *LT = new LuaTask<int, std::string, std::string>(i, key, tostringType(_bstr_t, v));
+		LT->setback([&](LuaTaskEvent *lte){
+			LT = (LuaTask<int, std::string, std::string> *)lte;
+			LuaManage::getInstance()->CallLuaFunction(LuaBack[3], [&](lua_State* L){
+				lua_pushnumber(L, std::get<0>(LT->data));
+				lua_pushstring(L, std::get<1>(LT->data).c_str());
+				lua_pushstring(L, std::get<2>(LT->data).c_str());
+				return 3;
+			});
+		});
+		LuaQueue::getInstance()->push(LT);
+		return true;
+	});
+}
+bool SELF::push(std::string TableName, strArr KeyValue, std::string wherekey, std::string wherevalue){
+	return push(TableName, KeyValue, wherekey, wherevalue, [&](bool b){
+		LuaManage::getInstance()->CallLuaFunction(LuaBack[1], [&](lua_State* L){
+			return 0;
+		});
+	});
+}
+//存储过程
+bool SELF::push(std::string StoredProcedureName, strArr Param){
+	return push(StoredProcedureName, Param, [&](strArr Param){
+		LuaManage::getInstance()->CallLuaFunction(LuaBack[2], [&](lua_State* L){
+			return 0;
+		});
+	});
+}
+//切换数据库版
+bool SELF::push(std::string dbcmd, std::string name){
+	return push(dbcmd, name, [&](bool b){
+		LuaTask<bool> *LT = new LuaTask<bool>(b);
+		LT->setback([&](LuaTaskEvent* lte){
+			LT = (LuaTask<bool> *)lte;
+			LuaManage::getInstance()->CallLuaFunction(LuaBack[0], [&](lua_State* L){
+				lua_pushboolean(L, std::get<0>(LT->data));
+				return 1;
+			});
+		});
+		LuaQueue::getInstance()->push(LT);
+	});
 }
 bool SELF::Run(){
 	if (RunFlg[0] == DB_SQL_STATS::Empty){

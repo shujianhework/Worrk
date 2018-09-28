@@ -201,6 +201,8 @@ function Server:FuncHandler(StructName,FuncName,pv,new,IsNewFunc)
 					LuaTypes[i][kk] = {vv,self:CTypeTranceLuaType(vv)}
 					s = s..","..LuaTypes[i][kk][2]
 				end
+			else
+				s = s..","
 			end
 			if s ~= "," and s ~= "" then
 				if LuaFuncName ~= "new" then

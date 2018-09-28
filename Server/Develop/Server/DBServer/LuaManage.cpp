@@ -97,7 +97,7 @@ std::string SELF::RegisterLuaFunction(int idx){
 	//生成一个key
 	std::string key = Tool::getHaskKeys(10);
 	while (C2LuaCallKeyManage.find(key) != C2LuaCallKeyManage.end()){
-		key = Tool::getHaskKeys(35);
+		key = Tool::getHaskKeys(6);
 	}
 	lua_getglobal(L, C2LuaBackS);
 	lua_pushvalue(L, idx);

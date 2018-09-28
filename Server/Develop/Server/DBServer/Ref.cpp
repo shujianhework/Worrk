@@ -186,7 +186,7 @@ std::string Tool::getHaskKeys(int len){
 	char arr[4096] = "";
 	for (int i = 0; i < len; i++)
 	{
-		arr[i] = rand() % 200 + 10;
+		arr[i] = rand() % 94 + 32;
 	}
 	arr[len] = '\0';
 	s = arr;

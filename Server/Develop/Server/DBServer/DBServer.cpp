@@ -11,6 +11,7 @@
 #include "LuaManage.h"
 #include "RegisterLuaDefine.h"
 #include "LuaInterFace.h"
+#include "LuaTaskEvent.h"
 int TestDB(){
 	auto dbtasklist = SJH::SJH_DB_SQL_DBTaskEvent::getInstance();
 	std::string tempstr = "";
@@ -70,13 +71,19 @@ void OnExit(int state){
 	SJH::SocketManage::Destroy();
 	SJH::LuaManage::Destroy();
 	SJH::JHConfigManage::Desotry();
+	SJH::LuaQueue::Destroy();
 }
 int main(int argc, TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
 	TestNewLua();
-	system("pause");
-	//OnExit(0);
+	//设置主循环池，用来存放回调lua的事件
+	SJH::LuaQueue *LQ = SJH::LuaQueue::getInstance();
+	while (true){
+		LQ->update();
+		JHSleep(20);
+	}
+	OnExit(0);
 	return 0;
 }
 

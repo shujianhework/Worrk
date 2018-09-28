@@ -119,7 +119,7 @@ namespace SJH{
 	};
 	struct LSchedulerCell
 	{
-	private:
+	public:
 		std::string strhandle;
 	public:
 		LSchedulerCell():strhandle(""){}

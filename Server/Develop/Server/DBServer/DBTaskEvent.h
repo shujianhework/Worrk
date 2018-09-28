@@ -3,6 +3,7 @@
 #include "DBOper.h"
 #include <mutex>
 #include <functional>
+#include "LuaManage.h"
 #define DB_SQL_THREAD_NUMBER_MAX 50
 namespace SJH{
 	class SJH_DB_SQL_DBTaskEvent :public Ref
@@ -93,6 +94,7 @@ namespace SJH{
 			}
 		};
 		std::vector<DB_SQL_TaskRef*> TaskLists[DB_SQL_THREAD_NUMBER_MAX];
+		std::string LuaBack[4];
 	private:
 		SJH_DB_SQL_DBTaskEvent();
 		~SJH_DB_SQL_DBTaskEvent();
@@ -109,33 +111,20 @@ namespace SJH{
 		bool Run();
 		//不提供delete insert 最好实现采用 存储过程db实现这里调用
 		//查询版
+		void setLuaBack(std::string switchback, std::string updateback, std::string Procback, std::string selectback){
+			LuaBack[0] = switchback;
+			LuaBack[1] = updateback;
+			LuaBack[2] = Procback;
+			LuaBack[3] = selectback;
+		}
 		bool push(std::string cmd,std::function<bool(int i,std::string key,_variant_t v)> back);
-		//更改版
 		bool push(std::string TableName, strArr KeyValue, std::string wherekey, std::string wherevalue,std::function<void(bool)> back);
-		//存储过程
 		bool push(std::string StoredProcedureName, strArr &Param, std::function<void(strArr Param)> back);
-		//切换数据库版
 		bool push(std::string dbcmd, std::string name, std::function<void(bool)> back);
 
-		bool push(std::string cmd, std::string luabackkey){
-			return push(cmd, [&](int i, std::string key, _variant_t v){
-
-				return true;
-			});
-		}
-		bool push(std::string TableName, strArr KeyValue, std::string wherekey, std::string wherevalue, std::string luabackkey){
-			return push(TableName, KeyValue, wherekey, wherevalue, [&](bool b){
-			});
-		}
-		//存储过程
-		bool push(std::string StoredProcedureName, strArr &Param, std::string luabackkey){
-			return push(StoredProcedureName, Param, [&](strArr Param){
-			});
-		}
-		//切换数据库版
-		bool push(std::string dbcmd, std::string name, std::string luabackkey){
-			return push(dbcmd, name, [&](bool b){
-			});
-		}
+		bool push(std::string cmd);
+		bool push(std::string TableName, strArr KeyValue, std::string wherekey, std::string wherevalue);
+		bool push(std::string StoredProcedureName, strArr Param);
+		bool push(std::string dbcmd, std::string name);
 	};
 }
