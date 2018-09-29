@@ -172,10 +172,11 @@ int LSchedulerCell::setTimer(int interval,bool loop)
 	return JHTimerSystem::getInstance()->setTimer(interval, [&](int dt, int tid ,void* P){
 		LuaTask<int, int> *LT = new LuaTask<int, int>(dt, tid);
 		LT->setback([&](LuaTaskEvent* lte){
-			LT = (LuaTask<int, int> *)lte;
-			LuaManage::getInstance()->CallLuaFunction(strhandle, [&](lua_State* L){
-				lua_pushnumber(L, std::get<0>(LT->data));
-				lua_pushnumber(L, std::get<1>(LT->data));
+			auto LLT = (LuaTask<int, int> *)lte;
+			auto LM = LuaManage::getInstance();
+			LM->CallLuaFunction(strhandle, [&](lua_State* L){
+				LM->Push(std::get<0>(LLT->data));
+				LM->Push(std::get<1>(LLT->data));
 				return 2;
 			});
 		});

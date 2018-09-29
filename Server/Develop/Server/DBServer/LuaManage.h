@@ -188,16 +188,80 @@ namespace SJH{
 			return 0;
 		}
 #undef putfunc
-#define CheckFunc(CType,LISTypeFunc,LGetValueFunc) inline bool Peek##CType(CType& value,int i){\
-			if (lua_type(L,i) == LUA_##LISTypeFunc)\
-				value = lua_to##LGetValueFunc(L,i);\
-			else\
-				return false;\
-			return true;\
+#define PUSH(Type,FuncName) inline void Push(Type v){lua_push##FuncName(L,v);}
+		PUSH(short, number);
+		PUSH(unsigned short, number);
+		PUSH(int, number);
+		PUSH(unsigned int, number);
+		PUSH(long, number);
+		PUSH(unsigned long, number);
+		PUSH(long long, number);
+		PUSH(unsigned long long, number);
+		PUSH(double, number);
+		PUSH(float, number);
+		PUSH(char, number);
+		PUSH(unsigned char, number);
+
+		PUSH(bool, boolean);
+
+		PUSH(char*, string);
+		PUSH(const char*, string);
+
+		inline void Push(std::string s){
+			Push(s.c_str());
 		}
-		CheckFunc(int, TNUMBER, number);
-		CheckFunc(double, TNUMBER, number);
-		CheckFunc(float, TNUMBER, number);
-		
+		inline void Push(strArr data){
+			lua_newtable(L);
+			for each (auto v in data)
+			{
+				Push(v.second);
+				lua_setfield(L, -2, v.first.c_str());
+			}
+		}
+
+		inline void Push(std::map<std::string,int> data){
+			lua_newtable(L);
+			for each (auto v in data)
+			{
+				Push(v.second);
+				lua_setfield(L, -2, v.first.c_str());
+			}
+		}
+
+		inline void Push(std::map<std::string,bool> data){
+			lua_newtable(L);
+			for each (auto v in data)
+			{
+				Push(v.second);
+				lua_setfield(L, -2, v.first.c_str());
+			}
+		}
+
+		inline void Push(std::map<int,std::string> data){
+			lua_newtable(L);
+			for each (auto v in data)
+			{
+				Push(v.second);
+				lua_rawseti(L, -2, v.first);
+			}
+		}
+
+		inline void Push(std::map<int, int> data){
+			lua_newtable(L);
+			for each (auto v in data)
+			{
+				Push(v.second);
+				lua_rawseti(L, -2, v.first);
+			}
+		}
+
+		inline void Push(std::map<int, bool> data){
+			lua_newtable(L);
+			for each (auto v in data)
+			{
+				Push(v.second);
+				lua_rawseti(L, -2, v.first);
+			}
+		}
 	};
 };

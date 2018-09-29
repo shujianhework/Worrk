@@ -128,33 +128,10 @@ bool SELF::CheckSelectCmd(std::string cmd, std::vector<std::string>& Keys){
 	}
 	return true;
 }
-bool SELF::Select(std::string cmd, std::function < bool(int i, std::string key, _variant_t &var)> back){
+bool SELF::Select(std::string cmd, strArr1& arr){
 	std::vector<std::string> Keys(1);
-	if (CheckSelectCmd(cmd,Keys) == false)
+	if (CheckSelectCmd(cmd, Keys) == false)
 		return false;
-	_RecordsetPtr Rec = DB->Execute(cmd.c_str(), NULL, adCmdText);
-	int Index = 0;
-	std::string tempstr = "";
-	try{
-		while (!Rec->adoEOF){
-			for (auto i = Keys.begin(); i < Keys.end(); i++)
-			{
-				_variant_t vt = Rec->GetCollect(i->c_str());
-				if (back(Index, i->c_str(), vt) == false)
-					return true;
-			}
-			Index = Index + 1;
-			Rec->MoveNext();
-		}
-	}
-	catch (_com_error *e){
-		std::string s = e->Description();
-		ErrorInfor = "Select :" + cmd + s;
-		return false;
-	}
-	return true;
-}
-bool SELF::Select(std::string cmd, strArr1& arr, const std::vector<std::string>& Keys){
 	_RecordsetPtr Rec = DB->Execute(cmd.c_str(), NULL, adCmdText);
 	arr.clear();
 	int Index = 1;

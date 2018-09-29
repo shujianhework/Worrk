@@ -24,14 +24,27 @@ namespace SJH{
 			virtual bool Run(){ return false; }
 		};
 		class DB_SQL_SelectTaskData :public DB_SQL_TaskRef{
-			std::function<bool(int i, std::string key, _variant_t v)> back;
+			std::function<
+			//bool(int i, std::string key, _variant_t v)
+			void(bool, strArr&)
+			> back;
 			std::string cmd;
 		public:
-			DB_SQL_SelectTaskData(std::string cmd, std::function<bool(int i, std::string key, _variant_t v)> back) :cmd(cmd), back(back){
+			DB_SQL_SelectTaskData(std::string cmd, std::function<void(bool, strArr&)> back) :cmd(cmd), back(back){
 				Type = Select;
 			}
 			bool Run(){
-				return SJH_DB_SQL_MANAGE::getInstance()->Select(cmd, back);
+				strArr1 data;
+				bool ret = SJH_DB_SQL_MANAGE::getInstance()->Select(cmd, data);
+				if (ret == true){
+					for each (auto v in data)
+					{
+						back(ret, v.second);
+					}
+				}
+				strArr null;
+				back(ret, null);
+				return ret;
 			}
 		};
 		class DB_SQL_UpdateTaskData :public DB_SQL_TaskRef{
@@ -117,7 +130,7 @@ namespace SJH{
 			LuaBack[2] = Procback;
 			LuaBack[3] = selectback;
 		}
-		bool push(std::string cmd,std::function<bool(int i,std::string key,_variant_t v)> back);
+		bool push(std::string cmd, std::function<void(bool, strArr&)> back);
 		bool push(std::string TableName, strArr KeyValue, std::string wherekey, std::string wherevalue,std::function<void(bool)> back);
 		bool push(std::string StoredProcedureName, strArr &Param, std::function<void(strArr Param)> back);
 		bool push(std::string dbcmd, std::string name, std::function<void(bool)> back);

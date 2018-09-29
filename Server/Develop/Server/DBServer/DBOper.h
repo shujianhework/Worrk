@@ -43,8 +43,7 @@ namespace SJH{
 		bool init();
 		void release();
 		bool switchdb(std::string dbcmd, std::string name);
-		bool Select(std::string cmd, strArr1& arr, const std::vector<std::string>& Keys);
-		bool Select(std::string cmd, std::function < bool(int i,std::string key,_variant_t &var)> back);
+		bool Select(std::string cmd, strArr1& arr);
 		//只能单条使用，多条不要 update  表名  set 字段集合=值集合 where 字段=值
 		bool update(std::string TableName, strArr KeyValue, std::string wherekey, std::string wherevalue);
 		bool UseStoredProcedure(std::string StoredProcedureName, strArr &Param);

@@ -70,7 +70,7 @@ int SELF::GetPushIndex(){
 	return -1;
 
 }
-bool SELF::push(std::string cmd, std::function<bool(int i, std::string key, _variant_t v)> back){
+bool SELF::push(std::string cmd, std::function<void(bool,strArr&)> back){
 	int idx = 0;
 	for (int i = 0; i < DBPushFailedRetryUpperLimit; i++)
 	{
@@ -147,19 +147,24 @@ bool SELF::push(std::string dbcmd, std::string name, std::function<void(bool)> b
 	return false;
 }
 bool SELF::push(std::string cmd){
-	return push(cmd, [&](int i, std::string key, _variant_t v){
-		LuaTask<int, std::string, std::string> *LT = new LuaTask<int, std::string, std::string>(i, key, tostringType(_bstr_t, v));
+	return push(cmd, [&](bool ret, strArr& data){
+		strArr *p = new strArr;
+		for each (auto v in data)
+		{
+			(*p)[v.first] = v.second;
+		}
+		LuaTask<bool,strArr*> *LT = new LuaTask<bool,strArr*>(ret,p);
 		LT->setback([&](LuaTaskEvent *lte){
-			LT = (LuaTask<int, std::string, std::string> *)lte;
-			LuaManage::getInstance()->CallLuaFunction(LuaBack[3], [&](lua_State* L){
-				lua_pushnumber(L, std::get<0>(LT->data));
-				lua_pushstring(L, std::get<1>(LT->data).c_str());
-				lua_pushstring(L, std::get<2>(LT->data).c_str());
-				return 3;
+			auto LM = LuaManage::getInstance();
+			auto LLT = (LuaTask<bool, strArr*> *)lte;
+			LM->CallLuaFunction(LuaBack[3], [&](lua_State* L){
+				LM->Push(std::get<0>(LLT->data));
+				LM->Push(*(std::get<1>(LLT->data)));
+				delete std::get<1>(LLT->data);
+				return 2;
 			});
 		});
 		LuaQueue::getInstance()->push(LT);
-		return true;
 	});
 }
 bool SELF::push(std::string TableName, strArr KeyValue, std::string wherekey, std::string wherevalue){
@@ -182,9 +187,10 @@ bool SELF::push(std::string dbcmd, std::string name){
 	return push(dbcmd, name, [&](bool b){
 		LuaTask<bool> *LT = new LuaTask<bool>(b);
 		LT->setback([&](LuaTaskEvent* lte){
-			LT = (LuaTask<bool> *)lte;
-			LuaManage::getInstance()->CallLuaFunction(LuaBack[0], [&](lua_State* L){
-				lua_pushboolean(L, std::get<0>(LT->data));
+			auto  LLT = (LuaTask<bool> *)lte;
+			auto LM = LuaManage::getInstance();
+			LM->CallLuaFunction(LuaBack[0], [&](lua_State* L){
+				LM->Push(std::get<0>(LLT->data));
 				return 1;
 			});
 		});

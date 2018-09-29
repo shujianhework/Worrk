@@ -1,22 +1,37 @@
 local tm = require "testModel"
-local Scheduler = tm:LSchedulerCell()
-local tab = {a = "123q234",c = "dsfsd"}
-print(Scheduler:testmap(tab))
-print(Scheduler:testmap({a=1,b=100,c=100,f = 124},true))
+_G.Scheduler = tm:LSchedulerCell()
 Scheduler:setHandlerBack(function (id,dt,...)
 	print(id,dt,...)
 end)
-Scheduler:setTimer(200,true)
-local db = tm:SJH_DB_SQL_DBTaskEvent()
+Scheduler:setTimer(2000,true)
+_G.db = tm:SJH_DB_SQL_DBTaskEvent()
 db:Run()
+local l = 0
 db:setLuaBack(function ( ... )
-	--print(...)
-end,function ( ... )
 	print(...)
 end,function ( ... )
 	print(...)
 end,function ( ... )
 	print(...)
+end,function ( ... )
+	local s = ""..l..","
+	local tab = {...}
+	for k,v in pairs(tab) do
+		s = s..","..type(v)
+		if type(v) == "table" then
+			s = s.."{"
+			for kk,vv in pairs(v) do
+				s = s..kk..","..vv
+			end
+			s = s.."}"
+		elseif type(v) == type(true) then
+			s = s..(v and "true" or "false")
+		else
+			s = s..v
+		end
+	end
+	print(s)
+	l = l + 1
 end)
 db:push("Driver={sql server};server=47.75.78.46;uid=sa;pwd=shu110SHUsa;database=ply_web","ply_web")
 db:push("select * from Area ")

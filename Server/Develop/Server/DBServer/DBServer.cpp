@@ -18,10 +18,7 @@ int TestDB(){
 	dbtasklist->Run();
 	dbtasklist->push("Driver={sql server};server=47.75.78.46;uid=sa;pwd=shu110SHUsa;database=test", "test", [&](bool Flg){
 		if (Flg){
-			dbtasklist->push("select age,name from Person ", [&](int i,std::string key,_variant_t v){
-				tempstr = SJH::tostringType(_bstr_t, v);
-				printf("%s=%s\n",key.c_str(),tempstr.c_str());
-				return true;
+			dbtasklist->push("select age,name from Person ", [&](bool ret,strArr &data){
 			});
 		}
 	});
@@ -76,9 +73,9 @@ void OnExit(int state){
 int main(int argc, TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
-	TestNewLua();
 	//设置主循环池，用来存放回调lua的事件
 	SJH::LuaQueue *LQ = SJH::LuaQueue::getInstance();
+	TestNewLua();
 	while (true){
 		LQ->update();
 		JHSleep(20);
