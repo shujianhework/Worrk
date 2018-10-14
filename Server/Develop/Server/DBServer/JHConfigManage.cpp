@@ -76,10 +76,10 @@ bool SELF::init(int argc, TCHAR *argv[]){
 	return true;
 }
 bool initLua(std::string path){
-	
+	return false;
 }
 bool initXML(std::string path){
-
+	return false;
 }
 void SELF::get(std::string key, unsigned int &ret, unsigned int Default){
 	auto iter = datas.find(key);
