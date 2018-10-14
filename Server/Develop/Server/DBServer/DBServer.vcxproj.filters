@@ -147,6 +147,12 @@
     <ClInclude Include="..\Lua\lcode.h">
       <Filter>Lua</Filter>
     </ClInclude>
+    <ClInclude Include="LuaTaskEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SJHMemoryPool.h">
+      <Filter>DBServerLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -292,6 +298,12 @@
     </ClCompile>
     <ClCompile Include="LuaInterFace.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaTaskEvent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SJHMemoryPool.cpp">
+      <Filter>DBServerLib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
