@@ -14,6 +14,8 @@ namespace SJH{
 			instan = instan ? instan : new JHConfigManage();
 			return instan;
 		}
+		bool initLua(std::string path);
+		bool initXML(std::string path);
 		bool init(std::string path);
 		bool init(int argc, TCHAR *argv[]);
 		void get(std::string key, unsigned int &ret, unsigned int Default = 0);

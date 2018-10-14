@@ -118,6 +118,7 @@
     <ClInclude Include="NetSocket.h" />
     <ClInclude Include="Ref.h" />
     <ClInclude Include="RegisterLuaDefine.h" />
+    <ClInclude Include="SJHMemoryPool.h" />
     <ClInclude Include="SJHType.h" />
     <ClInclude Include="SocketManage.h" />
     <ClInclude Include="stdafx.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="LuaTaskEvent.cpp" />
     <ClCompile Include="NetSocket.cpp" />
     <ClCompile Include="Ref.cpp" />
+    <ClCompile Include="SJHMemoryPool.cpp" />
     <ClCompile Include="SocketManage.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Test2Lua.cpp" />

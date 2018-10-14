@@ -1,4 +1,5 @@
 #include "JHConfigManage.h"
+#include <Windows.h>
 //#define _CRT_SECURE_NO_WARNINGS true
 using namespace SJH;
 #define SELF JHConfigManage
@@ -73,6 +74,12 @@ bool SELF::init(int argc, TCHAR *argv[]){
 		datas.insert(std::make_pair(key, temps));
 	}
 	return true;
+}
+bool initLua(std::string path){
+	
+}
+bool initXML(std::string path{
+
 }
 void SELF::get(std::string key, unsigned int &ret, unsigned int Default){
 	auto iter = datas.find(key);
