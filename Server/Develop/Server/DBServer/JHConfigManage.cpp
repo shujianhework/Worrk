@@ -78,7 +78,7 @@ bool SELF::init(int argc, TCHAR *argv[]){
 bool initLua(std::string path){
 	
 }
-bool initXML(std::string path{
+bool initXML(std::string path){
 
 }
 void SELF::get(std::string key, unsigned int &ret, unsigned int Default){
