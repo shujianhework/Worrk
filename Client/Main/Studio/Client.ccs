@@ -1,0 +1,1617 @@
+<Solution>
+  <PropertyGroup Name="Client" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="Login">
+          <Project Name="login.csd" Type="Scene" />
+        </Folder>
+        <Folder Name="res">
+          <Folder Name="client">
+            <Folder Name="fonts">
+              <Fnt Name="coin_num_2.fnt" />
+              <Fnt Name="coin_number.fnt" />
+              <Fnt Name="font_lv_num.fnt" />
+              <Fnt Name="font_num_01.fnt" />
+              <Fnt Name="font_num_02.fnt" />
+              <Fnt Name="font_time_num.fnt" />
+              <Fnt Name="jsnumber_lose_0.fnt" />
+              <Fnt Name="jsnumber_win.fnt" />
+              <Fnt Name="xw_number01.fnt" />
+            </Folder>
+            <Folder Name="gamelist">
+              <Image Name="game_104.png" />
+              <Image Name="game_122.png" />
+              <Image Name="game_200.png" />
+              <Image Name="game_3617.png" />
+              <Image Name="game_3701.png" />
+              <Image Name="game_500.png" />
+              <Image Name="game_6.png" />
+              <Image Name="game_default.png" />
+              <Image Name="sp_title_104.png" />
+              <Image Name="sp_title_122.png" />
+              <Image Name="sp_title_200.png" />
+              <Image Name="sp_title_3617.png" />
+              <Image Name="sp_title_3701.png" />
+              <Image Name="sp_title_500.png" />
+              <Image Name="sp_title_6.png" />
+            </Folder>
+            <Folder Name="logon">
+              <Image Name="bt_changeAccount.png" />
+              <Image Name="bt_close_1.png" />
+              <Image Name="bt_close_2.png" />
+              <Image Name="bt_close_3.png" />
+              <Image Name="bt_code.png" />
+              <Image Name="bt_frame_1.png" />
+              <Image Name="bt_logon.png" />
+              <Image Name="bt_passwd.png" />
+              <Image Name="bt_refresh.png" />
+              <Image Name="bt_register.png" />
+              <Image Name="bt_reset_passwd.png" />
+              <Image Name="bt_visitor.png" />
+              <Image Name="bt_yan01.png" />
+              <Image Name="bt_yan02.png" />
+              <Image Name="icon.png" />
+              <Image Name="img_frame_1.png" />
+              <Image Name="img_frame_2.png" />
+              <File Name="LogonLayer.csb" />
+              <File Name="LogonScene.csb" />
+              <File Name="RegistLayer.csb" />
+              <Image Name="sp_bird.png" />
+              <Image Name="sp_button.png" />
+              <Image Name="sp_frame_01.png" />
+              <Image Name="sp_frame_02.png" />
+              <Image Name="sp_frame_03.png" />
+              <Image Name="sp_label_account.png" />
+              <Image Name="sp_label_bt_logon.png" />
+              <Image Name="sp_label_bt_logon2.png" />
+              <Image Name="sp_label_bt_regist.png" />
+              <Image Name="sp_label_logon.png" />
+              <Image Name="sp_label_passwd.png" />
+              <Image Name="sp_label_regist.png" />
+              <Image Name="sp_lock.png" />
+              <Image Name="sp_people_01.png" />
+              <Image Name="sp_people_02.png" />
+              <Image Name="sp_people_03.png" />
+              <Image Name="sp_people_04.png" />
+              <Image Name="sp_people_05.png" />
+              <Image Name="sp_x.png" />
+              <File Name="VarifyCodeLayer.csb" />
+            </Folder>
+            <Folder Name="plaza">
+              <Folder Name="girl">
+                <PlistImageFolder Image="girl.png" PListFile="girl.plist" Name=".girl_PList.Dir">
+                  <PlistImageFile Name="girl_eh.png" Key="girl/eh.png" />
+                  <PlistImageFile Name="girl_eh_light.png" Key="girl/eh_light.png" />
+                  <PlistImageFile Name="girl_hair01.png" Key="girl/hair01.png" />
+                  <PlistImageFile Name="girl_hair02.png" Key="girl/hair02.png" />
+                  <PlistImageFile Name="girl_hand_01.png" Key="girl/hand_01.png" />
+                  <PlistImageFile Name="girl_hand_02.png" Key="girl/hand_02.png" />
+                  <PlistImageFile Name="girl_hand_cy.png" Key="girl/hand_cy.png" />
+                  <PlistImageFile Name="girl_head.png" Key="girl/head.png" />
+                  <PlistImageFile Name="girl_head_eye.png" Key="girl/head_eye.png" />
+                  <PlistImageFile Name="girl_qunzi.png" Key="girl/qunzi.png" />
+                  <PlistImageFile Name="girl_st.png" Key="girl/st.png" />
+                  <PlistImageFile Name="girl_tui.png" Key="girl/tui.png" />
+                  <PlistImageFile Name="girl_xiong.png" Key="girl/xiong.png" />
+                </PlistImageFolder>
+                <File Name="girl_anim.csb" />
+              </Folder>
+              <PlistImageFolder Image="plaza.png" PListFile="plaza.plist" Name=".plaza_PList.Dir">
+                <PlistImageFile Name="plaza_bt_bind.png" Key="plaza/bt_bind.png" />
+                <PlistImageFile Name="plaza_bt_change.png" Key="plaza/bt_change.png" />
+                <PlistImageFile Name="plaza_bt_changeBind.png" Key="plaza/bt_changeBind.png" />
+                <PlistImageFile Name="plaza_bt_charge.png" Key="plaza/bt_charge.png" />
+                <PlistImageFile Name="plaza_bt_coffer.png" Key="plaza/bt_coffer.png" />
+                <PlistImageFile Name="plaza_bt_commit.png" Key="plaza/bt_commit.png" />
+                <PlistImageFile Name="plaza_bt_copysite1.png" Key="plaza/bt_copysite1.png" />
+                <PlistImageFile Name="plaza_bt_copysite2.png" Key="plaza/bt_copysite2.png" />
+                <PlistImageFile Name="plaza_bt_driveagent.png" Key="plaza/bt_driveagent.png" />
+                <PlistImageFile Name="plaza_bt_driveregister.png" Key="plaza/bt_driveregister.png" />
+                <PlistImageFile Name="plaza_bt_exchange.png" Key="plaza/bt_exchange.png" />
+                <PlistImageFile Name="plaza_bt_logout.png" Key="plaza/bt_logout.png" />
+                <PlistImageFile Name="plaza_bt_notice.png" Key="plaza/bt_notice.png" />
+                <PlistImageFile Name="plaza_bt_rank.png" Key="plaza/bt_rank.png" />
+                <PlistImageFile Name="plaza_bt_vip.png" Key="plaza/bt_vip.png" />
+                <PlistImageFile Name="plaza_bt_vip_2.png" Key="plaza/bt_vip_2.png" />
+                <PlistImageFile Name="plaza_bt_zx_dh.png" Key="plaza/bt_zx_dh.png" />
+                <PlistImageFile Name="plaza_duihuan_di01.png" Key="plaza/duihuan_di01.png" />
+                <PlistImageFile Name="plaza_duihuan_di02.png" Key="plaza/duihuan_di02.png" />
+                <PlistImageFile Name="plaza_phb_1st.png" Key="plaza/phb_1st.png" />
+                <PlistImageFile Name="plaza_phb_2ed.png" Key="plaza/phb_2ed.png" />
+                <PlistImageFile Name="plaza_phb_3th.png" Key="plaza/phb_3th.png" />
+                <PlistImageFile Name="plaza_phb_ic_lv.png" Key="plaza/phb_ic_lv.png" />
+                <PlistImageFile Name="plaza_phb_ic_time.png" Key="plaza/phb_ic_time.png" />
+                <PlistImageFile Name="plaza_phb_number_di.png" Key="plaza/phb_number_di.png" />
+                <PlistImageFile Name="plaza_phb_xinxi_di.png" Key="plaza/phb_xinxi_di.png" />
+                <PlistImageFile Name="plaza_sp_amount_exchange.png" Key="plaza/sp_amount_exchange.png" />
+                <PlistImageFile Name="plaza_sp_bg_entity_01.png" Key="plaza/sp_bg_entity_01.png" />
+                <PlistImageFile Name="plaza_sp_bg_entity_02.png" Key="plaza/sp_bg_entity_02.png" />
+                <PlistImageFile Name="plaza_sp_bg_entity_03.png" Key="plaza/sp_bg_entity_03.png" />
+                <PlistImageFile Name="plaza_sp_dir_1.png" Key="plaza/sp_dir_1.png" />
+                <PlistImageFile Name="plaza_sp_dir_2.png" Key="plaza/sp_dir_2.png" />
+                <PlistImageFile Name="plaza_sp_dir_3.png" Key="plaza/sp_dir_3.png" />
+                <PlistImageFile Name="plaza_sp_dot_01.png" Key="plaza/sp_dot_01.png" />
+                <PlistImageFile Name="plaza_sp_dot_02.png" Key="plaza/sp_dot_02.png" />
+                <PlistImageFile Name="plaza_sp_down.png" Key="plaza/sp_down.png" />
+                <PlistImageFile Name="plaza_sp_downing.png" Key="plaza/sp_downing.png" />
+                <PlistImageFile Name="plaza_sp_frame_1.png" Key="plaza/sp_frame_1.png" />
+                <PlistImageFile Name="plaza_sp_lock.png" Key="plaza/sp_lock.png" />
+                <PlistImageFile Name="plaza_sp_mail.png" Key="plaza/sp_mail.png" />
+                <PlistImageFile Name="plaza_sp_msg_new.png" Key="plaza/sp_msg_new.png" />
+                <PlistImageFile Name="plaza_sp_msg_readed.png" Key="plaza/sp_msg_readed.png" />
+                <PlistImageFile Name="plaza_sp_people_01.png" Key="plaza/sp_people_01.png" />
+                <PlistImageFile Name="plaza_sp_title_bind1.png" Key="plaza/sp_title_bind1.png" />
+                <PlistImageFile Name="plaza_sp_title_bind2.png" Key="plaza/sp_title_bind2.png" />
+                <PlistImageFile Name="plaza_sp_title_change1.png" Key="plaza/sp_title_change1.png" />
+                <PlistImageFile Name="plaza_sp_title_change2.png" Key="plaza/sp_title_change2.png" />
+                <PlistImageFile Name="plaza_sp_title_exchange.png" Key="plaza/sp_title_exchange.png" />
+                <PlistImageFile Name="plaza_sp_title_head.png" Key="plaza/sp_title_head.png" />
+                <PlistImageFile Name="plaza_sp_title_info.png" Key="plaza/sp_title_info.png" />
+                <PlistImageFile Name="plaza_sp_title_nick.png" Key="plaza/sp_title_nick.png" />
+                <PlistImageFile Name="plaza_sp_title_notice.png" Key="plaza/sp_title_notice.png" />
+                <PlistImageFile Name="plaza_sp_title_rank.png" Key="plaza/sp_title_rank.png" />
+                <PlistImageFile Name="plaza_sp_title_user.png" Key="plaza/sp_title_user.png" />
+                <PlistImageFile Name="plaza_sp_update.png" Key="plaza/sp_update.png" />
+                <PlistImageFile Name="plaza_sp_vip_0.png" Key="plaza/sp_vip_0.png" />
+                <PlistImageFile Name="plaza_sp_vip_1.png" Key="plaza/sp_vip_1.png" />
+                <PlistImageFile Name="plaza_sp_vip_2.png" Key="plaza/sp_vip_2.png" />
+                <PlistImageFile Name="plaza_sp_vip_3.png" Key="plaza/sp_vip_3.png" />
+                <PlistImageFile Name="plaza_sp_vip_4.png" Key="plaza/sp_vip_4.png" />
+                <PlistImageFile Name="plaza_sp_vip_5.png" Key="plaza/sp_vip_5.png" />
+                <PlistImageFile Name="plaza_sp_vip_6.png" Key="plaza/sp_vip_6.png" />
+                <PlistImageFile Name="plaza_sp_vip_icon.png" Key="plaza/sp_vip_icon.png" />
+                <PlistImageFile Name="plaza_sp_wsb.png" Key="plaza/sp_wsb.png" />
+              </PlistImageFolder>
+              <Image Name="ad_default.png" />
+              <File Name="AnnounceItem.csb" />
+              <File Name="AnnounceLayer.csb" />
+              <Image Name="background.jpg" />
+              <File Name="BindYinLianLayer.csb" />
+              <File Name="BindZFBLayer.csb" />
+              <File Name="ChangeHead.csb" />
+              <File Name="ChangeNick.csb" />
+              <File Name="ExchangeLayer.csb" />
+              <File Name="GameItem.csb" />
+              <File Name="MailLayer.csb" />
+              <File Name="PlazaScene.csb" />
+              <File Name="RankItem.csb" />
+              <File Name="RankLayer.csb" />
+              <File Name="UserInfo.csb" />
+            </Folder>
+            <Folder Name="public">
+              <Folder Name="cardtype">
+                <Image Name="BAO_ZI.png" />
+                <Image Name="BOMB.png" />
+                <Image Name="GOLD_NIU.png" />
+                <Image Name="JIN_HUA.png" />
+                <Image Name="NIUNIU.png" />
+                <Image Name="SHUN_JIN.png" />
+              </Folder>
+              <PlistImageFolder Image="im_head.png" PListFile="im_head.plist" Name=".im_head_PList.Dir">
+                <PlistImageFile Name="sp_avatar_0.png" Key="sp_avatar_0.png" />
+                <PlistImageFile Name="sp_avatar_1.png" Key="sp_avatar_1.png" />
+                <PlistImageFile Name="sp_avatar_10.png" Key="sp_avatar_10.png" />
+                <PlistImageFile Name="sp_avatar_11.png" Key="sp_avatar_11.png" />
+                <PlistImageFile Name="sp_avatar_2.png" Key="sp_avatar_2.png" />
+                <PlistImageFile Name="sp_avatar_3.png" Key="sp_avatar_3.png" />
+                <PlistImageFile Name="sp_avatar_4.png" Key="sp_avatar_4.png" />
+                <PlistImageFile Name="sp_avatar_5.png" Key="sp_avatar_5.png" />
+                <PlistImageFile Name="sp_avatar_6.png" Key="sp_avatar_6.png" />
+                <PlistImageFile Name="sp_avatar_7.png" Key="sp_avatar_7.png" />
+                <PlistImageFile Name="sp_avatar_8.png" Key="sp_avatar_8.png" />
+                <PlistImageFile Name="sp_avatar_9.png" Key="sp_avatar_9.png" />
+                <PlistImageFile Name="sp_head_frame_0.png" Key="sp_head_frame_0.png" />
+                <PlistImageFile Name="sp_head_frame_1.png" Key="sp_head_frame_1.png" />
+                <PlistImageFile Name="sp_head_frame_10.png" Key="sp_head_frame_10.png" />
+                <PlistImageFile Name="sp_head_frame_11.png" Key="sp_head_frame_11.png" />
+                <PlistImageFile Name="sp_head_frame_2.png" Key="sp_head_frame_2.png" />
+                <PlistImageFile Name="sp_head_frame_3.png" Key="sp_head_frame_3.png" />
+                <PlistImageFile Name="sp_head_frame_4.png" Key="sp_head_frame_4.png" />
+                <PlistImageFile Name="sp_head_frame_5.png" Key="sp_head_frame_5.png" />
+                <PlistImageFile Name="sp_head_frame_6.png" Key="sp_head_frame_6.png" />
+                <PlistImageFile Name="sp_head_frame_7.png" Key="sp_head_frame_7.png" />
+                <PlistImageFile Name="sp_head_frame_8.png" Key="sp_head_frame_8.png" />
+                <PlistImageFile Name="sp_head_frame_9.png" Key="sp_head_frame_9.png" />
+              </PlistImageFolder>
+              <PlistImageFolder Image="pAnimation.png" PListFile="pAnimation.plist" Name=".pAnimation_PList.Dir">
+                <PlistImageFile Name="headframeeffect_h_frame_01.png" Key="headframeeffect/h_frame_01.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_02.png" Key="headframeeffect/h_frame_02.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_03.png" Key="headframeeffect/h_frame_03.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_04.png" Key="headframeeffect/h_frame_04.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_05.png" Key="headframeeffect/h_frame_05.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_06.png" Key="headframeeffect/h_frame_06.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_07.png" Key="headframeeffect/h_frame_07.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_08.png" Key="headframeeffect/h_frame_08.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_09.png" Key="headframeeffect/h_frame_09.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_10.png" Key="headframeeffect/h_frame_10.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_11.png" Key="headframeeffect/h_frame_11.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_12.png" Key="headframeeffect/h_frame_12.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_13.png" Key="headframeeffect/h_frame_13.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_14.png" Key="headframeeffect/h_frame_14.png" />
+                <PlistImageFile Name="headframeeffect_h_frame_15.png" Key="headframeeffect/h_frame_15.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_01.png" Key="headframeeffect2/h_frame_01.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_02.png" Key="headframeeffect2/h_frame_02.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_03.png" Key="headframeeffect2/h_frame_03.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_04.png" Key="headframeeffect2/h_frame_04.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_05.png" Key="headframeeffect2/h_frame_05.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_06.png" Key="headframeeffect2/h_frame_06.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_07.png" Key="headframeeffect2/h_frame_07.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_08.png" Key="headframeeffect2/h_frame_08.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_09.png" Key="headframeeffect2/h_frame_09.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_10.png" Key="headframeeffect2/h_frame_10.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_11.png" Key="headframeeffect2/h_frame_11.png" />
+                <PlistImageFile Name="headframeeffect2_h_frame_12.png" Key="headframeeffect2/h_frame_12.png" />
+              </PlistImageFolder>
+              <Folder Name="pGame">
+                <PlistImageFolder Image="head_fire.jpg" PListFile="head_fire.plist" Name=".head_fire_PList.Dir">
+                  <PlistImageFile Name="head_fire_head_huo001.png" Key="head_fire/head_huo001.png" />
+                  <PlistImageFile Name="head_fire_head_huo002.png" Key="head_fire/head_huo002.png" />
+                  <PlistImageFile Name="head_fire_head_huo003.png" Key="head_fire/head_huo003.png" />
+                  <PlistImageFile Name="head_fire_head_huo004.png" Key="head_fire/head_huo004.png" />
+                  <PlistImageFile Name="head_fire_head_huo005.png" Key="head_fire/head_huo005.png" />
+                  <PlistImageFile Name="head_fire_head_huo006.png" Key="head_fire/head_huo006.png" />
+                  <PlistImageFile Name="head_fire_head_huo007.png" Key="head_fire/head_huo007.png" />
+                  <PlistImageFile Name="head_fire_head_huo008.png" Key="head_fire/head_huo008.png" />
+                  <PlistImageFile Name="head_fire_head_huo009.png" Key="head_fire/head_huo009.png" />
+                  <PlistImageFile Name="head_fire_head_huo010.png" Key="head_fire/head_huo010.png" />
+                  <PlistImageFile Name="head_fire_head_huo011.png" Key="head_fire/head_huo011.png" />
+                  <PlistImageFile Name="head_fire_head_huo012.png" Key="head_fire/head_huo012.png" />
+                  <PlistImageFile Name="head_fire_head_huo013.png" Key="head_fire/head_huo013.png" />
+                  <PlistImageFile Name="head_fire_head_huo014.png" Key="head_fire/head_huo014.png" />
+                  <PlistImageFile Name="head_fire_head_huo015.png" Key="head_fire/head_huo015.png" />
+                  <PlistImageFile Name="head_fire_head_huo016.png" Key="head_fire/head_huo016.png" />
+                </PlistImageFolder>
+                <PlistImageFolder Image="screen_fire.jpg" PListFile="screen_fire.plist" Name=".screen_fire_PList.Dir">
+                  <PlistImageFile Name="screen_fire_huo_01.png" Key="screen_fire/huo_01.png" />
+                  <PlistImageFile Name="screen_fire_huo_02.png" Key="screen_fire/huo_02.png" />
+                  <PlistImageFile Name="screen_fire_huo_03.png" Key="screen_fire/huo_03.png" />
+                  <PlistImageFile Name="screen_fire_huo_04.png" Key="screen_fire/huo_04.png" />
+                  <PlistImageFile Name="screen_fire_huo_05.png" Key="screen_fire/huo_05.png" />
+                  <PlistImageFile Name="screen_fire_huo_06.png" Key="screen_fire/huo_06.png" />
+                  <PlistImageFile Name="screen_fire_huo_07.png" Key="screen_fire/huo_07.png" />
+                  <PlistImageFile Name="screen_fire_huo_08.png" Key="screen_fire/huo_08.png" />
+                  <PlistImageFile Name="screen_fire_huo_09.png" Key="screen_fire/huo_09.png" />
+                  <PlistImageFile Name="screen_fire_huo_10.png" Key="screen_fire/huo_10.png" />
+                  <PlistImageFile Name="screen_fire_huo_11.png" Key="screen_fire/huo_11.png" />
+                  <PlistImageFile Name="screen_fire_huo_12.png" Key="screen_fire/huo_12.png" />
+                  <PlistImageFile Name="screen_fire_huo_13.png" Key="screen_fire/huo_13.png" />
+                  <PlistImageFile Name="screen_fire_huo_14.png" Key="screen_fire/huo_14.png" />
+                  <PlistImageFile Name="screen_fire_huo_15.png" Key="screen_fire/huo_15.png" />
+                  <PlistImageFile Name="screen_fire_huo_16.png" Key="screen_fire/huo_16.png" />
+                </PlistImageFolder>
+                <Image Name="fire_frame.png" />
+                <Image Name="head_fire.png" />
+                <Image Name="screen_fire.png" />
+                <Image Name="sp_lj_di01.png" />
+                <Image Name="sp_lj_di02.png" />
+                <Image Name="sp_lose_di01.png" />
+                <Image Name="sp_lose_di02.png" />
+                <Image Name="sp_win_di01.png" />
+                <Image Name="sp_win_di02.png" />
+              </Folder>
+              <PlistImageFolder Image="pGame.png" PListFile="pGame.plist" Name=".pGame_PList.Dir">
+                <PlistImageFile Name="pGame_bt_blue.png" Key="pGame/bt_blue.png" />
+                <PlistImageFile Name="pGame_bt_blue_s.png" Key="pGame/bt_blue_s.png" />
+                <PlistImageFile Name="pGame_bt_charge.png" Key="pGame/bt_charge.png" />
+                <PlistImageFile Name="pGame_bt_huise.png" Key="pGame/bt_huise.png" />
+                <PlistImageFile Name="pGame_bt_purple.png" Key="pGame/bt_purple.png" />
+                <PlistImageFile Name="pGame_bt_record_.png" Key="pGame/bt_record_.png" />
+                <PlistImageFile Name="pGame_bt_record_2.png" Key="pGame/bt_record_2.png" />
+                <PlistImageFile Name="pGame_bt_red.png" Key="pGame/bt_red.png" />
+                <PlistImageFile Name="pGame_bt_setup_1.png" Key="pGame/bt_setup_1.png" />
+                <PlistImageFile Name="pGame_bt_setup_2.png" Key="pGame/bt_setup_2.png" />
+                <PlistImageFile Name="pGame_bt_yello.png" Key="pGame/bt_yello.png" />
+                <PlistImageFile Name="pGame_bt_yellow_s.png" Key="pGame/bt_yellow_s.png" />
+                <PlistImageFile Name="pGame_bt_zx_jx.png" Key="pGame/bt_zx_jx.png" />
+                <PlistImageFile Name="pGame_card_club.png" Key="pGame/card_club.png" />
+                <PlistImageFile Name="pGame_card_diamond.png" Key="pGame/card_diamond.png" />
+                <PlistImageFile Name="pGame_card_heart.png" Key="pGame/card_heart.png" />
+                <PlistImageFile Name="pGame_card_spade.png" Key="pGame/card_spade.png" />
+                <PlistImageFile Name="pGame_lose_cloud.png" Key="pGame/lose_cloud.png" />
+                <PlistImageFile Name="pGame_lose_frame.png" Key="pGame/lose_frame.png" />
+                <PlistImageFile Name="pGame_lose_txt.png" Key="pGame/lose_txt.png" />
+                <PlistImageFile Name="pGame_sp_01.png" Key="pGame/sp_01.png" />
+                <PlistImageFile Name="pGame_sp_02.png" Key="pGame/sp_02.png" />
+                <PlistImageFile Name="pGame_sp_03.png" Key="pGame/sp_03.png" />
+                <PlistImageFile Name="pGame_sp_banker.png" Key="pGame/sp_banker.png" />
+                <PlistImageFile Name="pGame_sp_chip_1.png" Key="pGame/sp_chip_1.png" />
+                <PlistImageFile Name="pGame_sp_chip_2.png" Key="pGame/sp_chip_2.png" />
+                <PlistImageFile Name="pGame_sp_chip_3.png" Key="pGame/sp_chip_3.png" />
+                <PlistImageFile Name="pGame_sp_chip_4.png" Key="pGame/sp_chip_4.png" />
+                <PlistImageFile Name="pGame_sp_chip_5.png" Key="pGame/sp_chip_5.png" />
+                <PlistImageFile Name="pGame_sp_chip_6.png" Key="pGame/sp_chip_6.png" />
+                <PlistImageFile Name="pGame_sp_chip_7.png" Key="pGame/sp_chip_7.png" />
+                <PlistImageFile Name="pGame_sp_chip_8.png" Key="pGame/sp_chip_8.png" />
+                <PlistImageFile Name="pGame_sp_chip_selected.png" Key="pGame/sp_chip_selected.png" />
+                <PlistImageFile Name="pGame_sp_countdown.png" Key="pGame/sp_countdown.png" />
+                <PlistImageFile Name="pGame_sp_cutdown.png" Key="pGame/sp_cutdown.png" />
+                <PlistImageFile Name="pGame_sp_frame_01.png" Key="pGame/sp_frame_01.png" />
+                <PlistImageFile Name="pGame_sp_frame_02.png" Key="pGame/sp_frame_02.png" />
+                <PlistImageFile Name="pGame_sp_frame_03.png" Key="pGame/sp_frame_03.png" />
+                <PlistImageFile Name="pGame_sp_frame_04.png" Key="pGame/sp_frame_04.png" />
+                <PlistImageFile Name="pGame_sp_frame_05.png" Key="pGame/sp_frame_05.png" />
+                <PlistImageFile Name="pGame_sp_frame_coin.png" Key="pGame/sp_frame_coin.png" />
+                <PlistImageFile Name="pGame_sp_label_1.png" Key="pGame/sp_label_1.png" />
+                <PlistImageFile Name="pGame_sp_label_2.png" Key="pGame/sp_label_2.png" />
+                <PlistImageFile Name="pGame_sp_label_3.png" Key="pGame/sp_label_3.png" />
+                <PlistImageFile Name="pGame_sp_label_4.png" Key="pGame/sp_label_4.png" />
+                <PlistImageFile Name="pGame_sp_label_5.png" Key="pGame/sp_label_5.png" />
+                <PlistImageFile Name="pGame_sp_label_6.png" Key="pGame/sp_label_6.png" />
+                <PlistImageFile Name="pGame_sp_label_7.png" Key="pGame/sp_label_7.png" />
+                <PlistImageFile Name="pGame_sp_label_8.png" Key="pGame/sp_label_8.png" />
+                <PlistImageFile Name="pGame_sp_label_9.png" Key="pGame/sp_label_9.png" />
+                <PlistImageFile Name="pGame_sp_line.png" Key="pGame/sp_line.png" />
+                <PlistImageFile Name="pGame_sp_lose.png" Key="pGame/sp_lose.png" />
+                <PlistImageFile Name="pGame_sp_lose_di.png" Key="pGame/sp_lose_di.png" />
+                <PlistImageFile Name="pGame_sp_lose_xian.png" Key="pGame/sp_lose_xian.png" />
+                <PlistImageFile Name="pGame_sp_player_di_lj.png" Key="pGame/sp_player_di_lj.png" />
+                <PlistImageFile Name="pGame_sp_player_di_lose.png" Key="pGame/sp_player_di_lose.png" />
+                <PlistImageFile Name="pGame_sp_player_di_win.png" Key="pGame/sp_player_di_win.png" />
+                <PlistImageFile Name="pGame_sp_rank_01.png" Key="pGame/sp_rank_01.png" />
+                <PlistImageFile Name="pGame_sp_rank_02.png" Key="pGame/sp_rank_02.png" />
+                <PlistImageFile Name="pGame_sp_rank_03.png" Key="pGame/sp_rank_03.png" />
+                <PlistImageFile Name="pGame_sp_rank_04.png" Key="pGame/sp_rank_04.png" />
+                <PlistImageFile Name="pGame_sp_service.png" Key="pGame/sp_service.png" />
+                <PlistImageFile Name="pGame_sp_tou_lj.png" Key="pGame/sp_tou_lj.png" />
+                <PlistImageFile Name="pGame_sp_tou_lj_di.png" Key="pGame/sp_tou_lj_di.png" />
+                <PlistImageFile Name="pGame_sp_tou_lose.png" Key="pGame/sp_tou_lose.png" />
+                <PlistImageFile Name="pGame_sp_tou_lose_di.png" Key="pGame/sp_tou_lose_di.png" />
+                <PlistImageFile Name="pGame_sp_tou_lose_yun01.png" Key="pGame/sp_tou_lose_yun01.png" />
+                <PlistImageFile Name="pGame_sp_tou_lose_yun02.png" Key="pGame/sp_tou_lose_yun02.png" />
+                <PlistImageFile Name="pGame_sp_tou_win.png" Key="pGame/sp_tou_win.png" />
+                <PlistImageFile Name="pGame_sp_tou_win_di.png" Key="pGame/sp_tou_win_di.png" />
+                <PlistImageFile Name="pGame_sp_tou_win_xing.png" Key="pGame/sp_tou_win_xing.png" />
+                <PlistImageFile Name="pGame_sp_win.png" Key="pGame/sp_win.png" />
+                <PlistImageFile Name="pGame_sp_win_di.png" Key="pGame/sp_win_di.png" />
+                <PlistImageFile Name="pGame_sp_win_xian.png" Key="pGame/sp_win_xian.png" />
+                <PlistImageFile Name="pGame_win_txt.png" Key="pGame/win_txt.png" />
+              </PlistImageFolder>
+              <PlistImageFolder Image="pPoker.png" PListFile="pPoker.plist" Name=".pPoker_PList.Dir">
+                <PlistImageFile Name="pPoker_card_0_1.png" Key="pPoker/card_0_1.png" />
+                <PlistImageFile Name="pPoker_card_0_10.png" Key="pPoker/card_0_10.png" />
+                <PlistImageFile Name="pPoker_card_0_11.png" Key="pPoker/card_0_11.png" />
+                <PlistImageFile Name="pPoker_card_0_12.png" Key="pPoker/card_0_12.png" />
+                <PlistImageFile Name="pPoker_card_0_13.png" Key="pPoker/card_0_13.png" />
+                <PlistImageFile Name="pPoker_card_0_2.png" Key="pPoker/card_0_2.png" />
+                <PlistImageFile Name="pPoker_card_0_3.png" Key="pPoker/card_0_3.png" />
+                <PlistImageFile Name="pPoker_card_0_4.png" Key="pPoker/card_0_4.png" />
+                <PlistImageFile Name="pPoker_card_0_5.png" Key="pPoker/card_0_5.png" />
+                <PlistImageFile Name="pPoker_card_0_6.png" Key="pPoker/card_0_6.png" />
+                <PlistImageFile Name="pPoker_card_0_7.png" Key="pPoker/card_0_7.png" />
+                <PlistImageFile Name="pPoker_card_0_8.png" Key="pPoker/card_0_8.png" />
+                <PlistImageFile Name="pPoker_card_0_9.png" Key="pPoker/card_0_9.png" />
+                <PlistImageFile Name="pPoker_card_1_1.png" Key="pPoker/card_1_1.png" />
+                <PlistImageFile Name="pPoker_card_1_10.png" Key="pPoker/card_1_10.png" />
+                <PlistImageFile Name="pPoker_card_1_11.png" Key="pPoker/card_1_11.png" />
+                <PlistImageFile Name="pPoker_card_1_12.png" Key="pPoker/card_1_12.png" />
+                <PlistImageFile Name="pPoker_card_1_13.png" Key="pPoker/card_1_13.png" />
+                <PlistImageFile Name="pPoker_card_1_2.png" Key="pPoker/card_1_2.png" />
+                <PlistImageFile Name="pPoker_card_1_3.png" Key="pPoker/card_1_3.png" />
+                <PlistImageFile Name="pPoker_card_1_4.png" Key="pPoker/card_1_4.png" />
+                <PlistImageFile Name="pPoker_card_1_5.png" Key="pPoker/card_1_5.png" />
+                <PlistImageFile Name="pPoker_card_1_6.png" Key="pPoker/card_1_6.png" />
+                <PlistImageFile Name="pPoker_card_1_7.png" Key="pPoker/card_1_7.png" />
+                <PlistImageFile Name="pPoker_card_1_8.png" Key="pPoker/card_1_8.png" />
+                <PlistImageFile Name="pPoker_card_1_9.png" Key="pPoker/card_1_9.png" />
+                <PlistImageFile Name="pPoker_card_2_1.png" Key="pPoker/card_2_1.png" />
+                <PlistImageFile Name="pPoker_card_2_10.png" Key="pPoker/card_2_10.png" />
+                <PlistImageFile Name="pPoker_card_2_11.png" Key="pPoker/card_2_11.png" />
+                <PlistImageFile Name="pPoker_card_2_12.png" Key="pPoker/card_2_12.png" />
+                <PlistImageFile Name="pPoker_card_2_13.png" Key="pPoker/card_2_13.png" />
+                <PlistImageFile Name="pPoker_card_2_2.png" Key="pPoker/card_2_2.png" />
+                <PlistImageFile Name="pPoker_card_2_3.png" Key="pPoker/card_2_3.png" />
+                <PlistImageFile Name="pPoker_card_2_4.png" Key="pPoker/card_2_4.png" />
+                <PlistImageFile Name="pPoker_card_2_5.png" Key="pPoker/card_2_5.png" />
+                <PlistImageFile Name="pPoker_card_2_6.png" Key="pPoker/card_2_6.png" />
+                <PlistImageFile Name="pPoker_card_2_7.png" Key="pPoker/card_2_7.png" />
+                <PlistImageFile Name="pPoker_card_2_8.png" Key="pPoker/card_2_8.png" />
+                <PlistImageFile Name="pPoker_card_2_9.png" Key="pPoker/card_2_9.png" />
+                <PlistImageFile Name="pPoker_card_3_1.png" Key="pPoker/card_3_1.png" />
+                <PlistImageFile Name="pPoker_card_3_10.png" Key="pPoker/card_3_10.png" />
+                <PlistImageFile Name="pPoker_card_3_11.png" Key="pPoker/card_3_11.png" />
+                <PlistImageFile Name="pPoker_card_3_12.png" Key="pPoker/card_3_12.png" />
+                <PlistImageFile Name="pPoker_card_3_13.png" Key="pPoker/card_3_13.png" />
+                <PlistImageFile Name="pPoker_card_3_2.png" Key="pPoker/card_3_2.png" />
+                <PlistImageFile Name="pPoker_card_3_3.png" Key="pPoker/card_3_3.png" />
+                <PlistImageFile Name="pPoker_card_3_4.png" Key="pPoker/card_3_4.png" />
+                <PlistImageFile Name="pPoker_card_3_5.png" Key="pPoker/card_3_5.png" />
+                <PlistImageFile Name="pPoker_card_3_6.png" Key="pPoker/card_3_6.png" />
+                <PlistImageFile Name="pPoker_card_3_7.png" Key="pPoker/card_3_7.png" />
+                <PlistImageFile Name="pPoker_card_3_8.png" Key="pPoker/card_3_8.png" />
+                <PlistImageFile Name="pPoker_card_3_9.png" Key="pPoker/card_3_9.png" />
+                <PlistImageFile Name="pPoker_card_4_14.png" Key="pPoker/card_4_14.png" />
+                <PlistImageFile Name="pPoker_card_4_15.png" Key="pPoker/card_4_15.png" />
+                <PlistImageFile Name="pPoker_card_back.png" Key="pPoker/card_back.png" />
+                <PlistImageFile Name="pPoker_card_face.png" Key="pPoker/card_face.png" />
+                <PlistImageFile Name="pPokerAnim_poker_open_1.png" Key="pPokerAnim/poker_open_1.png" />
+                <PlistImageFile Name="pPokerAnim_poker_open_2.png" Key="pPokerAnim/poker_open_2.png" />
+                <PlistImageFile Name="pPokerAnim_poker_open_3.png" Key="pPokerAnim/poker_open_3.png" />
+                <PlistImageFile Name="pPokerAnim_poker_open_4.png" Key="pPokerAnim/poker_open_4.png" />
+                <PlistImageFile Name="pPokerAnim_poker_open_5.png" Key="pPokerAnim/poker_open_5.png" />
+              </PlistImageFolder>
+              <PlistImageFolder Image="pPokerSmall.png" PListFile="pPokerSmall.plist" Name=".pPokerSmall_PList.Dir">
+                <PlistImageFile Name="pPokerSmall_card_0_1.png" Key="pPokerSmall/card_0_1.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_10.png" Key="pPokerSmall/card_0_10.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_11.png" Key="pPokerSmall/card_0_11.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_12.png" Key="pPokerSmall/card_0_12.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_13.png" Key="pPokerSmall/card_0_13.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_2.png" Key="pPokerSmall/card_0_2.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_3.png" Key="pPokerSmall/card_0_3.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_4.png" Key="pPokerSmall/card_0_4.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_5.png" Key="pPokerSmall/card_0_5.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_6.png" Key="pPokerSmall/card_0_6.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_7.png" Key="pPokerSmall/card_0_7.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_8.png" Key="pPokerSmall/card_0_8.png" />
+                <PlistImageFile Name="pPokerSmall_card_0_9.png" Key="pPokerSmall/card_0_9.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_1.png" Key="pPokerSmall/card_1_1.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_10.png" Key="pPokerSmall/card_1_10.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_11.png" Key="pPokerSmall/card_1_11.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_12.png" Key="pPokerSmall/card_1_12.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_13.png" Key="pPokerSmall/card_1_13.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_2.png" Key="pPokerSmall/card_1_2.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_3.png" Key="pPokerSmall/card_1_3.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_4.png" Key="pPokerSmall/card_1_4.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_5.png" Key="pPokerSmall/card_1_5.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_6.png" Key="pPokerSmall/card_1_6.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_7.png" Key="pPokerSmall/card_1_7.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_8.png" Key="pPokerSmall/card_1_8.png" />
+                <PlistImageFile Name="pPokerSmall_card_1_9.png" Key="pPokerSmall/card_1_9.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_1.png" Key="pPokerSmall/card_2_1.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_10.png" Key="pPokerSmall/card_2_10.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_11.png" Key="pPokerSmall/card_2_11.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_12.png" Key="pPokerSmall/card_2_12.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_13.png" Key="pPokerSmall/card_2_13.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_2.png" Key="pPokerSmall/card_2_2.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_3.png" Key="pPokerSmall/card_2_3.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_4.png" Key="pPokerSmall/card_2_4.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_5.png" Key="pPokerSmall/card_2_5.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_6.png" Key="pPokerSmall/card_2_6.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_7.png" Key="pPokerSmall/card_2_7.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_8.png" Key="pPokerSmall/card_2_8.png" />
+                <PlistImageFile Name="pPokerSmall_card_2_9.png" Key="pPokerSmall/card_2_9.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_1.png" Key="pPokerSmall/card_3_1.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_10.png" Key="pPokerSmall/card_3_10.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_11.png" Key="pPokerSmall/card_3_11.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_12.png" Key="pPokerSmall/card_3_12.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_13.png" Key="pPokerSmall/card_3_13.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_2.png" Key="pPokerSmall/card_3_2.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_3.png" Key="pPokerSmall/card_3_3.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_4.png" Key="pPokerSmall/card_3_4.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_5.png" Key="pPokerSmall/card_3_5.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_6.png" Key="pPokerSmall/card_3_6.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_7.png" Key="pPokerSmall/card_3_7.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_8.png" Key="pPokerSmall/card_3_8.png" />
+                <PlistImageFile Name="pPokerSmall_card_3_9.png" Key="pPokerSmall/card_3_9.png" />
+                <PlistImageFile Name="pPokerSmall_card_4_14.png" Key="pPokerSmall/card_4_14.png" />
+                <PlistImageFile Name="pPokerSmall_card_4_15.png" Key="pPokerSmall/card_4_15.png" />
+                <PlistImageFile Name="pPokerSmall_card_back.png" Key="pPokerSmall/card_back.png" />
+              </PlistImageFolder>
+              <PlistImageFolder Image="public.png" PListFile="public.plist" Name=".public_PList.Dir">
+                <PlistImageFile Name="bfb.png" Key="bfb.png" />
+                <PlistImageFile Name="blank.png" Key="blank.png" />
+                <PlistImageFile Name="bt_add.png" Key="bt_add.png" />
+                <PlistImageFile Name="bt_back.png" Key="bt_back.png" />
+                <PlistImageFile Name="bt_back02.png" Key="bt_back02.png" />
+                <PlistImageFile Name="bt_close_normal.png" Key="bt_close_normal.png" />
+                <PlistImageFile Name="bt_commit.png" Key="bt_commit.png" />
+                <PlistImageFile Name="bt_copy.png" Key="bt_copy.png" />
+                <PlistImageFile Name="bt_cx.png" Key="bt_cx.png" />
+                <PlistImageFile Name="bt_edit_01.png" Key="bt_edit_01.png" />
+                <PlistImageFile Name="bt_edit_02.png" Key="bt_edit_02.png" />
+                <PlistImageFile Name="bt_frame_01_clicked.png" Key="bt_frame_01_clicked.png" />
+                <PlistImageFile Name="bt_frame_01_normal.png" Key="bt_frame_01_normal.png" />
+                <PlistImageFile Name="bt_frame_02.png" Key="bt_frame_02.png" />
+                <PlistImageFile Name="bt_frame_03.png" Key="bt_frame_03.png" />
+                <PlistImageFile Name="bt_frame_04.png" Key="bt_frame_04.png" />
+                <PlistImageFile Name="bt_frame_05.png" Key="bt_frame_05.png" />
+                <PlistImageFile Name="bt_frame_06.png" Key="bt_frame_06.png" />
+                <PlistImageFile Name="bt_frame_07.png" Key="bt_frame_07.png" />
+                <PlistImageFile Name="bt_frame_08.png" Key="bt_frame_08.png" />
+                <PlistImageFile Name="bt_max.png" Key="bt_max.png" />
+                <PlistImageFile Name="bt_rule_01.png" Key="bt_rule_01.png" />
+                <PlistImageFile Name="bt_rule_02.png" Key="bt_rule_02.png" />
+                <PlistImageFile Name="bt_setup.png" Key="bt_setup.png" />
+                <PlistImageFile Name="bt_zx_ck.png" Key="bt_zx_ck.png" />
+                <PlistImageFile Name="bt_zx_qk.png" Key="bt_zx_qk.png" />
+                <PlistImageFile Name="chat_item_framebg.png" Key="chat_item_framebg.png" />
+                <PlistImageFile Name="duihuan_lx01.png" Key="duihuan_lx01.png" />
+                <PlistImageFile Name="duihuan_lx02.png" Key="duihuan_lx02.png" />
+                <PlistImageFile Name="icon_wechat.png" Key="icon_wechat.png" />
+                <PlistImageFile Name="je_di01.png" Key="je_di01.png" />
+                <PlistImageFile Name="je_tuotiao01.png" Key="je_tuotiao01.png" />
+                <PlistImageFile Name="je_tuotiao02.png" Key="je_tuotiao02.png" />
+                <PlistImageFile Name="label_charge.png" Key="label_charge.png" />
+                <PlistImageFile Name="label_register.png" Key="label_register.png" />
+                <PlistImageFile Name="phb_ic_di.png" Key="phb_ic_di.png" />
+                <PlistImageFile Name="sp_amount_ATM.png" Key="sp_amount_ATM.png" />
+                <PlistImageFile Name="sp_amount_save.png" Key="sp_amount_save.png" />
+                <PlistImageFile Name="sp_bar_01.png" Key="sp_bar_01.png" />
+                <PlistImageFile Name="sp_bar_02.png" Key="sp_bar_02.png" />
+                <PlistImageFile Name="sp_battery_1.png" Key="sp_battery_1.png" />
+                <PlistImageFile Name="sp_battery_2.png" Key="sp_battery_2.png" />
+                <PlistImageFile Name="sp_battery_3.png" Key="sp_battery_3.png" />
+                <PlistImageFile Name="sp_coffer.png" Key="sp_coffer.png" />
+                <PlistImageFile Name="sp_coin.png" Key="sp_coin.png" />
+                <PlistImageFile Name="sp_coin_bg.png" Key="sp_coin_bg.png" />
+                <PlistImageFile Name="sp_coin_bg_min.png" Key="sp_coin_bg_min.png" />
+                <PlistImageFile Name="sp_coin_min.png" Key="sp_coin_min.png" />
+                <PlistImageFile Name="sp_coin_small.png" Key="sp_coin_small.png" />
+                <PlistImageFile Name="sp_default_head.png" Key="sp_default_head.png" />
+                <PlistImageFile Name="sp_default_head2.png" Key="sp_default_head2.png" />
+                <PlistImageFile Name="sp_dir.png" Key="sp_dir.png" />
+                <PlistImageFile Name="sp_dir2.png" Key="sp_dir2.png" />
+                <PlistImageFile Name="sp_frame_01.png" Key="sp_frame_01.png" />
+                <PlistImageFile Name="sp_frame_02.png" Key="sp_frame_02.png" />
+                <PlistImageFile Name="sp_frame_03.png" Key="sp_frame_03.png" />
+                <PlistImageFile Name="sp_frame_04.png" Key="sp_frame_04.png" />
+                <PlistImageFile Name="sp_frame_05.png" Key="sp_frame_05.png" />
+                <PlistImageFile Name="sp_frame_06.png" Key="sp_frame_06.png" />
+                <PlistImageFile Name="sp_frame_07.png" Key="sp_frame_07.png" />
+                <PlistImageFile Name="sp_frame_08.png" Key="sp_frame_08.png" />
+                <PlistImageFile Name="sp_frame_09.png" Key="sp_frame_09.png" />
+                <PlistImageFile Name="sp_head_frame.png" Key="sp_head_frame.png" />
+                <PlistImageFile Name="sp_help.png" Key="sp_help.png" />
+                <PlistImageFile Name="sp_icon_music.png" Key="sp_icon_music.png" />
+                <PlistImageFile Name="sp_icon_sound.png" Key="sp_icon_sound.png" />
+                <PlistImageFile Name="sp_level_frame.png" Key="sp_level_frame.png" />
+                <PlistImageFile Name="sp_level_frame_bar.png" Key="sp_level_frame_bar.png" />
+                <PlistImageFile Name="sp_light_bar.png" Key="sp_light_bar.png" />
+                <PlistImageFile Name="sp_light_dot.png" Key="sp_light_dot.png" />
+                <PlistImageFile Name="sp_light_star.png" Key="sp_light_star.png" />
+                <PlistImageFile Name="sp_light_star_2.png" Key="sp_light_star_2.png" />
+                <PlistImageFile Name="sp_location_icon.png" Key="sp_location_icon.png" />
+                <PlistImageFile Name="sp_pframe_01.png" Key="sp_pframe_01.png" />
+                <PlistImageFile Name="sp_pframe_02.png" Key="sp_pframe_02.png" />
+                <PlistImageFile Name="sp_rad.png" Key="sp_rad.png" />
+                <PlistImageFile Name="sp_selected.png" Key="sp_selected.png" />
+                <PlistImageFile Name="sp_slider_01.png" Key="sp_slider_01.png" />
+                <PlistImageFile Name="sp_slider_02.png" Key="sp_slider_02.png" />
+                <PlistImageFile Name="sp_star.png" Key="sp_star.png" />
+                <PlistImageFile Name="sp_tips_bg.png" Key="sp_tips_bg.png" />
+                <PlistImageFile Name="sp_title_box.png" Key="sp_title_box.png" />
+                <PlistImageFile Name="sp_title_frame.png" Key="sp_title_frame.png" />
+                <PlistImageFile Name="sp_title_setup.png" Key="sp_title_setup.png" />
+                <PlistImageFile Name="sp_trumpet.png" Key="sp_trumpet.png" />
+                <PlistImageFile Name="sp_vip0.png" Key="sp_vip0.png" />
+                <PlistImageFile Name="sp_vip1.png" Key="sp_vip1.png" />
+                <PlistImageFile Name="sp_vip2.png" Key="sp_vip2.png" />
+                <PlistImageFile Name="sp_vip3.png" Key="sp_vip3.png" />
+                <PlistImageFile Name="sp_vip4.png" Key="sp_vip4.png" />
+                <PlistImageFile Name="sp_vip5.png" Key="sp_vip5.png" />
+                <PlistImageFile Name="sp_vip6.png" Key="sp_vip6.png" />
+                <PlistImageFile Name="spinner_circle.png" Key="spinner_circle.png" />
+              </PlistImageFolder>
+              <PlistImageFolder Image="win_effect.png" PListFile="win_effect.plist" Name=".win_effect_PList.Dir">
+                <PlistImageFile Name="im_win_effect_0.png" Key="im_win_effect_0.png" />
+                <PlistImageFile Name="im_win_effect_1.png" Key="im_win_effect_1.png" />
+                <PlistImageFile Name="im_win_effect_10.png" Key="im_win_effect_10.png" />
+                <PlistImageFile Name="im_win_effect_11.png" Key="im_win_effect_11.png" />
+                <PlistImageFile Name="im_win_effect_12.png" Key="im_win_effect_12.png" />
+                <PlistImageFile Name="im_win_effect_13.png" Key="im_win_effect_13.png" />
+                <PlistImageFile Name="im_win_effect_14.png" Key="im_win_effect_14.png" />
+                <PlistImageFile Name="im_win_effect_15.png" Key="im_win_effect_15.png" />
+                <PlistImageFile Name="im_win_effect_16.png" Key="im_win_effect_16.png" />
+                <PlistImageFile Name="im_win_effect_17.png" Key="im_win_effect_17.png" />
+                <PlistImageFile Name="im_win_effect_18.png" Key="im_win_effect_18.png" />
+                <PlistImageFile Name="im_win_effect_19.png" Key="im_win_effect_19.png" />
+                <PlistImageFile Name="im_win_effect_2.png" Key="im_win_effect_2.png" />
+                <PlistImageFile Name="im_win_effect_3.png" Key="im_win_effect_3.png" />
+                <PlistImageFile Name="im_win_effect_4.png" Key="im_win_effect_4.png" />
+                <PlistImageFile Name="im_win_effect_5.png" Key="im_win_effect_5.png" />
+                <PlistImageFile Name="im_win_effect_6.png" Key="im_win_effect_6.png" />
+                <PlistImageFile Name="im_win_effect_7.png" Key="im_win_effect_7.png" />
+                <PlistImageFile Name="im_win_effect_8.png" Key="im_win_effect_8.png" />
+                <PlistImageFile Name="im_win_effect_9.png" Key="im_win_effect_9.png" />
+              </PlistImageFolder>
+              <File Name="badwords.txt" />
+              <File Name="BatteryLayer.csb" />
+              <Image Name="bt_savesite1.png" />
+              <Image Name="bt_savesite2.png" />
+              <Image Name="guild_dir.png" />
+              <Image Name="guild_frame.png" />
+              <File Name="HeadLayer.csb" />
+              <File Name="NoticeEntity.csb" />
+              <File Name="PopUserInfoLayer.csb" />
+              <File Name="SafeBoxLayer.csb" />
+              <File Name="SettingLayer.csb" />
+              <Image Name="sp_boxdown.png" />
+              <Image Name="sp_boxup.png" />
+              <Image Name="sp_cursor.png" />
+              <Image Name="sp_light_circle.png" />
+            </Folder>
+            <Folder Name="roomlist">
+              <Fnt Name="font_cell_score.fnt" />
+              <File Name="RoomItem.csb" />
+              <Image Name="sp_adorn_1_1.png" />
+              <Image Name="sp_adorn_1_2.png" />
+              <Image Name="sp_adorn_1_3.png" />
+              <Image Name="sp_adorn_2_1.png" />
+              <Image Name="sp_adorn_2_2.png" />
+              <Image Name="sp_adorn_2_3.png" />
+              <Image Name="sp_adorn_3_1.png" />
+              <Image Name="sp_adorn_3_2.png" />
+              <Image Name="sp_adorn_3_3.png" />
+              <Image Name="sp_adorn_4_1.png" />
+              <Image Name="sp_adorn_4_2.png" />
+              <Image Name="sp_adorn_4_3.png" />
+              <Image Name="sp_frame_1.png" />
+              <Image Name="sp_icon_default.png" />
+              <Image Name="sp_label_1.png" />
+              <Image Name="sp_label_2.png" />
+              <Image Name="sp_label_3.png" />
+              <Image Name="sp_room_bg_01.png" />
+              <Image Name="sp_room_bg_02.png" />
+              <Image Name="sp_room_bg_03.png" />
+              <Image Name="sp_room_bg_04.png" />
+              <Image Name="sp_star.png" />
+            </Folder>
+            <Folder Name="shop">
+              <PlistImageFolder Image="shop.png" PListFile="shop.plist" Name=".shop_PList.Dir">
+                <PlistImageFile Name="shop_bt_copy.png" Key="shop/bt_copy.png" />
+                <PlistImageFile Name="shop_bt_frame_1.png" Key="shop/bt_frame_1.png" />
+                <PlistImageFile Name="shop_bt_frame_2_click.png" Key="shop/bt_frame_2_click.png" />
+                <PlistImageFile Name="shop_bt_frame_2_normal.png" Key="shop/bt_frame_2_normal.png" />
+                <PlistImageFile Name="shop_bt_frame_3.png" Key="shop/bt_frame_3.png" />
+                <PlistImageFile Name="shop_bt_number_1.png" Key="shop/bt_number_1.png" />
+                <PlistImageFile Name="shop_bt_number_2.png" Key="shop/bt_number_2.png" />
+                <PlistImageFile Name="shop_bt_x.png" Key="shop/bt_x.png" />
+                <PlistImageFile Name="shop_img_line.png" Key="shop/img_line.png" />
+                <PlistImageFile Name="shop_label_push.png" Key="shop/label_push.png" />
+                <PlistImageFile Name="shop_sp_dot_normal.png" Key="shop/sp_dot_normal.png" />
+                <PlistImageFile Name="shop_sp_dot_selected.png" Key="shop/sp_dot_selected.png" />
+                <PlistImageFile Name="shop_sp_down.png" Key="shop/sp_down.png" />
+                <PlistImageFile Name="shop_sp_frame_1.png" Key="shop/sp_frame_1.png" />
+                <PlistImageFile Name="shop_sp_frame_10.png" Key="shop/sp_frame_10.png" />
+                <PlistImageFile Name="shop_sp_frame_11.png" Key="shop/sp_frame_11.png" />
+                <PlistImageFile Name="shop_sp_frame_12.png" Key="shop/sp_frame_12.png" />
+                <PlistImageFile Name="shop_sp_frame_13.png" Key="shop/sp_frame_13.png" />
+                <PlistImageFile Name="shop_sp_frame_2.png" Key="shop/sp_frame_2.png" />
+                <PlistImageFile Name="shop_sp_frame_3.png" Key="shop/sp_frame_3.png" />
+                <PlistImageFile Name="shop_sp_frame_4.png" Key="shop/sp_frame_4.png" />
+                <PlistImageFile Name="shop_sp_frame_5.png" Key="shop/sp_frame_5.png" />
+                <PlistImageFile Name="shop_sp_frame_6.png" Key="shop/sp_frame_6.png" />
+                <PlistImageFile Name="shop_sp_frame_7.png" Key="shop/sp_frame_7.png" />
+                <PlistImageFile Name="shop_sp_frame_8.png" Key="shop/sp_frame_8.png" />
+                <PlistImageFile Name="shop_sp_frame_9.png" Key="shop/sp_frame_9.png" />
+                <PlistImageFile Name="shop_sp_line.png" Key="shop/sp_line.png" />
+                <PlistImageFile Name="shop_sp_logo.png" Key="shop/sp_logo.png" />
+                <PlistImageFile Name="shop_sp_people_1.png" Key="shop/sp_people_1.png" />
+                <PlistImageFile Name="shop_sp_title_1.png" Key="shop/sp_title_1.png" />
+                <PlistImageFile Name="shop_sp_title_2.png" Key="shop/sp_title_2.png" />
+                <PlistImageFile Name="shop_sp_up.png" Key="shop/sp_up.png" />
+              </PlistImageFolder>
+              <File Name="ContactAgentLayer.csb" />
+              <File Name="ReportLayer.csb" />
+              <File Name="ShopLayer.csb" />
+              <Image Name="sp_apple_01.png" />
+              <Image Name="sp_apple_02.png" />
+              <Image Name="sp_dianka_01.png" />
+              <Image Name="sp_dianka_02.png" />
+              <Image Name="sp_jd_01.png" />
+              <Image Name="sp_jd_02.png" />
+              <Image Name="sp_qq_01.png" />
+              <Image Name="sp_qq_02.png" />
+              <Image Name="sp_weixin_01.png" />
+              <Image Name="sp_weixin_02.png" />
+              <Image Name="sp_yinlian_01.png" />
+              <Image Name="sp_yinlian_02.png" />
+              <Image Name="sp_zhifubao_01.png" />
+              <Image Name="sp_zhifubao_02.png" />
+            </Folder>
+            <Folder Name="sound">
+              <Audio Name="backgroud01.mp3" />
+              <Audio Name="Click_Close.mp3" />
+              <Audio Name="Click_Normal.mp3" />
+            </Folder>
+            <Folder Name="viplayer">
+              <PlistImageFolder Image="plaza_vip.png" PListFile="plaza_vip.plist" Name=".plaza_vip_PList.Dir">
+                <PlistImageFile Name="plaza_vip_sp_01.png" Key="plaza_vip/sp_01.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_0.png" Key="plaza_vip/sp_cannon_0.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_1.png" Key="plaza_vip/sp_cannon_1.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_2.png" Key="plaza_vip/sp_cannon_2.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_3.png" Key="plaza_vip/sp_cannon_3.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_4.png" Key="plaza_vip/sp_cannon_4.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_5.png" Key="plaza_vip/sp_cannon_5.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_6.png" Key="plaza_vip/sp_cannon_6.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_label_0.png" Key="plaza_vip/sp_cannon_label_0.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_label_1.png" Key="plaza_vip/sp_cannon_label_1.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_label_2.png" Key="plaza_vip/sp_cannon_label_2.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_label_3.png" Key="plaza_vip/sp_cannon_label_3.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_label_4.png" Key="plaza_vip/sp_cannon_label_4.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_label_5.png" Key="plaza_vip/sp_cannon_label_5.png" />
+                <PlistImageFile Name="plaza_vip_sp_cannon_label_6.png" Key="plaza_vip/sp_cannon_label_6.png" />
+                <PlistImageFile Name="plaza_vip_sp_dir.png" Key="plaza_vip/sp_dir.png" />
+                <PlistImageFile Name="plaza_vip_sp_frame_01.png" Key="plaza_vip/sp_frame_01.png" />
+                <PlistImageFile Name="plaza_vip_sp_frame_02.png" Key="plaza_vip/sp_frame_02.png" />
+                <PlistImageFile Name="plaza_vip_sp_frame_03.png" Key="plaza_vip/sp_frame_03.png" />
+                <PlistImageFile Name="plaza_vip_sp_label_01.png" Key="plaza_vip/sp_label_01.png" />
+                <PlistImageFile Name="plaza_vip_sp_label_02.png" Key="plaza_vip/sp_label_02.png" />
+                <PlistImageFile Name="plaza_vip_sp_label_03.png" Key="plaza_vip/sp_label_03.png" />
+                <PlistImageFile Name="plaza_vip_sp_loading_bar.png" Key="plaza_vip/sp_loading_bar.png" />
+                <PlistImageFile Name="plaza_vip_sp_loading_bg.png" Key="plaza_vip/sp_loading_bg.png" />
+                <PlistImageFile Name="plaza_vip_sp_title.png" Key="plaza_vip/sp_title.png" />
+                <PlistImageFile Name="plaza_vip_sp_vip_bg.png" Key="plaza_vip/sp_vip_bg.png" />
+                <PlistImageFile Name="plaza_vip_sp_vip_frame.png" Key="plaza_vip/sp_vip_frame.png" />
+                <PlistImageFile Name="plaza_vip_vip_girl.png" Key="plaza_vip/vip_girl.png" />
+              </PlistImageFolder>
+              <File Name="VipItemLayer.csb" />
+              <File Name="VipLayer.csb" />
+            </Folder>
+            <File Name="filemd5List.json" />
+          </Folder>
+          <Folder Name="Default">
+            <Image Name="Button_Disable.png" />
+            <Image Name="Button_Normal.png" />
+            <Image Name="Button_Press.png" />
+            <Image Name="CheckBox_Disable.png" />
+            <Image Name="ImageFile.png" />
+          </Folder>
+          <Folder Name="entity">
+            <Image Name="bt_frame_02.png" />
+            <Image Name="bt_frame_03.png" />
+            <Image Name="bt_label_cancel.png" />
+            <Image Name="bt_label_sure.png" />
+            <Image Name="sp_01.png" />
+            <Image Name="sp_02.png" />
+            <Image Name="sp_03.png" />
+            <Image Name="sp_04.png" />
+            <Image Name="sp_05.png" />
+            <Image Name="sp_frame_07.png" />
+            <Image Name="sp_money.png" />
+            <Image Name="sp_title_frame.png" />
+            <Image Name="sp_title_tip.png" />
+            <Image Name="sp_toast_frame.png" />
+            <Image Name="wait_round.png" />
+          </Folder>
+          <Folder Name="fonts">
+            <TTF Name="FZY3JW.TTF" />
+            <TTF Name="round_body.ttf" />
+          </Folder>
+          <Folder Name="game">
+            <Folder Name="baike">
+              <File Name="baike.csb" />
+              <Image Name="baike_task_0.png" />
+              <Image Name="baike_task_1.png" />
+              <Image Name="baike_task_bg.png" />
+              <Image Name="bei.png" />
+              <Image Name="close.png" />
+              <Image Name="countie.png" />
+              <Image Name="fish_baike_0.png" />
+              <Image Name="fish_baike_1.png" />
+              <Image Name="fish_baike_10.png" />
+              <Image Name="fish_baike_11.png" />
+              <Image Name="fish_baike_12.png" />
+              <Image Name="fish_baike_13.png" />
+              <Image Name="fish_baike_14.png" />
+              <Image Name="fish_baike_15.png" />
+              <Image Name="fish_baike_16.png" />
+              <Image Name="fish_baike_17.png" />
+              <Image Name="fish_baike_18.png" />
+              <Image Name="fish_baike_19.png" />
+              <Image Name="fish_baike_2.png" />
+              <Image Name="fish_baike_20.png" />
+              <Image Name="fish_baike_21.png" />
+              <Image Name="fish_baike_22.png" />
+              <Image Name="fish_baike_23.png" />
+              <Image Name="fish_baike_24.png" />
+              <Image Name="fish_baike_25.png" />
+              <Image Name="fish_baike_26.png" />
+              <Image Name="fish_baike_27.png" />
+              <Image Name="fish_baike_3.png" />
+              <Image Name="fish_baike_31.png" />
+              <Image Name="fish_baike_4.png" />
+              <Image Name="fish_baike_5.png" />
+              <Image Name="fish_baike_6.png" />
+              <Image Name="fish_baike_7.png" />
+              <Image Name="fish_baike_8.png" />
+              <Image Name="fish_baike_9.png" />
+              <Image Name="frame.png" />
+              <Image Name="frame_baike.png" />
+              <Image Name="left.png" />
+            </Folder>
+            <Folder Name="baike_number">
+              <Image Name="baike_num.png" />
+              <Image Name="baike_num_1.png" />
+            </Folder>
+            <Folder Name="boss">
+              <Image Name="boss_31.png" />
+              <Image Name="boss_come.png" />
+              <Image Name="boss_notice_line0.png" />
+              <Image Name="boss_notice_line1.png" />
+              <Image Name="boss_notice_line2.png" />
+              <Image Name="boss_notice_line3.png" />
+              <Image Name="boss_notice_line4.png" />
+              <Image Name="boss_notice_line5.png" />
+              <Image Name="boss_notice_line6.png" />
+              <Image Name="boss_notice_line7.png" />
+              <Image Name="boss_notice_line8.png" />
+              <Image Name="boss_notice_line9.png" />
+              <Image Name="boss_notice_thunder0.png" />
+              <Image Name="boss_notice_thunder1.png" />
+              <Image Name="boss_notice_thunder2.png" />
+              <Image Name="boss_notice_thunder3.png" />
+              <Image Name="boss_notice_thunder4.png" />
+              <File Name="come_boss.csb" />
+              <File Name="light.csb" />
+            </Folder>
+            <Folder Name="boss_come">
+              <Image Name="200.png" />
+              <Image Name="31_10.png" />
+              <File Name="boss_come.csb" />
+              <Image Name="boss_kill.png" />
+              <Image Name="boss_name.png" />
+            </Folder>
+            <Folder Name="cheatuser">
+              <File Name="cheatLayer.csb" />
+            </Folder>
+            <Folder Name="efect">
+              <Folder Name="3">
+                <Image Name="fish_explosive3_1.png" />
+                <Image Name="fish_explosive3_10.png" />
+                <Image Name="fish_explosive3_11.png" />
+                <Image Name="fish_explosive3_12.png" />
+                <Image Name="fish_explosive3_13.png" />
+                <Image Name="fish_explosive3_14.png" />
+                <Image Name="fish_explosive3_15.png" />
+                <Image Name="fish_explosive3_16.png" />
+                <Image Name="fish_explosive3_17.png" />
+                <Image Name="fish_explosive3_18.png" />
+                <Image Name="fish_explosive3_19.png" />
+                <Image Name="fish_explosive3_2.png" />
+                <Image Name="fish_explosive3_20.png" />
+                <Image Name="fish_explosive3_3.png" />
+                <Image Name="fish_explosive3_4.png" />
+                <Image Name="fish_explosive3_5.png" />
+                <Image Name="fish_explosive3_6.png" />
+                <Image Name="fish_explosive3_7.png" />
+                <Image Name="fish_explosive3_8.png" />
+                <Image Name="fish_explosive3_9.png" />
+                <File Name="Skeleton.csb" />
+              </Folder>
+              <Folder Name="4">
+                <Image Name="fish_explosive1_1.png" />
+                <Image Name="fish_explosive1_10.png" />
+                <Image Name="fish_explosive1_11.png" />
+                <Image Name="fish_explosive1_12.png" />
+                <Image Name="fish_explosive1_13.png" />
+                <Image Name="fish_explosive1_14.png" />
+                <Image Name="fish_explosive1_15.png" />
+                <Image Name="fish_explosive1_16.png" />
+                <Image Name="fish_explosive1_17.png" />
+                <Image Name="fish_explosive1_18.png" />
+                <Image Name="fish_explosive1_19.png" />
+                <Image Name="fish_explosive1_2.png" />
+                <Image Name="fish_explosive1_20.png" />
+                <Image Name="fish_explosive1_3.png" />
+                <Image Name="fish_explosive1_4.png" />
+                <Image Name="fish_explosive1_5.png" />
+                <Image Name="fish_explosive1_6.png" />
+                <Image Name="fish_explosive1_7.png" />
+                <Image Name="fish_explosive1_8.png" />
+                <Image Name="fish_explosive1_9.png" />
+                <File Name="Skeleton.csb" />
+              </Folder>
+              <Folder Name="5">
+                <Image Name="fish_explosive2_1.png" />
+                <Image Name="fish_explosive2_10.png" />
+                <Image Name="fish_explosive2_11.png" />
+                <Image Name="fish_explosive2_12.png" />
+                <Image Name="fish_explosive2_13.png" />
+                <Image Name="fish_explosive2_14.png" />
+                <Image Name="fish_explosive2_15.png" />
+                <Image Name="fish_explosive2_16.png" />
+                <Image Name="fish_explosive2_17.png" />
+                <Image Name="fish_explosive2_18.png" />
+                <Image Name="fish_explosive2_19.png" />
+                <Image Name="fish_explosive2_2.png" />
+                <Image Name="fish_explosive2_20.png" />
+                <Image Name="fish_explosive2_3.png" />
+                <Image Name="fish_explosive2_4.png" />
+                <Image Name="fish_explosive2_5.png" />
+                <Image Name="fish_explosive2_6.png" />
+                <Image Name="fish_explosive2_7.png" />
+                <Image Name="fish_explosive2_8.png" />
+                <Image Name="fish_explosive2_9.png" />
+                <File Name="Skeleton.csb" />
+              </Folder>
+            </Folder>
+            <Folder Name="fish">
+              <Folder Name="anim">
+                <Folder Name="27">
+                  <PlistImageFolder Image="die.png" PListFile="die.plist" Name=".die_PList.Dir">
+                    <PlistImageFile Name="fish27_die01.png" Key="fish27_die01.png" />
+                    <PlistImageFile Name="fish27_die02.png" Key="fish27_die02.png" />
+                    <PlistImageFile Name="fish27_die03.png" Key="fish27_die03.png" />
+                    <PlistImageFile Name="fish27_die04.png" Key="fish27_die04.png" />
+                    <PlistImageFile Name="fish27_die05.png" Key="fish27_die05.png" />
+                    <PlistImageFile Name="fish27_die06.png" Key="fish27_die06.png" />
+                    <PlistImageFile Name="fish27_die07.png" Key="fish27_die07.png" />
+                    <PlistImageFile Name="fish27_die08.png" Key="fish27_die08.png" />
+                  </PlistImageFolder>
+                </Folder>
+                <Folder Name="28">
+                  <PlistImageFolder Image="die.png" PListFile="die.plist" Name=".die_PList.Dir">
+                    <PlistImageFile Name="fish28_die01.png" Key="fish28_die01.png" />
+                    <PlistImageFile Name="fish28_die02.png" Key="fish28_die02.png" />
+                    <PlistImageFile Name="fish28_die03.png" Key="fish28_die03.png" />
+                    <PlistImageFile Name="fish28_die04.png" Key="fish28_die04.png" />
+                    <PlistImageFile Name="fish28_die05.png" Key="fish28_die05.png" />
+                    <PlistImageFile Name="fish28_die06.png" Key="fish28_die06.png" />
+                  </PlistImageFolder>
+                  <PlistImageFolder Image="move.png" PListFile="move.plist" Name=".move_PList.Dir">
+                    <PlistImageFile Name="fish28_move01.png" Key="fish28_move01.png" />
+                    <PlistImageFile Name="fish28_move02.png" Key="fish28_move02.png" />
+                    <PlistImageFile Name="fish28_move03.png" Key="fish28_move03.png" />
+                    <PlistImageFile Name="fish28_move04.png" Key="fish28_move04.png" />
+                    <PlistImageFile Name="fish28_move05.png" Key="fish28_move05.png" />
+                    <PlistImageFile Name="fish28_move06.png" Key="fish28_move06.png" />
+                    <PlistImageFile Name="fish28_move07.png" Key="fish28_move07.png" />
+                    <PlistImageFile Name="fish28_move08.png" Key="fish28_move08.png" />
+                    <PlistImageFile Name="fish28_move09.png" Key="fish28_move09.png" />
+                  </PlistImageFolder>
+                </Folder>
+                <PlistImageFolder Image="die.png" PListFile="die.plist" Name=".die_PList.Dir">
+                  <PlistImageFile Name="fish10_die01.png" Key="fish10_die01.png" />
+                  <PlistImageFile Name="fish10_die02.png" Key="fish10_die02.png" />
+                  <PlistImageFile Name="fish10_die03.png" Key="fish10_die03.png" />
+                  <PlistImageFile Name="fish10_die04.png" Key="fish10_die04.png" />
+                  <PlistImageFile Name="fish10_die05.png" Key="fish10_die05.png" />
+                  <PlistImageFile Name="fish10_die06.png" Key="fish10_die06.png" />
+                  <PlistImageFile Name="fish10_die07.png" Key="fish10_die07.png" />
+                  <PlistImageFile Name="fish11_die01.png" Key="fish11_die01.png" />
+                  <PlistImageFile Name="fish11_die02.png" Key="fish11_die02.png" />
+                  <PlistImageFile Name="fish11_die03.png" Key="fish11_die03.png" />
+                  <PlistImageFile Name="fish11_die04.png" Key="fish11_die04.png" />
+                  <PlistImageFile Name="fish12_die01.png" Key="fish12_die01.png" />
+                  <PlistImageFile Name="fish12_die02.png" Key="fish12_die02.png" />
+                  <PlistImageFile Name="fish12_die03.png" Key="fish12_die03.png" />
+                  <PlistImageFile Name="fish12_die04.png" Key="fish12_die04.png" />
+                  <PlistImageFile Name="fish13_die01.png" Key="fish13_die01.png" />
+                  <PlistImageFile Name="fish13_die02.png" Key="fish13_die02.png" />
+                  <PlistImageFile Name="fish13_die03.png" Key="fish13_die03.png" />
+                  <PlistImageFile Name="fish13_die04.png" Key="fish13_die04.png" />
+                  <PlistImageFile Name="fish14_die01.png" Key="fish14_die01.png" />
+                  <PlistImageFile Name="fish14_die02.png" Key="fish14_die02.png" />
+                  <PlistImageFile Name="fish14_die03.png" Key="fish14_die03.png" />
+                  <PlistImageFile Name="fish15_die01.png" Key="fish15_die01.png" />
+                  <PlistImageFile Name="fish15_die02.png" Key="fish15_die02.png" />
+                  <PlistImageFile Name="fish15_die03.png" Key="fish15_die03.png" />
+                  <PlistImageFile Name="fish15_die04.png" Key="fish15_die04.png" />
+                  <PlistImageFile Name="fish15_die05.png" Key="fish15_die05.png" />
+                  <PlistImageFile Name="fish16_die01.png" Key="fish16_die01.png" />
+                  <PlistImageFile Name="fish16_die02.png" Key="fish16_die02.png" />
+                  <PlistImageFile Name="fish16_die03.png" Key="fish16_die03.png" />
+                  <PlistImageFile Name="fish16_die04.png" Key="fish16_die04.png" />
+                  <PlistImageFile Name="fish17_die01.png" Key="fish17_die01.png" />
+                  <PlistImageFile Name="fish17_die02.png" Key="fish17_die02.png" />
+                  <PlistImageFile Name="fish17_die03.png" Key="fish17_die03.png" />
+                  <PlistImageFile Name="fish17_die04.png" Key="fish17_die04.png" />
+                  <PlistImageFile Name="fish18_die01.png" Key="fish18_die01.png" />
+                  <PlistImageFile Name="fish18_die02.png" Key="fish18_die02.png" />
+                  <PlistImageFile Name="fish18_die03.png" Key="fish18_die03.png" />
+                  <PlistImageFile Name="fish19_die01.png" Key="fish19_die01.png" />
+                  <PlistImageFile Name="fish19_die02.png" Key="fish19_die02.png" />
+                  <PlistImageFile Name="fish19_die03.png" Key="fish19_die03.png" />
+                  <PlistImageFile Name="fish19_die04.png" Key="fish19_die04.png" />
+                  <PlistImageFile Name="fish1_die01.png" Key="fish1_die01.png" />
+                  <PlistImageFile Name="fish1_die02.png" Key="fish1_die02.png" />
+                  <PlistImageFile Name="fish1_die03.png" Key="fish1_die03.png" />
+                  <PlistImageFile Name="fish1_die04.png" Key="fish1_die04.png" />
+                  <PlistImageFile Name="fish1_die05.png" Key="fish1_die05.png" />
+                  <PlistImageFile Name="fish20_die01.png" Key="fish20_die01.png" />
+                  <PlistImageFile Name="fish20_die02.png" Key="fish20_die02.png" />
+                  <PlistImageFile Name="fish20_die03.png" Key="fish20_die03.png" />
+                  <PlistImageFile Name="fish20_die04.png" Key="fish20_die04.png" />
+                  <PlistImageFile Name="fish23_die01.png" Key="fish23_die01.png" />
+                  <PlistImageFile Name="fish23_die02.png" Key="fish23_die02.png" />
+                  <PlistImageFile Name="fish23_die03.png" Key="fish23_die03.png" />
+                  <PlistImageFile Name="fish23_die04.png" Key="fish23_die04.png" />
+                  <PlistImageFile Name="fish23_die05.png" Key="fish23_die05.png" />
+                  <PlistImageFile Name="fish23_die06.png" Key="fish23_die06.png" />
+                  <PlistImageFile Name="fish26_die01.png" Key="fish26_die01.png" />
+                  <PlistImageFile Name="fish26_die02.png" Key="fish26_die02.png" />
+                  <PlistImageFile Name="fish26_die03.png" Key="fish26_die03.png" />
+                  <PlistImageFile Name="fish26_die04.png" Key="fish26_die04.png" />
+                  <PlistImageFile Name="fish2_die01.png" Key="fish2_die01.png" />
+                  <PlistImageFile Name="fish2_die02.png" Key="fish2_die02.png" />
+                  <PlistImageFile Name="fish2_die03.png" Key="fish2_die03.png" />
+                  <PlistImageFile Name="fish30_die01.png" Key="fish30_die01.png" />
+                  <PlistImageFile Name="fish30_die02.png" Key="fish30_die02.png" />
+                  <PlistImageFile Name="fish30_die03.png" Key="fish30_die03.png" />
+                  <PlistImageFile Name="fish30_die04.png" Key="fish30_die04.png" />
+                  <PlistImageFile Name="fish30_die05.png" Key="fish30_die05.png" />
+                  <PlistImageFile Name="fish30_die06.png" Key="fish30_die06.png" />
+                  <PlistImageFile Name="fish30_die07.png" Key="fish30_die07.png" />
+                  <PlistImageFile Name="fish30_die08.png" Key="fish30_die08.png" />
+                  <PlistImageFile Name="fish31_die01.png" Key="fish31_die01.png" />
+                  <PlistImageFile Name="fish31_die02.png" Key="fish31_die02.png" />
+                  <PlistImageFile Name="fish31_die03.png" Key="fish31_die03.png" />
+                  <PlistImageFile Name="fish31_die04.png" Key="fish31_die04.png" />
+                  <PlistImageFile Name="fish31_die05.png" Key="fish31_die05.png" />
+                  <PlistImageFile Name="fish3_die01.png" Key="fish3_die01.png" />
+                  <PlistImageFile Name="fish3_die02.png" Key="fish3_die02.png" />
+                  <PlistImageFile Name="fish3_die03.png" Key="fish3_die03.png" />
+                  <PlistImageFile Name="fish4_die01.png" Key="fish4_die01.png" />
+                  <PlistImageFile Name="fish4_die02.png" Key="fish4_die02.png" />
+                  <PlistImageFile Name="fish4_die03.png" Key="fish4_die03.png" />
+                  <PlistImageFile Name="fish4_die04.png" Key="fish4_die04.png" />
+                  <PlistImageFile Name="fish4_die05.png" Key="fish4_die05.png" />
+                  <PlistImageFile Name="fish5_die01.png" Key="fish5_die01.png" />
+                  <PlistImageFile Name="fish5_die02.png" Key="fish5_die02.png" />
+                  <PlistImageFile Name="fish5_die03.png" Key="fish5_die03.png" />
+                  <PlistImageFile Name="fish6_die01.png" Key="fish6_die01.png" />
+                  <PlistImageFile Name="fish6_die02.png" Key="fish6_die02.png" />
+                  <PlistImageFile Name="fish6_die03.png" Key="fish6_die03.png" />
+                  <PlistImageFile Name="fish6_die04.png" Key="fish6_die04.png" />
+                  <PlistImageFile Name="fish6_die05.png" Key="fish6_die05.png" />
+                  <PlistImageFile Name="fish6_die06.png" Key="fish6_die06.png" />
+                  <PlistImageFile Name="fish7_die01.png" Key="fish7_die01.png" />
+                  <PlistImageFile Name="fish7_die02.png" Key="fish7_die02.png" />
+                  <PlistImageFile Name="fish7_die03.png" Key="fish7_die03.png" />
+                  <PlistImageFile Name="fish8_die01.png" Key="fish8_die01.png" />
+                  <PlistImageFile Name="fish8_die02.png" Key="fish8_die02.png" />
+                  <PlistImageFile Name="fish8_die03.png" Key="fish8_die03.png" />
+                  <PlistImageFile Name="fish8_die04.png" Key="fish8_die04.png" />
+                  <PlistImageFile Name="fish8_die05.png" Key="fish8_die05.png" />
+                  <PlistImageFile Name="fish8_die06.png" Key="fish8_die06.png" />
+                  <PlistImageFile Name="fish9_die01.png" Key="fish9_die01.png" />
+                  <PlistImageFile Name="fish9_die02.png" Key="fish9_die02.png" />
+                  <PlistImageFile Name="fish9_die03.png" Key="fish9_die03.png" />
+                  <PlistImageFile Name="fish9_die04.png" Key="fish9_die04.png" />
+                </PlistImageFolder>
+              </Folder>
+              <PlistImageFolder Image="bomb_light_frame8.png" PListFile="bomb_light_frame8.plist" Name=".bomb_light_frame8_PList.Dir">
+                <PlistImageFile Name="bomb_light_0.png" Key="bomb_light_0.png" />
+                <PlistImageFile Name="bomb_light_1.png" Key="bomb_light_1.png" />
+                <PlistImageFile Name="bomb_light_2.png" Key="bomb_light_2.png" />
+                <PlistImageFile Name="bomb_light_3.png" Key="bomb_light_3.png" />
+                <PlistImageFile Name="bomb_light_4.png" Key="bomb_light_4.png" />
+              </PlistImageFolder>
+              <PlistImageFolder Image="bomb_line_ani_frame8.png" PListFile="bomb_line_ani_frame8.plist" Name=".bomb_line_ani_frame8_PList.Dir">
+                <PlistImageFile Name="bomb_line_1.png" Key="bomb_line_1.png" />
+                <PlistImageFile Name="bomb_line_2.png" Key="bomb_line_2.png" />
+                <PlistImageFile Name="bomb_line_3.png" Key="bomb_line_3.png" />
+                <PlistImageFile Name="bomb_line_4.png" Key="bomb_line_4.png" />
+                <PlistImageFile Name="bomb_line_5.png" Key="bomb_line_5.png" />
+                <PlistImageFile Name="bomb_line_head.png" Key="bomb_line_head.png" />
+              </PlistImageFolder>
+              <Folder Name="effect_bar_glod">
+                <ExportJsonFile Name="effect_bar_glod.ExportJson" />
+              </Folder>
+              <Folder Name="fish">
+                <Image Name="boss_31.png" />
+                <Image Name="boss_come.png" />
+                <Image Name="boss_notice_line0.png" />
+                <Image Name="boss_notice_line1.png" />
+                <Image Name="boss_notice_line2.png" />
+                <Image Name="boss_notice_line3.png" />
+                <Image Name="boss_notice_line4.png" />
+                <Image Name="boss_notice_line5.png" />
+                <Image Name="boss_notice_line6.png" />
+                <Image Name="boss_notice_line7.png" />
+                <Image Name="boss_notice_line8.png" />
+                <Image Name="boss_notice_line9.png" />
+                <Image Name="boss_notice_thunder0.png" />
+                <Image Name="boss_notice_thunder1.png" />
+                <Image Name="boss_notice_thunder2.png" />
+                <Image Name="boss_notice_thunder3.png" />
+                <Image Name="boss_notice_thunder4.png" />
+                <File Name="come_boss.csb" />
+              </Folder>
+              <Folder Name="name">
+                <Image Name="15.png" />
+                <Image Name="16.png" />
+                <Image Name="17.png" />
+                <Image Name="18.png" />
+                <Image Name="19.png" />
+                <Image Name="20.png" />
+                <Image Name="21.png" />
+                <Image Name="22.png" />
+                <Image Name="23.png" />
+                <Image Name="24.png" />
+                <Image Name="28.png" />
+                <Image Name="32.png" />
+                <Image Name="33.png" />
+                <Image Name="34.png" />
+                <Image Name="35.png" />
+              </Folder>
+              <Folder Name="plist">
+                <PlistImageFolder Image="1.png" PListFile="1.plist" Name=".1_PList.Dir">
+                  <PlistImageFile Name="gold_01.png" Key="gold_01.png" />
+                  <PlistImageFile Name="gold_02.png" Key="gold_02.png" />
+                  <PlistImageFile Name="gold_03.png" Key="gold_03.png" />
+                  <PlistImageFile Name="gold_04.png" Key="gold_04.png" />
+                  <PlistImageFile Name="gold_05.png" Key="gold_05.png" />
+                  <PlistImageFile Name="gold_06.png" Key="gold_06.png" />
+                </PlistImageFolder>
+                <PlistImageFolder Image="2.png" PListFile="2.plist" Name=".2_PList.Dir">
+                  <PlistImageFile Name="qipao1_01.png" Key="qipao1_01.png" />
+                  <PlistImageFile Name="qipao1_02.png" Key="qipao1_02.png" />
+                  <PlistImageFile Name="qipao1_03.png" Key="qipao1_03.png" />
+                  <PlistImageFile Name="qipao1_04.png" Key="qipao1_04.png" />
+                  <PlistImageFile Name="qipao1_05.png" Key="qipao1_05.png" />
+                  <PlistImageFile Name="qipao1_06.png" Key="qipao1_06.png" />
+                  <PlistImageFile Name="qipao1_07.png" Key="qipao1_07.png" />
+                  <PlistImageFile Name="qipao1_08.png" Key="qipao1_08.png" />
+                  <PlistImageFile Name="qipao1_09.png" Key="qipao1_09.png" />
+                  <PlistImageFile Name="qipao1_10.png" Key="qipao1_10.png" />
+                  <PlistImageFile Name="qipao1_11.png" Key="qipao1_11.png" />
+                  <PlistImageFile Name="qipao1_12.png" Key="qipao1_12.png" />
+                  <PlistImageFile Name="qipao1_13.png" Key="qipao1_13.png" />
+                  <PlistImageFile Name="qipao1_14.png" Key="qipao1_14.png" />
+                  <PlistImageFile Name="qipao1_15.png" Key="qipao1_15.png" />
+                  <PlistImageFile Name="qipao1_16.png" Key="qipao1_16.png" />
+                  <PlistImageFile Name="qipao1_17.png" Key="qipao1_17.png" />
+                  <PlistImageFile Name="qipao1_18.png" Key="qipao1_18.png" />
+                </PlistImageFolder>
+                <PlistImageFolder Image="3.png" PListFile="3.plist" Name=".3_PList.Dir">
+                  <PlistImageFile Name="qipao2_01.png" Key="qipao2_01.png" />
+                  <PlistImageFile Name="qipao2_02.png" Key="qipao2_02.png" />
+                  <PlistImageFile Name="qipao2_03.png" Key="qipao2_03.png" />
+                  <PlistImageFile Name="qipao2_04.png" Key="qipao2_04.png" />
+                  <PlistImageFile Name="qipao2_05.png" Key="qipao2_05.png" />
+                  <PlistImageFile Name="qipao2_06.png" Key="qipao2_06.png" />
+                  <PlistImageFile Name="qipao2_07.png" Key="qipao2_07.png" />
+                  <PlistImageFile Name="qipao2_08.png" Key="qipao2_08.png" />
+                  <PlistImageFile Name="qipao2_09.png" Key="qipao2_09.png" />
+                  <PlistImageFile Name="qipao2_10.png" Key="qipao2_10.png" />
+                  <PlistImageFile Name="qipao2_11.png" Key="qipao2_11.png" />
+                  <PlistImageFile Name="qipao2_12.png" Key="qipao2_12.png" />
+                  <PlistImageFile Name="qipao2_13.png" Key="qipao2_13.png" />
+                  <PlistImageFile Name="qipao2_14.png" Key="qipao2_14.png" />
+                  <PlistImageFile Name="qipao2_15.png" Key="qipao2_15.png" />
+                  <PlistImageFile Name="qipao2_16.png" Key="qipao2_16.png" />
+                  <PlistImageFile Name="qipao2_17.png" Key="qipao2_17.png" />
+                  <PlistImageFile Name="qipao2_18.png" Key="qipao2_18.png" />
+                </PlistImageFolder>
+                <PlistImageFolder Image="4.png" PListFile="4.plist" Name=".4_PList.Dir">
+                  <PlistImageFile Name="jizhong01.png" Key="jizhong01.png" />
+                  <PlistImageFile Name="jizhong02.png" Key="jizhong02.png" />
+                  <PlistImageFile Name="jizhong03.png" Key="jizhong03.png" />
+                  <PlistImageFile Name="jizhong04.png" Key="jizhong04.png" />
+                  <PlistImageFile Name="jizhong05.png" Key="jizhong05.png" />
+                  <PlistImageFile Name="jizhong06.png" Key="jizhong06.png" />
+                  <PlistImageFile Name="jizhong07.png" Key="jizhong07.png" />
+                  <PlistImageFile Name="jizhong08.png" Key="jizhong08.png" />
+                  <PlistImageFile Name="jizhong09.png" Key="jizhong09.png" />
+                  <PlistImageFile Name="jizhong10.png" Key="jizhong10.png" />
+                  <PlistImageFile Name="jizhong11.png" Key="jizhong11.png" />
+                  <PlistImageFile Name="jizhong12.png" Key="jizhong12.png" />
+                  <PlistImageFile Name="jizhong13.png" Key="jizhong13.png" />
+                  <PlistImageFile Name="jizhong14.png" Key="jizhong14.png" />
+                  <PlistImageFile Name="jizhong15.png" Key="jizhong15.png" />
+                  <PlistImageFile Name="jizhong16.png" Key="jizhong16.png" />
+                  <PlistImageFile Name="jizhong17.png" Key="jizhong17.png" />
+                  <PlistImageFile Name="jizhong18.png" Key="jizhong18.png" />
+                  <PlistImageFile Name="jizhong19.png" Key="jizhong19.png" />
+                  <PlistImageFile Name="jizhong20.png" Key="jizhong20.png" />
+                </PlistImageFolder>
+                <PlistImageFolder Image="5.png" PListFile="5.plist" Name=".5_PList.Dir">
+                  <PlistImageFile Name="daguaibaozha_01.png" Key="daguaibaozha_01.png" />
+                  <PlistImageFile Name="daguaibaozha_02.png" Key="daguaibaozha_02.png" />
+                  <PlistImageFile Name="daguaibaozha_03.png" Key="daguaibaozha_03.png" />
+                  <PlistImageFile Name="daguaibaozha_04.png" Key="daguaibaozha_04.png" />
+                  <PlistImageFile Name="daguaibaozha_05.png" Key="daguaibaozha_05.png" />
+                  <PlistImageFile Name="daguaibaozha_06.png" Key="daguaibaozha_06.png" />
+                  <PlistImageFile Name="daguaibaozha_07.png" Key="daguaibaozha_07.png" />
+                  <PlistImageFile Name="daguaibaozha_08.png" Key="daguaibaozha_08.png" />
+                  <PlistImageFile Name="daguaibaozha_09.png" Key="daguaibaozha_09.png" />
+                  <PlistImageFile Name="daguaibaozha_10.png" Key="daguaibaozha_10.png" />
+                  <PlistImageFile Name="daguaibaozha_11.png" Key="daguaibaozha_11.png" />
+                  <PlistImageFile Name="daguaibaozha_12.png" Key="daguaibaozha_12.png" />
+                  <PlistImageFile Name="daguaibaozha_13.png" Key="daguaibaozha_13.png" />
+                  <PlistImageFile Name="daguaibaozha_14.png" Key="daguaibaozha_14.png" />
+                  <PlistImageFile Name="daguaibaozha_15.png" Key="daguaibaozha_15.png" />
+                  <PlistImageFile Name="daguaibaozha_16.png" Key="daguaibaozha_16.png" />
+                  <PlistImageFile Name="daguaibaozha_17.png" Key="daguaibaozha_17.png" />
+                  <PlistImageFile Name="daguaibaozha_18.png" Key="daguaibaozha_18.png" />
+                  <PlistImageFile Name="daguaibaozha_19.png" Key="daguaibaozha_19.png" />
+                  <PlistImageFile Name="daguaibaozha_20.png" Key="daguaibaozha_20.png" />
+                  <PlistImageFile Name="daguaibaozha_21.png" Key="daguaibaozha_21.png" />
+                  <PlistImageFile Name="daguaibaozha_22.png" Key="daguaibaozha_22.png" />
+                  <PlistImageFile Name="daguaibaozha_23.png" Key="daguaibaozha_23.png" />
+                  <PlistImageFile Name="daguaibaozha_24.png" Key="daguaibaozha_24.png" />
+                  <PlistImageFile Name="daguaibaozha_25.png" Key="daguaibaozha_25.png" />
+                  <PlistImageFile Name="daguaibaozha_26.png" Key="daguaibaozha_26.png" />
+                </PlistImageFolder>
+                <PlistImageFolder Image="6.png" PListFile="6.plist" Name=".6_PList.Dir">
+                  <PlistImageFile Name="guochang_01.png" Key="guochang_01.png" />
+                  <PlistImageFile Name="guochang_02.png" Key="guochang_02.png" />
+                  <PlistImageFile Name="guochang_03.png" Key="guochang_03.png" />
+                  <PlistImageFile Name="guochang_04.png" Key="guochang_04.png" />
+                  <PlistImageFile Name="guochang_05.png" Key="guochang_05.png" />
+                  <PlistImageFile Name="guochang_06.png" Key="guochang_06.png" />
+                  <PlistImageFile Name="guochang_07.png" Key="guochang_07.png" />
+                  <PlistImageFile Name="guochang_08.png" Key="guochang_08.png" />
+                  <PlistImageFile Name="guochang_09.png" Key="guochang_09.png" />
+                  <PlistImageFile Name="guochang_10.png" Key="guochang_10.png" />
+                  <PlistImageFile Name="guochang_11.png" Key="guochang_11.png" />
+                  <PlistImageFile Name="guochang_12.png" Key="guochang_12.png" />
+                  <PlistImageFile Name="guochang_13.png" Key="guochang_13.png" />
+                  <PlistImageFile Name="guochang_14.png" Key="guochang_14.png" />
+                  <PlistImageFile Name="guochang_15.png" Key="guochang_15.png" />
+                  <PlistImageFile Name="guochang_16.png" Key="guochang_16.png" />
+                  <PlistImageFile Name="guochang_17.png" Key="guochang_17.png" />
+                  <PlistImageFile Name="guochang_18.png" Key="guochang_18.png" />
+                  <PlistImageFile Name="guochang_19.png" Key="guochang_19.png" />
+                  <PlistImageFile Name="guochang_20.png" Key="guochang_20.png" />
+                </PlistImageFolder>
+              </Folder>
+              <Folder Name="scene">
+                <Image Name="game_bg_1.jpg" />
+                <Image Name="game_bg_2.jpg" />
+                <Image Name="game_bg_3.jpg" />
+                <Image Name="game_bg_4.jpg" />
+              </Folder>
+              <Folder Name="sound">
+                <Folder Name="speak">
+                  <Audio Name="11_1.mp3" />
+                  <Audio Name="11_2.mp3" />
+                  <Audio Name="11_3.mp3" />
+                  <Audio Name="11_4.mp3" />
+                  <Audio Name="11_5.mp3" />
+                  <Audio Name="11_6.mp3" />
+                  <Audio Name="11_7.mp3" />
+                  <Audio Name="11_boss1.mp3" />
+                  <Audio Name="22_1.mp3" />
+                  <Audio Name="22_2.mp3" />
+                  <Audio Name="22_3.mp3" />
+                  <Audio Name="22_4.mp3" />
+                  <Audio Name="22_5.mp3" />
+                  <Audio Name="22_6.mp3" />
+                  <Audio Name="22_boss1.mp3" />
+                  <Audio Name="22_boss2.mp3" />
+                </Folder>
+                <Audio Name="bgm_scene0.mp3" />
+                <Audio Name="bgm_scene1.mp3" />
+                <Audio Name="new_coin.mp3" />
+                <Audio Name="new_coins.mp3" />
+                <Audio Name="sfx_button.mp3" />
+                <Audio Name="sfx_collect.mp3" />
+                <Audio Name="sfx_goldweapon.mp3" />
+                <Audio Name="sfx_net.mp3" />
+              </Folder>
+              <Image Name="btn_1.png" />
+              <Image Name="btn_11.png" />
+              <Image Name="btn_12.png" />
+              <Image Name="btn_13.png" />
+              <Image Name="btn_14.png" />
+              <Image Name="btn_15.png" />
+              <Image Name="btn_2.png" />
+              <Image Name="btn_24.png" />
+              <Image Name="btn_3.png" />
+              <Image Name="btn_4.png" />
+              <Image Name="btn_5.png" />
+              <Image Name="btn_6.png" />
+              <Image Name="btn_7.png" />
+              <Image Name="btn_8.png" />
+              <Image Name="btn_pao.png" />
+              <Image Name="font_1.png" />
+              <Image Name="font_2.png" />
+              <Image Name="font_3.png" />
+              <Image Name="font_4.png" />
+              <Image Name="green_round_group.png" />
+              <Image Name="img_10.png" />
+              <Image Name="img_11.png" />
+              <Image Name="img_13.png" />
+              <Image Name="img_14.png" />
+              <Image Name="img_15.png" />
+              <Image Name="img_16.png" />
+              <Image Name="img_17.png" />
+              <Image Name="img_2.png" />
+              <Image Name="img_20.png" />
+              <Image Name="img_21.png" />
+              <Image Name="img_4.png" />
+              <Image Name="img_5.png" />
+              <Image Name="img_6.png" />
+              <Image Name="img_7.png" />
+              <Image Name="img_8.png" />
+              <Image Name="img_9.png" />
+              <Image Name="jb_sz1_yuan.png" />
+              <Image Name="myip.png" />
+              <Image Name="number.png" />
+              <Image Name="sz_huang_1.png" />
+              <Image Name="wait_frame_0.png" />
+              <Image Name="wait_frame_2.png" />
+              <File Name="waiting.csb" />
+              <Image Name="xiuyuqi.png" />
+              <Image Name="yellow_circle_02.png" />
+            </Folder>
+            <Folder Name="game">
+              <Folder Name="cannon">
+                <Folder Name="cannon">
+                  <Folder Name="g0">
+                    <Image Name="b_1.png" />
+                    <Image Name="b_2.png" />
+                    <Image Name="t_1.png" />
+                    <Image Name="t_2.png" />
+                  </Folder>
+                  <Folder Name="g1">
+                    <Image Name="b_2.png" />
+                    <Image Name="t_2.png" />
+                  </Folder>
+                  <Folder Name="g2">
+                    <Image Name="b_2.png" />
+                    <Image Name="t_2.png" />
+                  </Folder>
+                  <Folder Name="g3">
+                    <Image Name="b_2.png" />
+                    <Image Name="t_2.png" />
+                  </Folder>
+                  <Folder Name="g4">
+                    <Image Name="b_2.png" />
+                    <Image Name="t_2.png" />
+                  </Folder>
+                  <Folder Name="g5">
+                    <Image Name="b_2.png" />
+                    <Image Name="t_2.png" />
+                  </Folder>
+                  <Folder Name="g6">
+                    <Image Name="b_2.png" />
+                    <Image Name="t_2.png" />
+                  </Folder>
+                  <Image Name="pao_ditai.png" />
+                  <Image Name="sp_fire_1_1.png" />
+                  <Image Name="sp_fire_1_2.png" />
+                  <Image Name="sp_fish_net_00.png" />
+                </Folder>
+                <Folder Name="cannonselect">
+                  <Image Name="sp_vip0.png" />
+                  <Image Name="sp_vip1.png" />
+                  <Image Name="sp_vip2.png" />
+                  <Image Name="sp_vip3.png" />
+                  <Image Name="sp_vip4.png" />
+                  <Image Name="sp_vip5.png" />
+                  <Image Name="sp_vip6.png" />
+                </Folder>
+                <Folder Name="g0">
+                  <Image Name="b_1.png" />
+                  <Image Name="b_2.png" />
+                  <Image Name="t_1.png" />
+                  <Image Name="t_2.png" />
+                </Folder>
+                <Folder Name="g1">
+                  <Image Name="b_1.png" />
+                  <Image Name="b_2.png" />
+                  <Image Name="t_1.png" />
+                  <Image Name="t_2.png" />
+                </Folder>
+                <Folder Name="g2">
+                  <Image Name="b_1.png" />
+                  <Image Name="b_2.png" />
+                  <Image Name="t_1.png" />
+                  <Image Name="t_2.png" />
+                </Folder>
+                <Folder Name="g3">
+                  <Image Name="b_1.png" />
+                  <Image Name="b_2.png" />
+                  <Image Name="t_1.png" />
+                  <Image Name="t_2.png" />
+                </Folder>
+                <Folder Name="g4">
+                  <Image Name="b_1.png" />
+                  <Image Name="b_2.png" />
+                  <Image Name="t_1.png" />
+                  <Image Name="t_2.png" />
+                </Folder>
+                <Folder Name="g5">
+                  <Image Name="b_1.png" />
+                  <Image Name="b_2.png" />
+                  <Image Name="t_1.png" />
+                  <Image Name="t_2.png" />
+                </Folder>
+                <Folder Name="g6">
+                  <Image Name="b_1.png" />
+                  <Image Name="b_2.png" />
+                  <Image Name="t_1.png" />
+                  <Image Name="t_2.png" />
+                </Folder>
+                <Image Name="bt_a_0.png" />
+                <Image Name="bt_a_1.png" />
+                <Image Name="bt_close_normal.png" />
+                <Image Name="bt_m_0.png" />
+                <Image Name="bt_m_1.png" />
+                <Image Name="bt_used.png" />
+                <Image Name="pao_ditai.png" />
+                <Image Name="sp_fire_0_1.png" />
+                <Image Name="sp_fire_0_2.png" />
+                <Image Name="sp_fire_1_1.png" />
+                <Image Name="sp_fire_1_2.png" />
+                <Image Name="sp_fire_2_1.png" />
+                <Image Name="sp_fire_2_2.png" />
+                <Image Name="sp_fire_3.png" />
+                <Image Name="sp_fish_net_00.png" />
+                <Image Name="sp_fish_net_01.png" />
+                <Image Name="sp_fish_net_02.png" />
+                <Image Name="sp_fish_net_03.png" />
+                <Image Name="sp_fish_net_04.png" />
+                <Image Name="sp_fish_net_05.png" />
+                <Image Name="sp_fish_net_06.png" />
+                <Image Name="sp_fish_net_big.png" />
+                <Image Name="sp_frame_01.png" />
+                <Image Name="sp_frame_02.png" />
+                <Image Name="sp_frame_04.png" />
+                <Image Name="sp_frame_05.png" />
+                <Image Name="sp_frame_07.png" />
+                <Image Name="sp_lock.png" />
+                <Image Name="sp_title.png" />
+                <Image Name="sp_title_frame.png" />
+              </Folder>
+              <Folder Name="cannonselect">
+                <Image Name="sp_vip0.png" />
+                <Image Name="sp_vip1.png" />
+                <Image Name="sp_vip2.png" />
+                <Image Name="sp_vip3.png" />
+                <Image Name="sp_vip4.png" />
+                <Image Name="sp_vip5.png" />
+                <Image Name="sp_vip6.png" />
+              </Folder>
+              <Image Name="bt_close_normal.png" />
+              <Image Name="bt_lock.png" />
+              <Image Name="bt_used.png" />
+              <Image Name="bt_useing.png" />
+              <File Name="CannonSelectLayer.csb" />
+              <Image Name="fishui_sp_frame_05.png" />
+              <Image Name="sp_frame_01.png" />
+              <Image Name="sp_frame_02.png" />
+              <Image Name="sp_frame_03.png" />
+              <Image Name="sp_frame_04.png" />
+              <Image Name="sp_frame_05.png" />
+              <Image Name="sp_frame_07.png" />
+              <Image Name="sp_lock.png" />
+              <Image Name="sp_title.png" />
+              <Image Name="sp_title_frame.png" />
+            </Folder>
+            <Folder Name="loading">
+              <Image Name="28_01.png" />
+              <Image Name="28_02.png" />
+              <Image Name="28_03.png" />
+              <Image Name="28_04.png" />
+              <Image Name="28_05.png" />
+              <Image Name="28_06.png" />
+              <Image Name="28_07.png" />
+              <Image Name="28_08.png" />
+              <Image Name="28_09.png" />
+              <Image Name="28_10.png" />
+              <Image Name="28_11.png" />
+              <Image Name="28_12.png" />
+              <Image Name="dian.png" />
+              <Image Name="frame.png" />
+              <File Name="Layer.csb" />
+              <Image Name="light.png" />
+              <Image Name="LOAD.png" />
+              <File Name="loading.csb" />
+              <Image Name="loading.png" />
+              <File Name="paopao.csb" />
+              <Image Name="paopao.png" />
+              <File Name="Skeleton.csb" />
+              <File Name="Skeleton_0.csb" />
+              <Image Name="star_1.png" />
+              <Image Name="star_2.png" />
+              <Image Name="star_3.png" />
+              <File Name="zhangyu.csb" />
+            </Folder>
+            <Folder Name="number">
+              <Image Name="number_self.png" />
+              <Image Name="number_silver.png" />
+            </Folder>
+            <Folder Name="roomlist">
+              <Image Name="sp_adorn_1_1.png" />
+              <Image Name="sp_adorn_1_2.png" />
+              <Image Name="sp_adorn_1_3.png" />
+              <Image Name="sp_icon_1.png" />
+              <Image Name="sp_icon_2.png" />
+              <Image Name="sp_icon_3.png" />
+              <Image Name="sp_icon_4.png" />
+            </Folder>
+            <Folder Name="skill_aut">
+              <File Name="Skeleton.csb" />
+              <Image Name="skill1_effect_1.png" />
+              <Image Name="skill1_effect_10.png" />
+              <Image Name="skill1_effect_11.png" />
+              <Image Name="skill1_effect_12.png" />
+              <Image Name="skill1_effect_13.png" />
+              <Image Name="skill1_effect_14.png" />
+              <Image Name="skill1_effect_15.png" />
+              <Image Name="skill1_effect_16.png" />
+              <Image Name="skill1_effect_17.png" />
+              <Image Name="skill1_effect_2.png" />
+              <Image Name="skill1_effect_3.png" />
+              <Image Name="skill1_effect_4.png" />
+              <Image Name="skill1_effect_5.png" />
+              <Image Name="skill1_effect_6.png" />
+              <Image Name="skill1_effect_7.png" />
+              <Image Name="skill1_effect_8.png" />
+              <Image Name="skill1_effect_9.png" />
+            </Folder>
+            <Folder Name="split_bomb_light_frame8">
+              <Image Name="bomb_light_0.png" />
+              <Image Name="bomb_light_1.png" />
+              <Image Name="bomb_light_2.png" />
+              <Image Name="bomb_light_3.png" />
+              <Image Name="bomb_light_4.png" />
+            </Folder>
+            <Folder Name="split_boss_round_frame">
+              <File Name="boss_round.csb" />
+              <Image Name="boss_round_frame1.png" />
+              <Image Name="boss_round_frame10.png" />
+              <Image Name="boss_round_frame11.png" />
+              <Image Name="boss_round_frame12.png" />
+              <Image Name="boss_round_frame2.png" />
+              <Image Name="boss_round_frame3.png" />
+              <Image Name="boss_round_frame4.png" />
+              <Image Name="boss_round_frame5.png" />
+              <Image Name="boss_round_frame6.png" />
+              <Image Name="boss_round_frame7.png" />
+              <Image Name="boss_round_frame8.png" />
+              <Image Name="boss_round_frame9.png" />
+              <File Name="Node.csb" />
+            </Folder>
+            <Folder Name="split_plane_smoke">
+              <Image Name="kongbai.png" />
+              <Image Name="plane_smoke1.png" />
+              <Image Name="plane_smoke10.png" />
+              <Image Name="plane_smoke11.png" />
+              <Image Name="plane_smoke2.png" />
+              <Image Name="plane_smoke3.png" />
+              <Image Name="plane_smoke4.png" />
+              <Image Name="plane_smoke5.png" />
+              <Image Name="plane_smoke6.png" />
+              <Image Name="plane_smoke7.png" />
+              <Image Name="plane_smoke8.png" />
+              <Image Name="plane_smoke9.png" />
+            </Folder>
+            <Folder Name="split_ring_frame">
+              <File Name="0.csb" />
+              <File Name="0_1.csb" />
+              <File Name="1_0.csb" />
+              <File Name="1_1.csb" />
+              <File Name="2_0.csb" />
+              <File Name="2_1.csb" />
+              <File Name="3_0.csb" />
+              <File Name="3_1.csb" />
+              <File Name="4_0.csb" />
+              <Image Name="combination_oneCatch.png" />
+              <File Name="fish31.csb" />
+              <File Name="fish32.csb" />
+              <File Name="fish33.csb" />
+              <File Name="fish34.csb" />
+              <File Name="fish35.csb" />
+              <Image Name="ring0_0.png" />
+              <Image Name="ring0_1.png" />
+              <Image Name="ring1_0.png" />
+              <Image Name="ring1_1.png" />
+              <Image Name="ring2_0.png" />
+              <Image Name="ring2_1.png" />
+              <Image Name="ring3_0.png" />
+              <Image Name="ring3_1.png" />
+            </Folder>
+            <Folder Name="win_gold">
+              <Image Name="bombEffect_bg.png" />
+              <Image Name="bombEffect_light.png" />
+              <File Name="no_wingold.csb" />
+              <File Name="wingold.csb" />
+            </Folder>
+            <File Name="filemd5List.json" />
+            <Image Name="map_logo_ocean_001-i5-hd.png" />
+            <Image Name="numberlabel_bomb.png" />
+            <Image Name="pt.jpg" />
+          </Folder>
+          <Image Name="background.jpg" />
+          <Image Name="loading_circle.png" />
+          <Image Name="sp_adorn_00.png" />
+          <Image Name="sp_adorn_01.png" />
+          <Image Name="sp_adorn_02.png" />
+          <Image Name="sp_adorn_03.png" />
+          <Image Name="sp_adorn_04.png" />
+          <Image Name="sp_adorn_05.png" />
+          <Image Name="sp_loading_bar.png" />
+          <Image Name="sp_loading_bg.png" />
+          <Image Name="sp_logo.png" />
+          <File Name="WelcomeScene.csb" />
+        </Folder>
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

@@ -1,0 +1,33 @@
+﻿  AppEvent.cpp
+  AppLang.cpp
+  PlayerMenuServiceProtocol.cpp
+  PlayerProtocol.cpp
+  PlayerTaskServiceProtocol.cpp
+  ProjectConfig.cpp
+  SimulatorConfig.cpp
+  CCHTTPRequest.cpp
+  PlayerEditBoxServiceWin.cpp
+  PlayerFileDialogServiceWin.cpp
+  PlayerMenuServiceWin.cpp
+  PlayerMessageBoxServiceWin.cpp
+  PlayerTaskServiceWin.cpp
+  PlayerWin.cpp
+  ConfigParser.cpp
+  ConnectWaitLayer.cpp
+C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\include\Shlobj.h(1151): warning C4091: “typedef ”: 没有声明变量时忽略“tagGPFIDL_FLAGS”的左侧 (编译源文件 ..\lib\platform\win32\PlayerFileDialogServiceWin.cpp)
+..\lib\runtime\ConfigParser.cpp(110): warning C4018: “<”: 有符号/无符号不匹配
+  ConsoleCommand.cpp
+  FileServer.cpp
+  Runtime.cpp
+  RuntimeCCSImpl.cpp
+  RuntimeProtocol.cpp
+  VisibleRect.cpp
+  Runtime_win32.cpp
+..\lib\runtime\FileServer.cpp(144): warning C4477: “fprintf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 2 拥有了类型“WCHAR *”
+  ..\lib\runtime\FileServer.cpp(144): note: 请考虑在格式字符串中使用“%ls”
+  ..\lib\runtime\FileServer.cpp(144): note: 请考虑在格式字符串中使用“%lls”
+  ..\lib\runtime\FileServer.cpp(144): note: 请考虑在格式字符串中使用“%Ls”
+  ..\lib\runtime\FileServer.cpp(144): note: 请考虑在格式字符串中使用“%ws”
+atomicops_internals_x86_gcc.obj : warning LNK4221: 此对象文件未定义任何之前未定义的公共符号，因此任何耗用此库的链接操作都不会使用此文件
+PlayerUtils.obj : warning LNK4221: 此对象文件未定义任何之前未定义的公共符号，因此任何耗用此库的链接操作都不会使用此文件
+  libsimulator.vcxproj -> G:\Test\Vs13\OpenGL\Worrk\Client\Main\Developing\frameworks\runtime-src\proj.win32\Debug.win32\libsimulator.lib
