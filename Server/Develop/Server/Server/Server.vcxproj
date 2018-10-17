@@ -71,6 +71,7 @@
     <ClCompile Include="..\DBServer\JHTimerSystem.cpp" />
     <ClCompile Include="..\DBServer\NetSocket.cpp" />
     <ClCompile Include="..\DBServer\Ref.cpp" />
+    <ClCompile Include="..\DBServer\SJHMemoryPool.cpp" />
     <ClCompile Include="..\DBServer\SocketManage.cpp" />
     <ClCompile Include="..\DBServer\ThreadPoolManage.cpp" />
     <ClCompile Include="..\Lua\lapi.c" />
@@ -117,6 +118,7 @@
     <ClInclude Include="..\DBServer\JHTimerSystem.h" />
     <ClInclude Include="..\DBServer\NetSocket.h" />
     <ClInclude Include="..\DBServer\Ref.h" />
+    <ClInclude Include="..\DBServer\SJHMemoryPool.h" />
     <ClInclude Include="..\DBServer\SJHType.h" />
     <ClInclude Include="..\DBServer\SocketManage.h" />
     <ClInclude Include="..\DBServer\ThreadPoolManage.h" />

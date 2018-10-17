@@ -125,6 +125,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Test2Lua.h" />
     <ClInclude Include="ThreadPoolManage.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Lua\lapi.c" />
@@ -177,6 +178,7 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Test2Lua.cpp" />
     <ClCompile Include="ThreadPoolManage.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Lua\Makefile" />

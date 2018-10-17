@@ -12,6 +12,7 @@
 #include "RegisterLuaDefine.h"
 #include "LuaInterFace.h"
 #include "LuaTaskEvent.h"
+#include <Windows.h>
 int TestDB(){
 	auto dbtasklist = SJH::SJH_DB_SQL_DBTaskEvent::getInstance();
 	std::string tempstr = "";
@@ -74,12 +75,12 @@ int main(int argc, TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
 	//设置主循环池，用来存放回调lua的事件
-	SJH::LuaQueue *LQ = SJH::LuaQueue::getInstance();
-	TestNewLua();
-	while (true){
-		LQ->update();
-		JHSleep(20);
-	}
+	//SJH::LuaQueue *LQ = SJH::LuaQueue::getInstance();
+	//TestNewLua();
+	//while (true){
+	//	LQ->update();
+	//	JHSleep(20);
+	//}
 	OnExit(0);
 	return 0;
 }

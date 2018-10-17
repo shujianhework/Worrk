@@ -150,6 +150,9 @@
     <ClCompile Include="..\Lua\ldblib.c">
       <Filter>Lua</Filter>
     </ClCompile>
+    <ClCompile Include="..\DBServer\SJHMemoryPool.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DBServer\DBOper.h">
@@ -256,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="..\Lua\lctype.h">
       <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DBServer\SJHMemoryPool.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
