@@ -1,5 +1,6 @@
 #pragma once
 #include "Ref.h"
+#include "SJHMemoryPool.h"
 #include <winsock.h>
 #include <functional>
 #include <tuple>

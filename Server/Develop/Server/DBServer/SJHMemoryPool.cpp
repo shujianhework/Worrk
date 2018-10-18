@@ -7,6 +7,10 @@ SELF* SELF::instance = NULL;
 #define SEMISTATICMEMORYSIZE STATICMEMORYSIZE*5
 #define DYNAMICMEMORYSIZE	 SEMISTATICMEMORYSIZE*20
 #define ALLMEMORYSIZE (STATICMEMORYSIZE+SEMISTATICMEMORYSIZE+DYNAMICMEMORYSIZE)
+static int dynamicTemps[2000] = {0};
+static int compar(const void *a, const void *b){
+	return *(int*)a > *(int*)b ? 1 : 0;
+}
 SELF::SELF() :Memory(new char[ALLMEMORYSIZE]){
 	mstatic.Begin = Memory;
 	mstatic.Current = mstatic.Begin;
@@ -22,17 +26,40 @@ SELF::SELF() :Memory(new char[ALLMEMORYSIZE]){
 
 }
 
-bool SELF::Delete(void *&p){
+bool SELF::Delete(void *p){
 	if (p == NULL)
 		return false;
 	const char* cp = (char*)p;
-	p = NULL;
 	if (Memory < cp || mdynamic.End > cp){//这不是我的池子里面的
 		delete p;
 		return true;
 	}
 	if (mdynamic.Begin >= cp)//动态内存池的
 	{
+		int *plen = (int*)(cp - sizeof(int));
+		if (cp + *plen > this->mdynamic.Current){
+			assert(false, "检测到内存错误，请查看地址" + tostring(*(int*)p) + "或者他前面的内存是否越界赋值");
+			//想法子停止运行
+			return false;
+		}
+		std::mutex mt;
+		mt.lock();
+		if (cp + *plen == this->mdynamic.Current)//当前最后一个buffer,直接移动使用量
+		{
+			this->mdynamic.Current = (char*)plen;
+		}
+		else{
+			//把这一块放入废弃list里面
+			int nextAddr = (int)(*plen + sizeof(int) + plen);
+			if (this->RecoveryMdynamic.find(nextAddr) != RecoveryMdynamic.end()){//合并后一个buffer
+				int len = *plen + sizeof(int) + RecoveryMdynamic[nextAddr];
+				this->RecoveryMdynamic.erase(nextAddr);
+				RecoveryMdynamic.insert(std::make_pair((int)plen, len));
+			}
+			else
+				this->RecoveryMdynamic.insert(std::make_pair((int)plen, *plen + sizeof(int)));
+		}
+		mt.unlock();
 		return true;
 	}
 	if (msemistatic.Begin >= cp){//半常驻内存中的
@@ -66,6 +93,58 @@ bool SELF::Delete(void *&p){
 	return true;
 
 }
+void SELF::updateDynamicMem(){
+	std::mutex mt;
+	mt.lock();
+	const int maxtempindex = sizeof(dynamicTemps) / sizeof(dynamicTemps[0]);
+	int i = 0;
+	memset(dynamicTemps, 0, sizeof(dynamicTemps));
+	for each (auto v in RecoveryMdynamic)
+	{
+		if (i < maxtempindex)
+			dynamicTemps[i] = v.first;
+	}
+	int len = RecoveryMdynamic.size();
+	if (maxtempindex < len)
+		len = maxtempindex;
+	qsort(dynamicTemps, len, sizeof(int), compar);
+	i = 0;
+	std::vector<std::tuple<int, int>> ZhengHe;
+	int StartPtr = 0;
+	int FirstLenPtr = 0;
+	int Len = 0;
+	while (i < len && dynamicTemps[i] > 0){
+		StartPtr = i;
+		int nextptr = dynamicTemps[i];
+		Len = 0;
+		for (int j = i; j < len; j++)
+		{
+			if (nextptr == dynamicTemps[j]){
+				int *ptr = (int*)(mdynamic.Begin + dynamicTemps[j]) - 1;
+				nextptr = (int)(ptr + *ptr + 1);
+				Len += (*ptr + 4);
+			}
+			else{
+				if ((j - i) > 1){
+					RecoveryMdynamic[dynamicTemps[i]] = Len;
+					ZhengHe.push_back(std::tuple<int, int>(i + 1, j));
+					if (FirstLenPtr == 0)
+						FirstLenPtr = dynamicTemps[i];
+				}
+				i = j;
+				break;
+			}
+		}
+	}
+	for each (auto var in RecoveryMdynamic){
+		if (var.first < var.second){
+			for (int j = var.first; j <= var.second; j++){
+				RecoveryMdynamic.erase(dynamicTemps[j]);
+			}
+		}
+	}
+	mt.unlock();
+}
 //get instance 对应内存 析构时候释放
 void *SELF::getCodeMemory(int len){
 	if ((this->mstatic.Current + len) <= this->mstatic.End){
@@ -89,6 +168,7 @@ void *SELF::getDynamicMemory(int len){
 	const int srclen = len;
 	const int intsize = sizeof(int);
 	len += intsize;
+	const int maxtempindex = sizeof(dynamicTemps) / sizeof(dynamicTemps[0]);
 	if ((this->mdynamic.Current + len) <= this->mdynamic.End){
 		std::mutex mt;
 		mt.lock();
@@ -101,6 +181,8 @@ void *SELF::getDynamicMemory(int len){
 	{
 		std::mutex mt;
 		mt.lock();
+		
+		int i = 0;
 		for each (auto var in this->RecoveryMdynamic)
 		{
 			if (var.second >= len){
@@ -114,9 +196,27 @@ void *SELF::getDynamicMemory(int len){
 				break;
 			}
 		}
-		if (ret == NULL && this->RecoveryMdynamic.size() > 1000){
+		if (ret == NULL && this->RecoveryMdynamic.size() > 10){
+			mt.unlock();
+			updateDynamicMem();
+			for each (auto v in RecoveryMdynamic)
+			{
+				if (v.second > len){
+					int key = v.first;
+					int Len = v.second;
+					ret = (char*)key;
+					memcpy((char*)(key - 4), &srclen, 4);
+					RecoveryMdynamic.erase(key);
+					key += (4+len);
+					Len -= (len + 4);
+					memcpy((char*)(key - 4), &Len, 4);
+					RecoveryMdynamic.insert(std::make_pair(key, Len));
+				}
+			}
+			mt.lock();
 		}
-		if (ret == NULL){
+		if (ret == NULL){//实在找不到内存后 重新new 一块
+			ret = new char[len];
 		}
 		mt.unlock();
 	}

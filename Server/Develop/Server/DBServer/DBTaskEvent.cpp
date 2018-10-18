@@ -42,14 +42,11 @@ SELF::~SELF()
 	} while (true);
 }
 SELF* SELF::getInstance(){
-	__instan = __instan ? __instan : new SELF();
+	__instan = __instan ? __instan : NEW(SELF);
 	return __instan;
 }
 void SELF::Destroy(){
-	if (__instan){
-		delete __instan;
-	}
-	__instan = NULL;
+	DELETE(__instan);
 	SJH::SJH_DB_SQL_MANAGE::Destroy();
 }
 int SELF::GetPushIndex(){
@@ -153,7 +150,7 @@ bool SELF::push(std::string cmd){
 		{
 			(*p)[v.first] = v.second;
 		}
-		LuaTask<bool,strArr*> *LT = new LuaTask<bool,strArr*>(ret,p);
+		LuaTask<bool, strArr*> *LT = new(SJH::SJHMemoryPool::getInstance()->getDynamicMemory(sizeof(LuaTask<bool, strArr*>))) LuaTask<bool, strArr*>(ret, p);//NEW((LuaTask<bool, strArr*>), ret, p);//new LuaTask<bool,strArr*>(ret,p);
 		LT->setback([&](LuaTaskEvent *lte){
 			auto LM = LuaManage::getInstance();
 			auto LLT = (LuaTask<bool, strArr*> *)lte;

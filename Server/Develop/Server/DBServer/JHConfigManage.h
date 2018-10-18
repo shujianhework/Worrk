@@ -1,5 +1,6 @@
 #pragma once
 #include "Ref.h"
+#include "SJHMemoryPool.h"
 namespace SJH{
 	class JHConfigManage :public Ref
 	{
@@ -11,7 +12,7 @@ namespace SJH{
 		std::map<std::string, std::string> datas;
 	public:
 		static JHConfigManage* getInstance(){
-			instan = instan ? instan : new JHConfigManage();
+			instan = instan ? instan : NEWINSTANCEL(JHConfigManage);
 			return instan;
 		}
 		bool initLua(std::string path);
@@ -23,9 +24,7 @@ namespace SJH{
 		void get(std::string key,bool &ret, bool Default = false);
 		void get(std::string key,std::string &ret, std::string Default = "");
 		static void Desotry(){
-			if (instan)
-				delete instan;
-			instan = NULL;
+			DELETE(instan);
 		}
 	};
 #define __config JHConfigManage::getInstance()

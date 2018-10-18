@@ -1,5 +1,6 @@
 #pragma once
 #include "Ref.h"
+#include "SJHMemoryPool.h"
 #include "DBOper.h"
 #include <mutex>
 #include <functional>

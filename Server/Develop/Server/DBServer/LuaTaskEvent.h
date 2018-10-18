@@ -4,6 +4,7 @@
 #include <mutex>
 #include <tuple>
 #include <assert.h>
+#include "SJHMemoryPool.h"
 namespace SJH{
 	class LuaTaskEvent
 	{
@@ -39,10 +40,11 @@ namespace SJH{
 		std::list<LuaTaskEvent*> llte;
 	public:
 		static LuaQueue* getInstance(){
-			instance = instance ? instance : new LuaQueue();
+			instance = instance ? instance : NEWINSTANCEL(LuaQueue);
 			return instance;
 		}
-		static void Destroy(){ if (instance) delete instance; instance = NULL; }
+		static void Destroy(){ DELETE(instance); }
+		
 		void push(LuaTaskEvent* LT){
 			std::mutex mt;
 			mt.lock();
@@ -55,8 +57,7 @@ namespace SJH{
 			for each (auto v in llte)
 			{
 				v->Run();
-				delete v;
-				v = NULL;
+				DELETE(v);
 			}
 			llte.clear();
 			mt.unlock();

@@ -23,13 +23,11 @@ namespace SJH{
 		void OnHeartbeatHandler();
 	public:
 		static SocketManage* getInstance(){
-			instance = instance ? instance : new SocketManage;
+			instance = instance ? instance : NEWINSTANCEL(SocketManage);
 			return instance;
 		}
 		static void Destroy(){
-			if (instance)
-				delete instance;
-			instance = NULL;
+			DELETE(instance);
 		}
 		inline void setAcceptHandler(ACCEPT accepthandler){
 			this->accepthandler = accepthandler;
