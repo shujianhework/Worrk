@@ -1,4 +1,5 @@
 #include "DBOper.h"
+#include "SJHMemoryPool.h"
 #include <algorithm>
 using namespace SJH;
 #define SELF SJH_DB_SQL_MANAGE
@@ -30,7 +31,7 @@ SELF::~SELF()
 }
 SELF * SELF::getInstance(){
 	if (NULL == db){
-		db = new SELF;
+		db = NEW(SELF);
 	}
 	return db;
 }
@@ -42,10 +43,7 @@ void SELF::release(){
 	
 }
 void SELF::Destroy(){
-	if (db){
-		delete db;
-		db = NULL;
-	}
+	DELETE(db);
 }
 bool SELF::init()
 {
@@ -247,9 +245,10 @@ void SELF::GetCurrentDBStoredProcedureInfor()
 		for each (std::string v in arr1)
 		{
 			arr_1.clear();
-			tempstr = "select ORDINAL_POSITION, PARAMETER_MODE,SPECIFIC_SCHEMA,IS_RESULT, PARAMETER_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH from[information_schema].[parameters] where specific_name = '";
+			tempstr = "select NUMERIC_PRECISION,ORDINAL_POSITION, PARAMETER_MODE,SPECIFIC_SCHEMA,IS_RESULT, PARAMETER_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH from[information_schema].[parameters] where specific_name = '";
 			tempstr = tempstr + v + "'";
 			temp_luatablestr = temp_luatablestr + "[\"" + v + "\"] = { ";
+			LogInfo("DBSelect :%s", tempstr.c_str());
 			Rec = DB->Execute(_bstr_t(tempstr.c_str()), NULL, adCmdText);
 			while (!Rec->adoEOF){
 				arr.clear();
@@ -273,6 +272,16 @@ void SELF::GetCurrentDBStoredProcedureInfor()
 				else if (tempstr == "nvarchar")
 				{
 					arr.insert(std::make_pair("Size", tostring(0.5 * (int)Rec->GetCollect("CHARACTER_MAXIMUM_LENGTH"))));
+				}
+				else if (tempstr == "datetime"){
+					arr.insert(std::make_pair("Size", "8"));
+				}
+				else if (tempstr == "bigint"){
+					arr.insert(std::make_pair("Size", "8"));
+				}
+				else if (tempstr == "decimal")
+				{
+					arr.insert(std::make_pair("Size", tostring((int)Rec->GetCollect("NUMERIC_PRECISION"))));
 				}
 				else
 					throw "请添加未知类型"+tempstr+"的处理";

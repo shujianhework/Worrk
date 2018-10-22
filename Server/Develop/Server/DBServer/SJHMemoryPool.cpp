@@ -30,11 +30,11 @@ bool SELF::Delete(void *p){
 	if (p == NULL)
 		return false;
 	const char* cp = (char*)p;
-	if (Memory < cp || mdynamic.End > cp){//这不是我的池子里面的
+	if (Memory > cp || mdynamic.End < cp){//这不是我的池子里面的
 		delete p;
 		return true;
 	}
-	if (mdynamic.Begin >= cp)//动态内存池的
+	if (mdynamic.Begin <= cp)//动态内存池的
 	{
 		int *plen = (int*)(cp - sizeof(int));
 		if (cp + *plen > this->mdynamic.Current){
@@ -62,7 +62,7 @@ bool SELF::Delete(void *p){
 		mt.unlock();
 		return true;
 	}
-	if (msemistatic.Begin >= cp){//半常驻内存中的
+	if (msemistatic.Begin <= cp){//半常驻内存中的
 		int *plen = (int*)(cp - sizeof(int));
 		if (cp + *plen > this->msemistatic.Current){
 			assert(false, "检测到内存错误，请查看地址" + tostring(*(int*)p) + "或者他前面的内存是否越界赋值");
@@ -172,7 +172,7 @@ void *SELF::getDynamicMemory(int len){
 	if ((this->mdynamic.Current + len) <= this->mdynamic.End){
 		std::mutex mt;
 		mt.lock();
-		char *ret = this->mdynamic.Current + intsize;
+		ret = this->mdynamic.Current + intsize;
 		memcpy(this->mdynamic.Current, &srclen, intsize);
 		this->mdynamic.Current += len;
 		mt.unlock();

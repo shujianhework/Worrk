@@ -1,7 +1,9 @@
+#include "Ref.h"
 #include "LuaManage.h"
 #include "RegisterLuaDefine.h"
 #include "JHTimerSystem.h"
 #include "DBTaskEvent.h"
+
 int AutoRegister_Model(lua_State* L);
 
 using namespace std;
@@ -26,5 +28,10 @@ namespace LUANOUSER{
 		bool push(string,MAPSS, string , string);
 		bool push(string, MAPSS);
 		bool push(string,string);
+	};
+	struct Tool{
+	public:
+		Tool(){}
+		void print(int,string);
 	};
 }

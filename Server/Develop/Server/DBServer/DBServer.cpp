@@ -70,17 +70,29 @@ void OnExit(int state){
 	SJH::LuaManage::Destroy();
 	SJH::JHConfigManage::Desotry();
 	SJH::LuaQueue::Destroy();
+	SJH::SJHMemoryPool::Destroy();
 }
+class A
+{
+public:
+	int a;
+	int b;
+	int c;
+private:
+
+};
+
 int main(int argc, TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
 	//设置主循环池，用来存放回调lua的事件
-	//SJH::LuaQueue *LQ = SJH::LuaQueue::getInstance();
-	//TestNewLua();
-	//while (true){
-	//	LQ->update();
-	//	JHSleep(20);
-	//}
+	
+	SJH::LuaQueue *lq = SJH::LuaQueue::getInstance();
+	TestNewLua();
+	while (true){
+		lq->update();
+		JHSleep(20);
+	}
 	OnExit(0);
 	return 0;
 }

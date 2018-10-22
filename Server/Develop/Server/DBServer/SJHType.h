@@ -8,7 +8,7 @@
 #define LogDebug(fmt, ...)	\
 	printf("[DEBUG] [file:%s func:%s line: %d] :\n" fmt"\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 #define LogInfo(fmt, ...)	\
-	printf("[INFO ] [file:%s func:%s line: %d] :\n" fmt"\n", "", __FUNCTION__, __LINE__, ##__VA_ARGS__)
+	printf("[INFO ] [file:%s func:%s line: %d] :\n" fmt"\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 #define LogWarn(fmt, ...)	\
 	printf("[WARN ] [file:%s func:%s line: %d] :\n" fmt"\n", __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 #define LogError(fmt, ...)	\

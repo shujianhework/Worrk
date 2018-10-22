@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Ref.h"
 #include <time.h>
+#include "SJHType.h"
 using namespace SJH;
 Ref::Ref() :_retaincount(0)
 {
@@ -191,4 +192,22 @@ std::string Tool::getHaskKeys(int len){
 	arr[len] = '\0';
 	s = arr;
 	return s;
+}
+void Tool::print(int type, std::string s){
+	switch (type)
+	{
+	case 0:{
+		LogInfo("%s",s.c_str());
+	}break;
+	case 1:{
+		LogWarn("%s",s.c_str());
+	}break;
+	case 2:
+		LogError("%s",s.c_str());
+		break;
+	case 3:
+		LogDebug("%s",s.c_str());
+		break;
+	}
+	return ;
 }

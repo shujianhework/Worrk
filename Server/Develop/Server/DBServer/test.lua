@@ -1,9 +1,20 @@
 local tm = require "testModel"
+require "initLua"
+_G.tool = tm:Tool()
+if _G.tool and _G.tool.print then
+	--[[print = function(...)
+		local s = GetTableString(...)
+		_G.tool:print(0,s)
+	end]]--
+end
 _G.Scheduler = tm:LSchedulerCell()
 Scheduler:setHandlerBack(function (id,dt,...)
 	print(id,dt,...)
 end)
-Scheduler:setTimer(2000,true)
+Scheduler:setTimer(100,true)
+Scheduler:setTimer(100,true)
+Scheduler:setTimer(100,true)
+Scheduler:setTimer(100,true)
 _G.db = tm:SJH_DB_SQL_DBTaskEvent()
 db:Run()
 local l = 0

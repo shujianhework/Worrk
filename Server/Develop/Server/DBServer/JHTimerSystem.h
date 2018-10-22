@@ -3,6 +3,7 @@
 #include <time.h>
 #include <functional>
 #include <map>
+#include "SJHMemoryPool.h"
 namespace SJH{
 	typedef std::function<void(int,int, void*)> TimerBack;
 	class JHTimerSystem:public Ref
@@ -104,13 +105,13 @@ namespace SJH{
 		unsigned int Prve2NowTimeLength();
 	public:
 		static JHTimerSystem *getInstance(){
-			instance = instance ? instance : new JHTimerSystem();
+			if (instance == NULL){
+				instance = NEWINSTANCEL(JHTimerSystem);
+			}
 			return instance;
 		}
 		static void Destroy(){
-			if (instance)
-				delete instance;
-			instance = NULL;
+			DELETE(instance);
 		}
 		//
 		unsigned int setTimer(unsigned int interval, TimerBack tb, bool loop = false, void *p = NULL);

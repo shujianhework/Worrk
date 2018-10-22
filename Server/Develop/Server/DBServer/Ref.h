@@ -49,6 +49,7 @@ namespace SJH{
 		static std::string replaces(std::string src, std::string replace, std::string byreplace);
 		static std::string Trim(std::string src,char c = ' ');
 		static std::string getHaskKeys(int len);
+		void print(int type, std::string s);
 	private:
 
 	};

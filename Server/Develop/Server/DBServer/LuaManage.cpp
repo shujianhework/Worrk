@@ -2,6 +2,7 @@
 #include "LuaManage.h"
 #include "../Lua/lobject.h"
 #include "../Lua/lapi.h"
+#include "SJHMemoryPool.h"
 using namespace SJH;
 #define SELF LuaManage
 #define self this->
@@ -24,7 +25,7 @@ SELF::~SELF()
 }
 SELF* SELF::getInstance()
 {
-	instance = instance ? instance : new SELF;
+	instance = instance ? instance : NEW(SELF);
 	return instance;
 }
 void SELF::release(){

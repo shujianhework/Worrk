@@ -14,7 +14,6 @@ SELF::SELF()
 		DBPushFailedRetryUpperLimit = 5;
 	for (int i = 0; i < DB_SQL_THREAD_NUMBER_MAX; i++)
 	{
-		//ThreadMutex[i].unlock();
 		RunFlg[i] = DB_SQL_STATS::Empty;
 	}
 }
@@ -75,7 +74,7 @@ bool SELF::push(std::string cmd, std::function<void(bool,strArr&)> back){
 		if (idx > -1)
 		{
 			ThreadMutex[idx].lock();
-			TaskLists[idx].push_back(new DB_SQL_SelectTaskData(cmd, back));
+			TaskLists[idx].push_back(NEW(DB_SQL_SelectTaskData, cmd, back));
 			ThreadMutex[idx].unlock();
 			return true;
 		}
@@ -91,7 +90,7 @@ bool SELF::push(std::string TableName, strArr KeyValue, std::string wherekey, st
 		if (idx > -1)
 		{
 			ThreadMutex[idx].lock();
-			TaskLists[idx].push_back(new DB_SQL_UpdateTaskData(TableName,KeyValue,wherekey,wherevalue, back));
+			TaskLists[idx].push_back(NEW(DB_SQL_UpdateTaskData,TableName,KeyValue,wherekey,wherevalue, back));
 			ThreadMutex[idx].unlock();
 			return true;
 		}
@@ -107,7 +106,7 @@ bool SELF::push(std::string StoredProcedureName, strArr &Param, std::function<vo
 		if (idx > -1)
 		{
 			ThreadMutex[idx].lock();
-			TaskLists[idx].push_back(new DB_SQL_ProcedureTaskData(StoredProcedureName, Param, back));
+			TaskLists[idx].push_back(NEW(DB_SQL_ProcedureTaskData,StoredProcedureName, Param, back));
 			ThreadMutex[idx].unlock();
 			return true;
 		}
@@ -128,7 +127,7 @@ bool SELF::push(std::string dbcmd, std::string name, std::function<void(bool)> b
 					RunFlg[ii] = DB_SQL_STATS::PausePush;
 				}
 			}
-			TaskLists[idx].push_back(new DB_SQL_SwitchTaskData(dbcmd, name, back));
+			TaskLists[idx].push_back(NEW(DB_SQL_SwitchTaskData,dbcmd, name, back));
 			while (TaskLists[idx].size() > 0)
 				JHSleep(25);
 			for (int ii = 0; ii < DB_SQL_THREAD_NUMBER_MAX; ii++)
@@ -145,19 +144,20 @@ bool SELF::push(std::string dbcmd, std::string name, std::function<void(bool)> b
 }
 bool SELF::push(std::string cmd){
 	return push(cmd, [&](bool ret, strArr& data){
-		strArr *p = new strArr;
+		strArr *p = NEW(strArr);
 		for each (auto v in data)
 		{
 			(*p)[v.first] = v.second;
 		}
-		LuaTask<bool, strArr*> *LT = new(SJH::SJHMemoryPool::getInstance()->getDynamicMemory(sizeof(LuaTask<bool, strArr*>))) LuaTask<bool, strArr*>(ret, p);//NEW((LuaTask<bool, strArr*>), ret, p);//new LuaTask<bool,strArr*>(ret,p);
+		typedef LuaTask<bool, strArr*> bstrArr;
+		LuaTask<bool, strArr*> *LT = NEW(bstrArr, ret, p);
 		LT->setback([&](LuaTaskEvent *lte){
 			auto LM = LuaManage::getInstance();
 			auto LLT = (LuaTask<bool, strArr*> *)lte;
 			LM->CallLuaFunction(LuaBack[3], [&](lua_State* L){
 				LM->Push(std::get<0>(LLT->data));
 				LM->Push(*(std::get<1>(LLT->data)));
-				delete std::get<1>(LLT->data);
+				DELETE(std::get<1>(LLT->data));
 				return 2;
 			});
 		});
@@ -182,7 +182,7 @@ bool SELF::push(std::string StoredProcedureName, strArr Param){
 //ÇÐ»»Êý¾Ý¿â°æ
 bool SELF::push(std::string dbcmd, std::string name){
 	return push(dbcmd, name, [&](bool b){
-		LuaTask<bool> *LT = new LuaTask<bool>(b);
+		LuaTask<bool> *LT = NEW(LuaTask<bool>, b);
 		LT->setback([&](LuaTaskEvent* lte){
 			auto  LLT = (LuaTask<bool> *)lte;
 			auto LM = LuaManage::getInstance();

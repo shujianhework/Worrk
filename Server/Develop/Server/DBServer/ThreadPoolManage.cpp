@@ -1,4 +1,5 @@
 #include "ThreadPoolManage.h"
+#include "SJHMemoryPool.h"
 #include <thread>
 static bool Orphan = false;
 #define SELF ThreadPoolManage
@@ -21,7 +22,7 @@ SELF::~SELF()
 	ThreadInfo.clear();
 }
 SELF* SELF::getInstance(){
-	__instan = __instan ? __instan : new SELF();
+	__instan = __instan ? __instan : NEW(SELF);
 	return __instan;
 }
 void SELF::Destroy(){

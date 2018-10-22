@@ -20,8 +20,8 @@ SELF::SELF(){
 		SocketManageFlg = false;
 	}
 	);
-	Heartbeat1 = new char[4];
-	Heartbeat2 = new char[4];
+	Heartbeat1 = (char*)NEWINSTANCEL(int);
+	Heartbeat2 = (char*)NEWINSTANCEL(int);
 	int iheartbeat = 1;
 	memcpy(Heartbeat1, &iheartbeat, 4);
 	memcpy(Heartbeat2, &iheartbeat, 4);
@@ -43,16 +43,14 @@ SELF::~SELF(){
 	}
 	NetManage.clear();
 	WSACleanup();
-	delete[] Heartbeat1;
-	Heartbeat1 = NULL;
-	delete[] Heartbeat2;
-	Heartbeat2 = NULL;
+	DELETE(Heartbeat1);
+	DELETE(Heartbeat2);
 }
 std::string SELF::connect(std::string ip, int port){
 	std::string key = "connect_ip = " + ip + " port = " + tostring(port);
 	if (NetManage[key])
 		return "";
-	NetSocket *net = new NetSocket(ip, port);
+	NetSocket *net = NEW(NetSocket, ip, port);
 	if (net->init() == false || net->connect() == false){
 		return "";
 	}
@@ -64,7 +62,7 @@ std::string SELF::Server(int port, int listnumber){
 	std::string key = "server";
 	if (NetManage[key])
 		return key;
-	NetSocket* net = new NetSocket(ip, port);
+	NetSocket* net = NEW(NetSocket, ip, port);//new NetSocket(ip, port);
 	if (net->init() == false || net->bind() == false || net->Lister(listnumber) == false){
 		delete net;
 		net = NULL;
@@ -75,7 +73,7 @@ std::string SELF::Server(int port, int listnumber){
 		int port = htonl(addr->sin_port);
 		std::string key = "Accept_ip = " + ip + " port = " + tostring(port);
 		if (NetManage[key] == NULL){
-			NetSocket *newNet = new NetSocket(newsocket, (SOCKADDR*)addr);
+			NetSocket *newNet = NEW(NetSocket, newsocket, (SOCKADDR*)addr);
 			NetManage[key] = newNet;
 			accepthandler(ip,port,key);
 		}

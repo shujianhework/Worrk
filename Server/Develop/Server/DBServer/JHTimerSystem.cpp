@@ -14,8 +14,8 @@ SELF::SELF()
 	int configfps = 0;
 	__config->get("帧率", configfps, 60);
 	configfps = (configfps < 61 && configfps > 0) ? configfps : 60;
-	SystemTimeStruct[0] = new SJHTime ();
-	SystemTimeStruct[1] = new SJHTime();
+	SystemTimeStruct[0] = NEWINSTANCEL(SJHTime);
+	SystemTimeStruct[1] = NEWINSTANCEL(SJHTime);
 	memcpy(SystemTimeStruct[1], SystemTimeStruct[0], sizeof(SJHTime));
 
 	srand(time(NULL));
@@ -48,11 +48,8 @@ SELF::~SELF(){
 		delete v.second;
 	}
 	Pool.clear();
-	if (SystemTimeStruct[0])
-		delete SystemTimeStruct[0];
-	if (SystemTimeStruct[1])
-		delete SystemTimeStruct[1];	
-	SystemTimeStruct[0] = SystemTimeStruct[1] = NULL;
+	DELETE(SystemTimeStruct[0]);
+	DELETE(SystemTimeStruct[1]);
 }
 unsigned int SELF::setTimer(unsigned int interval, TimerBack tb, bool loop, void *p){
 	//不允许超大的间隔时间
@@ -66,7 +63,7 @@ unsigned int SELF::setTimer(unsigned int interval, TimerBack tb, bool loop, void
 	while (Pool.find(tid) != Pool.end() || tempPool.find(tid) != tempPool.end()){
 		tid = rand() % (UINT_MAX-0xff);		
 	}
-	SchedulerCell *cell = new SchedulerCell(interval,tb,loop,p);
+	SchedulerCell *cell = NEW(SchedulerCell, interval, tb, loop, p);
 	cell->tid = tid;
 	if (userTempPool)
 		tempPool.insert(std::make_pair(tid, cell));
@@ -170,7 +167,8 @@ bool CELL::update(unsigned int dt){
 int LSchedulerCell::setTimer(int interval,bool loop)
 {
 	return JHTimerSystem::getInstance()->setTimer(interval, [&](int dt, int tid ,void* P){
-		LuaTask<int, int> *LT = new LuaTask<int, int>(dt, tid);
+		typedef LuaTask<int,int> tempii;
+		LuaTask<int, int> *LT = NEW(tempii, dt, tid);
 		LT->setback([&](LuaTaskEvent* lte){
 			auto LLT = (LuaTask<int, int> *)lte;
 			auto LM = LuaManage::getInstance();
