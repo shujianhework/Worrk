@@ -86,13 +86,15 @@ int main(int argc, TCHAR* argv[])
 {
 	setlocale(LC_ALL, "");
 	//设置主循环池，用来存放回调lua的事件
-	
+	SJH::JHConfigManage::getInstance()->initLua("test2.lua");
+	int a = getchar();
+	/*
 	SJH::LuaQueue *lq = SJH::LuaQueue::getInstance();
 	TestNewLua();
 	while (true){
 		lq->update();
 		JHSleep(20);
-	}
+	}*/
 	OnExit(0);
 	return 0;
 }

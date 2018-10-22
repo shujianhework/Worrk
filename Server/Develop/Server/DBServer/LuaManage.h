@@ -54,7 +54,7 @@ namespace SJH{
 				{
 					mapss[lua_tostring(L, -1)] = lua_tostring(L, -2);
 				}
-				lua_pop(L, 2);
+				lua_pop(L, 1);
 			}
 			return mapss;
 		}

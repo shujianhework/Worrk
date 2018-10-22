@@ -35,17 +35,14 @@ void SELF::release(){
 	}
 }
 void SELF::Destroy(){
-	if (instance){
-		delete instance;
-		instance = NULL;
-	}
+	DELETE(instance);
 }
 //ע�᣿
 int SELF::start(std::string file, std::function<void(lua_State*)> back){
 	int top = lua_gettop(L);
 	assert(back != nullptr);
 	back(L);
-	int ret = luaL_dofile(L, "test.lua");
+	int ret = luaL_dofile(L, file.c_str());
 	if (ret != 0)
 	{
 		printf("%s", lua_tostring(L, -1));

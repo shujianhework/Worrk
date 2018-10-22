@@ -1,4 +1,5 @@
 #include "JHConfigManage.h"
+#include "LuaManage.h"
 #include <Windows.h>
 //#define _CRT_SECURE_NO_WARNINGS true
 using namespace SJH;
@@ -75,10 +76,38 @@ bool SELF::init(int argc, TCHAR *argv[]){
 	}
 	return true;
 }
-bool initLua(std::string path){
+static std::map<std::string, std::string> tempmap;
+static int LuaPush(lua_State* L){
+	int size = lua_gettop(L);
+	if (size > 1){
+		if (lua_isstring(L, 1) && lua_isstring(L, 2)){
+			tempmap[lua_tostring(L, 1)] = lua_tostring(L, 2);
+		}
+	}
+	else
+		lua_pushboolean(L, false);
+	return 1;
+}
+bool SELF::initLua(std::string path){
+	auto L = LuaManage::getInstance();
+	auto l = L->L;
+	tempmap.clear();
+	L->start(path, [&](lua_State* l){
+		lua_pushcfunction(l, LuaPush);
+		lua_setglobal(l, "push");
+	});
+	for each (auto v in tempmap)
+	{
+		this->datas[v.first] = v.second;
+	}
+	tempmap.clear();
+	L->Destroy();
 	return false;
 }
-bool initXML(std::string path){
+bool SELF::initXML(std::string path){
+	return false;
+}
+bool SELF::initINI(std::string path){
 	return false;
 }
 void SELF::get(std::string key, unsigned int &ret, unsigned int Default){
