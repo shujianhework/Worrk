@@ -1,0 +1,6 @@
+G:\Test\Vs13\OpenGL\Worrk\Tool\Flow\Client\bin\Debug\Client.exe.config
+G:\Test\Vs13\OpenGL\Worrk\Tool\Flow\Client\bin\Debug\Client.exe
+G:\Test\Vs13\OpenGL\Worrk\Tool\Flow\Client\bin\Debug\Client.pdb
+G:\Test\Vs13\OpenGL\Worrk\Tool\Flow\Client\obj\Debug\Client.exe
+G:\Test\Vs13\OpenGL\Worrk\Tool\Flow\Client\obj\Debug\Client.pdb
+G:\Test\Vs13\OpenGL\Worrk\Tool\Flow\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
